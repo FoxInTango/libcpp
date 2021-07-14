@@ -140,7 +140,6 @@ install :
 	rm -rf /usr/local/include/libcpp
 	mkdir /usr/local/include/libcpp
 	cp  -rf ./include/* /usr/local/include/libcpp
-	cp  -rf ./bin/IOServer /usr/local/bin
 	cp  -rf ./lib/libcpp.so /usr/local/lib
 uninstall : 
 	rm -rf /usr/local/include/libcpp
