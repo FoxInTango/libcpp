@@ -28,5 +28,12 @@ namespace foxintango {
 #else
     #define foxintangoAPI
 #endif
+
+/** 源码宏
+ *  __FILE__
+ *  __LINE__
+ *  __FUNCTION__
+ *  __PRETTY_FUNCTION__  namespace::classname::functionname
+ * */
 }
 #endif
