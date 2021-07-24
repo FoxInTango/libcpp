@@ -1,6 +1,10 @@
 #ifndef _LIB_CPP_H_
 #define _LIB_CPP_H_
-namespace foxintango {
+
+#define namespaceBegin(name) namespace name {
+#define namespaceEnd }
+
+namespaceBegin(foxintango)
 
 /** EXTERN C
  * */
@@ -35,5 +39,5 @@ namespace foxintango {
  *  __FUNCTION__
  *  __PRETTY_FUNCTION__  namespace::classname::functionname
  * */
-}
+namespaceEnd
 #endif
