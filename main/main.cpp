@@ -1,4 +1,6 @@
+#include <unistd.h>
 #include <stdio.h>
+// clang main/main.cpp -o hello -std=c++11 -lstdc++
 
 namespace foxintango {
 namespace macro {
@@ -20,6 +22,8 @@ int main(int argc,char** argv) {
 foxintango::macro::pretty s;
 
 function();
+
+//execl("su sparrow && /usr/bin/ls","/usr/local/");
 
 return 0;
 }
