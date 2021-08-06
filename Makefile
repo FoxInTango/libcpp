@@ -20,7 +20,7 @@ TARGET_NAME_EXT =
 #    安装位置
 INSTALL_PATH    = /usr/local/libcpp
 
-TARGET_OBJECTS_DIR := ./out
+TARGET_OBJECTS_DIR := ./obj
 TARGET_HEADERS_DIR := ./include
 TARGET_SOURCES_DIR := ./source
 TARGET_BINARY_DIR  := ./bin
