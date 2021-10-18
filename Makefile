@@ -140,7 +140,7 @@ install :
 	rm -rf /usr/local/include/libcpp
 	mkdir /usr/local/include/libcpp
 	cp  -rf ./include/* /usr/local/include/libcpp
-	cp  -rf ./lib/libcpp.so /usr/local/lib
+	cp  -rf ./lib/${TARGET_NAME} /usr/local/lib
 uninstall : 
 	rm -rf /usr/local/include/libcpp
-	rm -rf /usr/local/lib/libcpp.so
+	rm -rf /usr/local/lib/${TARGET_NAME}
