@@ -52,6 +52,9 @@ struct struct_range_element_spy_s {
     void* next = nullptr;
 };
 
+/** 判定方式
+ *  
+ * */
 template <typename S>
 bool struct_range_element_is_spy(S* s) {
     if(s) {
