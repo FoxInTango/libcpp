@@ -23,13 +23,13 @@ namespaceBegin(foxintango)
  *
  *     NOTE : 碰撞问题
  * */
-enum struct_range_element_spy_t {
-    struct_range_element_spy_nul = 0b00000000,
-    struct_range_element_spy_beg = 0b10000000, // array begin
-    struct_range_element_spy_end = 0b00000001, // array end
-    struct_range_element_spy_prv = 0b00000100, // pointer to another element
-    struct_range_element_spy_nxt = 0b00000010, // link 
-};
+// enum struct_range_element_spy_t {
+const int struct_range_element_spy_nul = 0b00000000;
+const int struct_range_element_spy_beg = 0b10000000; // array begin
+const int struct_range_element_spy_end = 0b00000001; // array end
+const int struct_range_element_spy_prv = 0b00000100; // pointer to another element
+const int struct_range_element_spy_nxt = 0b00000010; // link 
+// };
 
 /**
 struct struct_range_element_spy_lnk_s {
@@ -47,10 +47,12 @@ union struct_range_element_spy_entity {
 */
 
 struct struct_range_element_spy_s {
-    enum  struct_range_element_spy_t type;
+    int type;
     void* prev = nullptr;
     void* next = nullptr;
 };
+
+#define struct_range_element_spy_size sizeof(struct_range_element_spy_s)
 
 /** 判定方式
  *  
@@ -100,7 +102,7 @@ S* struct_array_next(S* s,const int& size) {
 // struct_array_end
 
 template <typename S>
-void struct_range_element_spy_make(S& s,const enum struct_range_element_spy_t& t) {
+void struct_range_element_spy_make(S& s,const int& t) {
     struct_range_element_spy_s* p = (struct_range_element_spy_s*)(&s);
     p->type = t;
 }
