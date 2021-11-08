@@ -54,8 +54,8 @@ union struct_range_element_spy_entity {
 
 struct struct_range_element_spy_s {
     int type;
-    void* prv = nullptr;
-    void* nxt = nullptr;
+    void* prv = 0;
+    void* nxt = 0;
 };
 
 #define struct_range_element_spy_size sizeof(struct_range_element_spy_s)
@@ -127,7 +127,7 @@ inline void struct_range_element_spy_make(const int& type,void* array,const int&
     if(!array) return;
 
     if(element_size >= sizeof(struct_range_element_spy_s)) {
-        void* e = (void*)(array + index * element_size);
+        void* e = (void*)((char*)array + index * element_size);
         /** 是否丢弃
          * */
         if(0 != (struct_range_element_spy_dty & type)) {
@@ -136,9 +136,8 @@ inline void struct_range_element_spy_make(const int& type,void* array,const int&
              * */
 
             if(nxt) {
-                
                 memclr(e,element_size);
-                struct_range_element_spy_s* s = (struct_range_element_spy_s*)adr;
+                struct_range_element_spy_s* s = (struct_range_element_spy_s*)e;
                 s->type = type;
                 s->prv = prv;
                 s->nxt = nxt;
@@ -147,8 +146,10 @@ inline void struct_range_element_spy_make(const int& type,void* array,const int&
     } else {
 
     }
-    struct_range_element_spy_s* p = (struct_range_element_spy_s*)(element);
-    p->type = t;
+/**
+ * struct_range_element_spy_s* p = (struct_range_element_spy_s*)(element);
+ * p->type = t;
+ */
 }
 
 template <typename S>
