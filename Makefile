@@ -1,6 +1,6 @@
 CC=clang
-AS=llvm-as
-AR=llvm-ar
+AS=as
+AR=ar
 LD=clang
 CP=llvm-objcopy
 
