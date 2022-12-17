@@ -126,7 +126,7 @@ inline void struct_range_element_spy_make(const int& type,void* array,const int&
      * */
     if(!array) return;
 
-    if(element_size >= sizeof(struct_range_element_spy_s)) {
+    if(static_cast<unsigned int>(element_size) >= sizeof(struct_range_element_spy_s)) {
         void* e = (void*)((char*)array + index * element_size);
         /** 是否丢弃
          * */
