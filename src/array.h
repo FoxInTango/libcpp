@@ -1,7 +1,23 @@
+#ifndef _ARRAY_H_foxintango
+#define _ARRAY_H_foxintango
+
+#include "define.h"
+namespaceBegin(foxintango)
+
 template <class T>
 class Array{
 protected:
     T* data;
+public:
+    class Iterator{
+    public:
+        operator +  (const unsigned int& offset) {}
+        operator -  (const unsigned int& offset) {}
+        operator += (const unsigned int& offset) {}
+        operator -= (const unsigned int& offset) {}
+        operator ++ (){}
+        operator -- (){}
+    };
 public:
     Array(){
         this->data = new T[0];
@@ -10,16 +26,19 @@ public:
        if(this->data) delete this->data;
     }
 public:
-    unsigned int append(){ return 0; }
-    unsigned int insert() { return 0; }
-    unsigned int remove() { return 0; }
+    unsigned int append(const T& t)  { return 0; }
+    unsigned int insert()  { return 0; }
+    unsigned int remove()  { return 0; }
     unsigned int replace() { return 0; }
 
-    int swap() { return 0; }
+    int swap(const unsigned int& l,const unsigned int& r) { return 0; }
 
     T& at(const unsigned int& index){}
     T* addressOf(const unsigned int& index){}
 public:
-    T operator[](const unsigned int& index){}
-
+    T& operator[](const unsigned int& index){}
 };
+
+namespaceEnd
+
+#endif // !_ARRAY_H_foxintango
