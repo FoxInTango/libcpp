@@ -24,6 +24,8 @@
 #ifndef _LIB_CPP_H_
 #define _LIB_CPP_H_
 
+#include "map.h"
+#include "array.h"
 #include "struct.h"
 #include "endian.h"
 #include "define.h"
