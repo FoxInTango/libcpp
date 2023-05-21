@@ -11,12 +11,12 @@ protected:
 public:
     class Iterator{
     public:
-        operator +  (const unsigned int& offset) {}
-        operator -  (const unsigned int& offset) {}
-        operator += (const unsigned int& offset) {}
-        operator -= (const unsigned int& offset) {}
-        operator ++ (){}
-        operator -- (){}
+        Iterator& operator +  (const unsigned int& offset) {}
+        Iterator& operator -  (const unsigned int& offset) {}
+        Iterator& operator += (const unsigned int& offset) {}
+        Iterator& operator -= (const unsigned int& offset) {}
+        Iterator& operator ++ (){}
+        Iterator& operator -- (){}
     };
 public:
     Array(){
