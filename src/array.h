@@ -4,7 +4,11 @@
 #include "define.h"
 namespaceBegin(foxintango)
 
-template <class T>
+/** TODO
+ *  Fill with model from libcpp_startup(Model&) 
+ */
+static unsigned int ARRAY_DEFAULT_SIZE = 32;
+template <class T,const unsigned int& size= ARRAY_DEFAULT_SIZE>
 class Array{
 private:
     class ArrayEntity{
@@ -20,8 +24,6 @@ private:
             unsigned int t_size = sizeof(t);
         }
     };
-protected:
-    T* entities;
 public:
     class Iterator{
     public:
@@ -34,9 +36,16 @@ public:
         T& operator *() { return T(); }
         T& operator *(const Iterator& iter){ return T();}
     };
+protected:
+    T* entities;
+    unsigned int size;
+    unsigned int entity_count;
 public:
-    Array(){
-        this->entities = new T[0];
+    Array() {
+        this->entities = new T[ARRAY_DEFAULT_SIZE];
+    }
+    Array(const unsigned int& size){
+        this->entities = new Array::ArrayEntity [size];
     }
    ~Array(){
        if(this->entities) delete this->entities;
@@ -49,6 +58,8 @@ public:
 
     int swap(const unsigned int& l,const unsigned int& r) { return 0; }
 
+    unsigned int size() { return size; }
+    unsigned int count() { return entity_count; }
     T& at(const unsigned int& index){}
     T* addressOf(const unsigned int& index){}
 public:
