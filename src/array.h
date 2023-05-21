@@ -6,8 +6,22 @@ namespaceBegin(foxintango)
 
 template <class T>
 class Array{
+private:
+    class ArrayEntity{
+    protected:
+        char* address;// 避免碎片化
+    public:
+        ArrayEntity(const T& t){
+            set(t);
+        }
+       ~ArrayEntity(){}
+    public:
+        int set(const T& t){
+            unsigned int t_size = sizeof(t);
+        }
+    };
 protected:
-    T* data;
+    T* entities;
 public:
     class Iterator{
     public:
@@ -17,13 +31,15 @@ public:
         Iterator& operator -= (const unsigned int& offset) {}
         Iterator& operator ++ (){}
         Iterator& operator -- (){}
+        T& operator *() { return T(); }
+        T& operator *(const Iterator& iter){ return T();}
     };
 public:
     Array(){
-        this->data = new T[0];
+        this->entities = new T[0];
     }
    ~Array(){
-       if(this->data) delete this->data;
+       if(this->entities) delete this->entities;
     }
 public:
     unsigned int append(const T& t)  { return 0; }
