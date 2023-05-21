@@ -22,6 +22,7 @@ private:
     public:
         int set(const T& t){
             unsigned int t_size = sizeof(t);
+            return 0;
         }
     };
 public:
@@ -61,9 +62,9 @@ public:
     unsigned int size() { return size; }
     unsigned int count() { return entity_count; }
     T& at(const unsigned int& index){}
-    T* addressOf(const unsigned int& index){}
+    T* addressOf(const unsigned int& index){ return 0; }
 public:
-    T& operator[](const unsigned int& index){}
+    T& operator[](const unsigned int& index){ return T();}
 };
 
 namespaceEnd
