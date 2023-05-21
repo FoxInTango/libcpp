@@ -39,7 +39,7 @@ public:
     };
 protected:
     T* entities;
-    unsigned int size;
+    unsigned int array_size;
     unsigned int entity_count;
 public:
     Array() {
@@ -59,7 +59,7 @@ public:
 
     int swap(const unsigned int& l,const unsigned int& r) { return 0; }
 
-    unsigned int size() { return size; }
+    unsigned int size() { return array_size; }
     unsigned int count() { return entity_count; }
     T& at(const unsigned int& index){}
     T* addressOf(const unsigned int& index){ return 0; }
