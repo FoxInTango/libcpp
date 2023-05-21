@@ -8,7 +8,7 @@ namespaceBegin(foxintango)
  *  Fill with model from libcpp_startup(Model&) 
  */
 static unsigned int ARRAY_DEFAULT_SIZE = 32;
-template <class T,const unsigned int& size= ARRAY_DEFAULT_SIZE>
+template <class T>
 class Array{
 private:
     class ArrayEntity{
