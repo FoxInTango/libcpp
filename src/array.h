@@ -1,7 +1,6 @@
 #ifndef _ARRAY_H_foxintango
 #define _ARRAY_H_foxintango
 
-#include "iterator.h"
 #include "struct.h"
 #include "define.h"
 namespaceBegin(foxintango)
@@ -10,11 +9,36 @@ namespaceBegin(foxintango)
  *  Fill with model from libcpp_startup(Model&) 
  */
 static unsigned int ARRAY_DEFAULT_SIZE = 32;
-template <class T,Size size = ARRAY_DEFAULT_SIZE>
+template <class T>
 class Array{
 public:
-Iterator<T, Array> iterator;
-protected:
+    class Iterator {
+    public:
+        Array* owner;
+        T* element;
+    public:
+        Iterator(Array* owner) {
+            this->owner = owner;
+        }
+    public:
+        void clean() {}
+    public:
+        Iterator& operator = (const Index& index) { return *this;}
+
+        Iterator& operator +  (const unsigned int& offset) { return *this; }
+        Iterator& operator -  (const unsigned int& offset) { return *this; }
+        Iterator& operator += (const unsigned int& offset) { return *this; }
+        Iterator& operator -= (const unsigned int& offset) { return *this; }
+        Iterator& operator ++ () { return *this; }
+        Iterator& operator -- () { return *this; }
+
+        bool operator == (const Index& index) { return false;}
+        bool operator == (const Iterator& iterator) { return false; }
+        T& operator *() { return T(); }
+        T& operator *(const Iterator& iter) { return T(); }
+    };
+public:
+    Iterator iterator;
     mem_segment<T, size, mem_segment_type_s> elements;
     Size array_size;
     Size entity_count;
