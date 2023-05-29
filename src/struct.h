@@ -190,18 +190,18 @@ int struct_range_contact();
 /** B-Tree
  */
 template <typename T>
-struct _tree_node_s {
+struct tree_node_s {
     /** super
      */
-    struct _tree_node_s* s;
+    struct tree_node_s* s;
     /** left
      */
-    struct _tree_node_s* l;
+    struct tree_node_s* l;
     /** right
      */
-    struct _tree_node_s* r;
+    struct tree_node_s* r;
     T entity;
-}tree_node_s;
+};
 
 /** bst avl rbt
  *
