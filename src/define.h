@@ -63,9 +63,9 @@ namespaceBegin(foxintango)
  *  __PRETTY_FUNCTION__  namespace::classname::functionname
  * */
 
-#define Size    unsigned long int
-#define Index   unsigned long int
-#define Error   int
-#define Address void*
+typedef unsigned long int Size;
+typedef unsigned long int Index;
+typedef int               Error;
+typedef void*             Address;
 namespaceEnd
 #endif

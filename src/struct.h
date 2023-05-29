@@ -39,7 +39,7 @@ const int struct_range_element_spy_dty = 0b10000000; // destroy
 
 template <Size size>
 struct bits{
-    char [size / 8];
+    char bits[size / 8];
 };
 /** bits functions
  * 
