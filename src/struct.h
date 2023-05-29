@@ -208,10 +208,10 @@ struct tree_node_s {
  */
 
 template <typename T>
-unsigned long int tree_insert_node(struct _tree_node_s<T>& t, const T& e) { return 0; }
+unsigned long int tree_insert_node(struct tree_node_s<T>& t, const T& e) { return 0; }
 
 template <typename T>
-unsigned long int tree_remove_node(struct _tree_node_s<T>& t, const T& e) { return 0; }
+unsigned long int tree_remove_node(struct tree_node_s<T>& t, const T& e) { return 0; }
 
 template <typename T>
 T& tree_lookup_at(unsigned long int& index) { return T(); }
