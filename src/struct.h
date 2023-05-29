@@ -37,9 +37,9 @@ const int struct_range_element_spy_nxt = 0b00010000; // link
 const int struct_range_element_spy_dty = 0b10000000; // destroy
 // };
 
-template <Size>
+template <Size size>
 struct bits{
-    char [Size / 8];
+    char [size / 8];
 };
 /** bits functions
  * 
@@ -47,8 +47,8 @@ struct bits{
 
 template <typename T>
 union mem_element {
-T    element;
-addr address;
+T       element;
+Address address;
 };
 
 typedef int mem_segment_type;

@@ -25,9 +25,8 @@
 using namespace foxintango;
 
 int libcpp_set_default(){
-    Array<int> iArray;
-    Iterator<int,Array<int>> iter(&iArray);
-    iter.clean();
+    Array<int> array;
+    array.iterator.clean();
     return 0;
 }
 
