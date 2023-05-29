@@ -38,8 +38,8 @@ public:
         T& operator *(const Iterator& iter) { return T(); }
     };
 public:
-    Iterator iterator;
-    mem_segment<T, size, mem_segment_type_s> elements;
+    Iterator iterator(this);
+    mem_segment<T, ARRAY_DEFAULT_SIZE, mem_segment_type_s> elements;
     Size array_size;
     Size entity_count;
 public:
@@ -49,7 +49,7 @@ public:
     Array(const Size& size){
     }
    ~Array(){
-       elements.~mem_segment();
+       //elements.~mem_segment();
     }
 public:
     unsigned int append(const T& t)  { return 0; }
@@ -57,8 +57,8 @@ public:
     unsigned int remove()  { return 0; }
     unsigned int replace() { return 0; }
 
-    Iterator<T, Array> begin(){ return Iterator<T, Array>(); }
-    Iterator<T, Array> end() { return Iterator<T, Array>(); }
+    Iterator begin(){ return Iterator(); }
+    Iterator end() { return Iterator(); }
 
     int swap(const unsigned int& l,const unsigned int& r) { return 0; }
     T& at(const unsigned int& index){}
