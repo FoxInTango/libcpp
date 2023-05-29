@@ -52,30 +52,8 @@ union struct_range_element_spy_entity {
 };
 */
 
-template <typename T>
-typedef struct _tree_node_s{
-    tree_node_s* super;
-    tree_node_s* left;
-    tree_node_s* right;
-    T entity;
-}tree_node_s;
-
-/** bst avl rbt
- * 
+/** 内存分片 : 拼接[前拼接,后拼接],截断
  */
-
-template <typename T>
-unsigned long int tree_insert_node(tree_node_s* t, const T& e) { return 0; }
-
-template <typename T>
-unsigned long int tree_remove_node(tree_node_s* t, const T& e) { return 0; }
-
-template <typename T>
-T& tree_lookup_at(unsigned long int& index) { return T();}
-
-template <typename T>
-T& tree_lookup_at(T& t) { return T(); }
-
 struct struct_range_element_spy_s {
     int type;
     void* prv = 0;
@@ -208,5 +186,37 @@ S* struct_range_element_at();
 
 int struct_range_clone(const int& beg = 0,const int& end = -1);
 int struct_range_contact();
+
+/** B-Tree
+ */
+template <typename T>
+typedef struct _tree_node_s {
+    /** super
+     */
+    struct _tree_node_s* s;
+    /** left
+     */
+    struct _tree_node_s* l;
+    /** right
+     */
+    struct _tree_node_s* r;
+    T entity;
+}tree_node_s;
+
+/** bst avl rbt
+ *
+ */
+
+template <typename T>
+unsigned long int tree_insert_node(struct _tree_node_s<T>& t, const T& e) { return 0; }
+
+template <typename T>
+unsigned long int tree_remove_node(struct _tree_node_s<T>& t, const T& e) { return 0; }
+
+template <typename T>
+T& tree_lookup_at(unsigned long int& index) { return T(); }
+
+template <typename T>
+T& tree_lookup_at(T& t) { return T(); }
 namespaceEnd
 #endif
