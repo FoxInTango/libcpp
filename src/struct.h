@@ -37,9 +37,9 @@ const int struct_range_element_spy_nxt = 0b00010000; // link
 const int struct_range_element_spy_dty = 0b10000000; // destroy
 // };
 
-template <size>
+template <Size>
 struct bits{
-    char [size / 8];
+    char [Size / 8];
 };
 /** bits functions
  * 
@@ -56,10 +56,10 @@ const int mem_segment_type_n = 0;// 独立
 const int mem_segment_type_s = 1;// 单向
 const int mem_segment_type_d = 2;// 双向
 
-template <typename T,size s, mem_segment_type t>
+template <typename T, Size s, mem_segment_type t>
 struct mem_segment{
-    size segment_size;
-    size element_count;
+    Size segment_size;
+    Size element_count;
     mem_segment_type type;
     union mem_element<T> elements[s];/** pre nxt*/
     mem_segment(){
@@ -71,19 +71,19 @@ struct mem_segment{
      */
     }
 
-    T& at(const size& index){ return T();}
+    T& at(const Size& index){ return T();}
 
     mem_segment* before(){ return 0;}
     mem_segment* behind(){ return 0;}
 
-    T& operator[] (const size& index) { return T();}
+    T& operator[] (const Size& index) { return T();}
 };
 
-template <typename T, size s>
+template <typename T, Size s>
 class mem_segment<T, s, mem_segment_type_n> {
-    size segment_size;
-    size element_count;
-    union mem_element<T> elements[size + mem_segment_type_n];/** pre nxt*/
+    Size segment_size;
+    Size element_count;
+    union mem_element<T> elements[Size + mem_segment_type_n];/** pre nxt*/
     mem_segment() {
         /** clear ids
          */
@@ -94,11 +94,11 @@ class mem_segment<T, s, mem_segment_type_n> {
     }
 };
 
-template <typename T, size s>
+template <typename T, Size s>
 class mem_segment<T,s, mem_segment_type_s> {
-    size segment_size;
-    size element_count;
-    union mem_element<T> elements[size + mem_segment_type_s];/** pre nxt*/
+    Size segment_size;
+    Size element_count;
+    union mem_element<T> elements[Size + mem_segment_type_s];/** pre nxt*/
     mem_segment() {
         /** clear ids
          */
@@ -109,11 +109,11 @@ class mem_segment<T,s, mem_segment_type_s> {
     }
 };
 
-template <typename T, size s>
+template <typename T, Size s>
 class mem_segment<T, s, mem_segment_type_d> {
-    size segment_size;
-    size element_count;
-    union mem_element<T> elements[size + mem_segment_type_d];/** pre nxt*/
+    Size segment_size;
+    Size element_count;
+    union mem_element<T> elements[Size + mem_segment_type_d];/** pre nxt*/
     mem_segment() {
         /** clear ids
          */
