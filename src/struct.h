@@ -190,7 +190,7 @@ int struct_range_contact();
 /** B-Tree
  */
 template <typename T>
-typedef struct _tree_node_s {
+struct _tree_node_s {
     /** super
      */
     struct _tree_node_s* s;
