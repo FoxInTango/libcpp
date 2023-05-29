@@ -23,3 +23,13 @@
  */
 #include "libcpp.h"
 using namespace foxintango;
+
+int libcpp_set_default(){
+    Array<int> iArray;
+    Iterator<int,Array<int>> iter(&iArray);
+    iter.clean();
+    return 0;
+}
+
+
+

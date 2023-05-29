@@ -37,6 +37,95 @@ const int struct_range_element_spy_nxt = 0b00010000; // link
 const int struct_range_element_spy_dty = 0b10000000; // destroy
 // };
 
+template <size>
+struct bits{
+    char [size / 8];
+};
+/** bits functions
+ * 
+ */
+
+template <typename T>
+union mem_element {
+T    element;
+addr address;
+};
+
+typedef int mem_segment_type;
+const int mem_segment_type_n = 0;// 独立
+const int mem_segment_type_s = 1;// 单向
+const int mem_segment_type_d = 2;// 双向
+
+template <typename T,size s, mem_segment_type t>
+struct mem_segment{
+    size segment_size;
+    size element_count;
+    mem_segment_type type;
+    union mem_element<T> elements[s];/** pre nxt*/
+    mem_segment(){
+    /** clear ids
+     */
+    }
+    ~mem_segment(){
+    /** delete subsgements
+     */
+    }
+
+    T& at(const size& index){ return T();}
+
+    mem_segment* before(){ return 0;}
+    mem_segment* behind(){ return 0;}
+
+    T& operator[] (const size& index) { return T();}
+};
+
+template <typename T, size s>
+class mem_segment<T, s, mem_segment_type_n> {
+    size segment_size;
+    size element_count;
+    union mem_element<T> elements[size + mem_segment_type_n];/** pre nxt*/
+    mem_segment() {
+        /** clear ids
+         */
+    }
+    ~mem_segment() {
+        /** delete subsgements
+         */
+    }
+};
+
+template <typename T, size s>
+class mem_segment<T,s, mem_segment_type_s> {
+    size segment_size;
+    size element_count;
+    union mem_element<T> elements[size + mem_segment_type_s];/** pre nxt*/
+    mem_segment() {
+        /** clear ids
+         */
+    }
+    ~mem_segment() {
+        /** delete subsgements
+         */
+    }
+};
+
+template <typename T, size s>
+class mem_segment<T, s, mem_segment_type_d> {
+    size segment_size;
+    size element_count;
+    union mem_element<T> elements[size + mem_segment_type_d];/** pre nxt*/
+    mem_segment() {
+        /** clear ids
+         */
+    }
+    ~mem_segment() {
+        /** delete subsgements
+         */
+    }
+};
+
+/** mem_segment functions
+ */
 /**
 struct struct_range_element_spy_lnk_s {
     void* prev;
