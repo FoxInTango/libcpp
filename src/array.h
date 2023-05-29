@@ -10,12 +10,12 @@ namespaceBegin(foxintango)
  *  Fill with model from libcpp_startup(Model&) 
  */
 static unsigned int ARRAY_DEFAULT_SIZE = 32;
-template <class T,Size s = ARRAY_DEFAULT_SIZE>
+template <class T,Size size = ARRAY_DEFAULT_SIZE>
 class Array{
 public:
 Iterator<T, Array> iterator;
 protected:
-    mem_segment<T,s, mem_segment_type_s> elements;
+    mem_segment<T, size, mem_segment_type_s> elements;
     Size array_size;
     Size entity_count;
 public:
