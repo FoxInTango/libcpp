@@ -13,15 +13,18 @@ const unsigned int ARRAY_DEFAULT_SIZE = 32;
 template <class T>
 class Array{
 public:
+    static T ENULL;// empty element.
+public:
     class Iterator {
     public:
         Array* owner;
         T* element;
     public:
         Iterator() {
-            
         }
-        Iterator(Array* owner) {
+        Iterator(const Index& index) {
+        }
+        Iterator(Array* owner, const Index& index = 0) {
             this->owner = owner;
         }
         ~Iterator() {
@@ -30,19 +33,24 @@ public:
     public:
         void clean() {}
     public:
-        Iterator& operator = (const Index& index) { return *this;}
-
+        Iterator& operator  = (const Index& index) { return *this;}
+        
         Iterator& operator +  (const unsigned int& offset) { return *this; }
         Iterator& operator -  (const unsigned int& offset) { return *this; }
         Iterator& operator += (const unsigned int& offset) { return *this; }
         Iterator& operator -= (const unsigned int& offset) { return *this; }
-        Iterator& operator ++ () { return *this; }
-        Iterator& operator -- () { return *this; }
+        Iterator& operator ++ ()    { return *this; }
+        Iterator& operator ++ (int) { return *this; }
+        Iterator& operator -- ()    { return *this; }
+        Iterator& operator -- (int) { return *this; }
 
         bool operator == (const Index& index) { return false;}
         bool operator == (const Iterator& iterator) { return false; }
-        T& operator *() { return T(); }
-        T& operator *(const Iterator& iter) { return T(); }
+        bool operator != (const Index& index) { return false; }
+        bool operator != (const Iterator& iterator) { return false; }
+
+        T& operator *() { return ENULL; }
+        T& operator *(const Iterator& iter) { return ENULL; }
     };
     class Range{
     public:
@@ -62,19 +70,24 @@ public:
    ~Array(){
     }
 public:
-    unsigned int append(const T& t)  { return 0; }
-    unsigned int insert()  { return 0; }
-    unsigned int remove()  { return 0; }
-    unsigned int replace() { return 0; }
+    Size append(const T& t)  { return 0; }
+    Size insert(const T& t,const Index& index)  { return 0; }
+    Size remove(const Index& index)  { return 0; }
+    Size remove(const Iterator& index) { return 0; }
+    Size replace(const Index& index) { return 0; }
+    Size replace(const Iterator& index) { return 0; }
+
+    Error swap(const unsigned int& l, const unsigned int& r) { return 0; }
+    T& at(const unsigned int& index) {}
+    T* addressOf(const unsigned int& index) { return 0; }
+
+    Size size() { return Size();}
+    Size size() const { return Size(); }
 
     Iterator begin(){ return Iterator(); }
     Iterator end() { return Iterator(); }
-
-    int swap(const unsigned int& l,const unsigned int& r) { return 0; }
-    T& at(const unsigned int& index){}
-    T* addressOf(const unsigned int& index){ return 0; }
 public:
-    T& operator[](const unsigned int& index){ return T();}
+    T& operator[](const unsigned int& index){ return ENULL;}
 };
 
 namespaceEnd
