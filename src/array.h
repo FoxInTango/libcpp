@@ -41,9 +41,13 @@ public:
         T& operator *() { return T(); }
         T& operator *(const Iterator& iter) { return T(); }
     };
+    class Range{
+    public:
+       void forEach(){} 
+    };
 public:
     Iterator iterator;
-    mem_segment<T, ARRAY_DEFAULT_SIZE, mem_segment_type_s> elements;
+    mem_segment<T, 1024, mem_segment_type_s> elements;
     Size array_size;
     Size entity_count;
 public:
