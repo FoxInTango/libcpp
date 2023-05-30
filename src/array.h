@@ -17,6 +17,9 @@ public:
         Array* owner;
         T* element;
     public:
+        Iterator() {
+            
+        }
         Iterator(Array* owner) {
             this->owner = owner;
         }
