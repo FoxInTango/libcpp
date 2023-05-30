@@ -25,8 +25,10 @@
 #define _LIB_CPP_H_
 
 #include "map.h"
+#include "set.h"
 #include "array.h"
 #include "struct.h"
+#include "set.h"
 #include "endian.h"
 #include "define.h"
 
