@@ -57,7 +57,7 @@ const int mem_segment_type_s = 1;// 单向
 const int mem_segment_type_d = 2;// 双向
 
 template <typename T, Size size, mem_segment_type t>
-struct mem_segment{
+class mem_segment{
 public:
     Size segment_size;
     Size element_count;
@@ -97,6 +97,7 @@ class mem_segment<T, size, mem_segment_type_n> {
 
 template <typename T, Size size>
 class mem_segment<T, size, mem_segment_type_s> {
+public:
     Size segment_size;
     Size element_count;
     union mem_element<T> elements[size + mem_segment_type_s];/** pre nxt*/
@@ -112,6 +113,7 @@ class mem_segment<T, size, mem_segment_type_s> {
 
 template <typename T, Size size>
 class mem_segment<T, size, mem_segment_type_d> {
+public:
     Size segment_size;
     Size element_count;
     union mem_element<T> elements[size + mem_segment_type_d];/** pre nxt*/

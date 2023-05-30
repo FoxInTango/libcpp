@@ -46,7 +46,7 @@ public:
        void forEach(){} 
     };
 public:
-    Iterator iterator;
+    Iterator iterator(this);
     mem_segment<T, 1024, mem_segment_type_s> elements;
     Size array_size;
     Size entity_count;
@@ -57,7 +57,6 @@ public:
     Array(const Size& size){
     }
    ~Array(){
-       //elements.~mem_segment();
     }
 public:
     unsigned int append(const T& t)  { return 0; }
