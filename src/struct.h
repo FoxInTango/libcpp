@@ -64,8 +64,6 @@ public:
     mem_segment_type type;
     union mem_element<T> elements[size];/** pre nxt*/
     mem_segment(){
-    /** clear ids
-     */
     }
     ~mem_segment(){
     /** delete subsgements
@@ -278,6 +276,8 @@ S* struct_range_element_at();
 
 int struct_range_clone(const int& beg = 0,const int& end = -1);
 int struct_range_contact();
+
+
 
 /** B-Tree
  */
