@@ -58,6 +58,7 @@ const int mem_segment_type_d = 2;// 双向
 
 template <typename T, Size size, mem_segment_type t>
 struct mem_segment{
+public:
     Size segment_size;
     Size element_count;
     mem_segment_type type;
