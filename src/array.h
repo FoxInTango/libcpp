@@ -24,6 +24,9 @@ public:
         Iterator(Array* owner) {
             this->owner = owner;
         }
+        ~Iterator() {
+
+        }
     public:
         void clean() {}
     public:
@@ -46,8 +49,8 @@ public:
        void forEach(){} 
     };
 public:
-    Iterator iterator(this);
-    mem_segment<T, 1024, mem_segment_type_s> elements;
+    Iterator iterator;
+    mem_segment<T, ARRAY_DEFAULT_SIZE, mem_segment_type_s> elements;
     Size array_size;
     Size entity_count;
 public:
