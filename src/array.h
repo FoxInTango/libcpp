@@ -8,7 +8,7 @@ namespaceBegin(foxintango)
 /** TODO
  *  Fill with model from libcpp_startup(Model&) 
  */
-static unsigned int ARRAY_DEFAULT_SIZE = 32;
+const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
 class Array{
