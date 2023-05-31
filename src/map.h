@@ -1,5 +1,6 @@
 #ifndef _MAP_H_foxintango
 #define _MAP_H_foxintango
+#include "hash.h"
 #include "struct.h"
 #include "define.h"
 

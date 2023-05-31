@@ -85,7 +85,7 @@ public:
     Iterator begin(){ return Iterator(); }
     Iterator end() { return Iterator(); }
 public:
-    T& operator[](const unsigned int& index){ return ENULL;}
+    T& operator[](const unsigned int& index){ return elements[index];}
 };
 
 namespaceEnd

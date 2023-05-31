@@ -24,9 +24,13 @@
 #include "libcpp.h"
 using namespace foxintango;
 
-int libcpp_set_default(){
+void sample_array(){
     Array<int> m;
     m.iterator.clean();
+}
+
+int libcpp_set_default(){
+    sample_array();
     return 0;
 }
 
