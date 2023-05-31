@@ -26,7 +26,7 @@ using namespace foxintango;
 
 void sample_array(){
     Array<int> m;
-    m.iterator.clean();
+    Array<int>::Iterator& iter = m.begin();
 }
 
 int libcpp_set_default(){
