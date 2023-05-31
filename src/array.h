@@ -56,7 +56,7 @@ public:
     };
 public:
     Iterator iterator;
-    mem_segment<T, ARRAY_DEFAULT_SIZE, mem_segment_type_s> elements;
+    mem_segment<T> elements;
     Size array_size;
     Size entity_count;
 public:
@@ -84,7 +84,7 @@ public:
     Iterator begin(){ return Iterator(); }
     Iterator end() { return Iterator(); }
 public:
-    T& operator[](const unsigned int& index){ return elements[index];}
+    T& operator[](const Index& index){ return elements[index];}
 };
 
 namespaceEnd
