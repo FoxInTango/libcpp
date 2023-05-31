@@ -90,7 +90,7 @@ public:
 public:
     Index lookup(const T& t) {
         for(Index i = 0;i < e_count;i ++){
-            if(elements[i] == t) return index;
+            if(elements[i] == t) return i;
         }
 
         return 0xFFFFFFFF;
@@ -176,7 +176,7 @@ public:
 public:
     Index lookup(const T& t) {
         for (Index i = 0; i < e_count; i++) {
-            if (elements[i] == t) return index;
+            if (elements[i] == t) return i;
         }
 
         return 0xFFFFFFFF;
