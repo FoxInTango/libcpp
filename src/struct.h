@@ -110,7 +110,7 @@ public:
  *
  */
 template <typename T, Size s>
-class mem_segment<typename T,s, mem_segment_type_s> {
+class mem_segment<typename T, Size, mem_segment_type_s> {
 public:
     Size s_size;
     Size e_count;
@@ -196,7 +196,7 @@ public:
  *
  */
 template <typename T, Size s>
-class mem_segment<typename T,s, mem_segment_type_sb> {
+class mem_segment<typename T, Size, mem_segment_type_sb> {
 public:
     Size s_size;
     Size e_count;
