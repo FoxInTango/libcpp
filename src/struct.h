@@ -20,21 +20,30 @@ const int mem_segment_type_sb = 0b00000011;// 单向可分叉
 const int mem_segment_type_d  = 0b10000001;// 双向
 const int mem_segment_type_db = 0b10000011;// 双向可分叉
 
+#define DEFAULT_MEM_SEGMENT_SIZE 1024
+
 /** 独立
  *  
  */
-template <typename T, Size s, mem_segment_type t>
+template <typename T>
 class mem_segment{
 public:
     Size s_size;
     Size e_count;
-    mem_segment_type type;
-    union mem_element<T> elements[s];/** pre nxt*/
+    union mem_element<T>* elements;/** pre nxt*/
 public:
     mem_segment(){
-        s_size = s;
+        if(elements = new mem_element[DEFAULT_MEM_SEGMENT_SIZE]){
+            s_size = DEFAULT_MEM_SEGMENT_SIZE;
+        }
+    }
+    mem_segment(Size& size) {
+        if (elements = new mem_element[DEFAULT_MEM_SEGMENT_SIZE]) {
+            s_size = size;
+        }
     }
     ~mem_segment(){
+        if(elements) delete[] elements;
     }
 public:
     Error append(const T& element){
@@ -109,18 +118,21 @@ public:
 /** 单向连接
  *
  */
-template <typename T, Size s, mem_segment_type t>
-class mem_segment<typename T,s, mem_segment_type_s> {
+template <typename T>
+class mem_segment_s :public mem_segment<T>{
 public:
-    Size s_size;
-    Size e_count;
-    mem_segment_type type;
-    union mem_element<T> elements[s + 2];/** [element][element][element][element][element][element][index][segment] */
+    Index index;
+    Address next;
+    /** [element][element][element][element][element][element][index][segment] */
 public:
-    mem_segment() {
-        s_size = s;
+    mem_segment_s() {
+        mem_segment<T>::mem_segment();
     }
-    ~mem_segment() {
+    mem_segment_s(const Size& size) {
+        mem_segment<T>::mem_segment(size);
+    }
+    ~mem_segment_s() {
+        mem_segment<T>::~mem_segment();
     }
 public:
     Error append(const T& element) {
@@ -183,8 +195,8 @@ public:
     }
     T& at(const Index& index) { return elements[index]; }
 
-    mem_segment* before() { return 0; }
-    mem_segment* behind() { return 0; }
+    mem_segment_s* before() { return 0; }
+    mem_segment_s* behind() { return 0; }
 
     T& operator[] (const Size& index) { return elements[index]; }
 public:
@@ -195,19 +207,15 @@ public:
 /** 单向连接可分叉
  *
  */
-template <typename T, Size s, mem_segment_type t>
-class mem_segment<typename T,s, mem_segment_type_sb> {
+template <typename T>
+class mem_segment_sb :public mem_segment_s<T> {
 public:
-    Size s_size;
-    Size e_count;
-    mem_segment_type type;
     char branches[s/8 + 1];
-    union mem_element<T> elements[s];/** [element][element][element][--|--][element][element][index][segment] */
+    /** [element][element][element][--|--][element][element][index][segment] */
 public:
-    mem_segment() {
-        s_size = s;
+    mem_segment_sb() {
     }
-    ~mem_segment() {
+    ~mem_segment_sb() {
     }
 public:
     bool is_branch(const Index& index){
