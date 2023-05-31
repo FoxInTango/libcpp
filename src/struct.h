@@ -14,81 +14,286 @@ Address address;
 };
 
 typedef int mem_segment_type;
-const int mem_segment_type_n = 0;// 独立
-const int mem_segment_type_s = 1;// 单向
-const int mem_segment_type_d = 2;// 双向
+const int mem_segment_type_r  = 0b00000000;// 独立
+const int mem_segment_type_s  = 0b00000001;// 单向
+const int mem_segment_type_sb = 0b00000011;// 单向可分叉
+const int mem_segment_type_d  = 0b10000001;// 双向
+const int mem_segment_type_db = 0b10000011;// 双向可分叉
 
-template <typename T, Size size, mem_segment_type t>
+/** 独立
+ *  
+ */
+template <typename T, Size s, mem_segment_type t>
 class mem_segment{
 public:
-    Size segment_size;
-    Size element_count;
+    Size s_size;
+    Size e_count;
     mem_segment_type type;
-    union mem_element<T> elements[size];/** pre nxt*/
+    union mem_element<T> elements[s];/** pre nxt*/
+public:
     mem_segment(){
+        s_size = s;
     }
     ~mem_segment(){
-    /** delete subsegments
-     */
     }
+public:
+    Error append(const T& t){
+        if(s_size > e_count){ elements[e_count] = t; e_count ++; return 1;}
+        return 0;
+    }
+    /** insert
+     *  向后移位
+     */
+    Error insert(const T& t,const Index& index){
+        if(e_count < s_size){
+            if(index < e_count){
+                for(Index i = e_count;i > index;i --){
+                    elements[i] = elements[i - 1];
+                }
+                elements[index] = t;
+                e_count++;
+                return 1;
+            }
+            else {
+                elements[index] = t;
+                e_count++;
+                return 2;
+            }
+        }
 
-    T& at(const Size& index){ return T();}
+        return 0;
+    }
+    /** remove
+     *  向前移位
+     */
+    Error remove(const Index& index){
+        if(index < e_count){
+            for (Index i = index; i < e_count; i++) {
+                elements[index] = elements[index + 1];
+            }
+
+            e_count--;
+
+            return 1;
+        }
+
+        return 0;
+    }
+    Error replace(const T& t, const Index& index) {
+        if(index < e_count){
+            elements[index] = t;
+            return 1;
+        }
+
+        return 0;
+    }
+public:
+    Index lookup(const T& t) {
+        for(Index i = 0;i < e_count;i ++){
+            if(elements[i] == t) return index;
+        }
+
+        return 0xFFFFFFFF;
+    }
+    T& at(const Index& index){ return elements[index];}
 
     mem_segment* before(){ return 0;}
     mem_segment* behind(){ return 0;}
 
-    T& operator[] (const Size& index) { return T();}
+    T& operator[] (const Size& index) { return elements[index];}
+public:
+    Size size(){ return s_size;}
+    Size count(){ return e_count;}
 };
 
-template <typename T, Size size>
-class mem_segment<T, size, mem_segment_type_n> {
-    Size segment_size;
-    Size element_count;
-    union mem_element<T> elements[size + mem_segment_type_n];/** pre nxt*/
+/** 单向连接
+ *
+ */
+template <typename T, Size s>
+class mem_segment<typename T,s, mem_segment_type_s> {
+public:
+    Size s_size;
+    Size e_count;
+    mem_segment_type type;
+    union mem_element<T> elements[s + 2];/** [element][element][element][element][element][element][index][segment] */
+public:
     mem_segment() {
-        /** clear ids
-         */
+        s_size = s;
     }
     ~mem_segment() {
-        /** delete subsgements
-         */
     }
+public:
+    Error append(const T& t) {
+        if (s_size > e_count) { elements[e_count] = t; e_count++; return 1; }
+        return 0;
+    }
+    /** insert
+     *  向后移位
+     */
+    Error insert(const T& t, const Index& index) {
+        if (e_count < s_size) {
+            if (index < e_count) {
+                for (Index i = e_count; i > index; i--) {
+                    elements[i] = elements[i - 1];
+                }
+                elements[index] = t;
+                e_count++;
+                return 1;
+            }
+            else {
+                elements[index] = t;
+                e_count++;
+                return 2;
+            }
+        }
+
+        return 0;
+    }
+    /** remove
+     *  向前移位
+     */
+    Error remove(const Index& index) {
+        if (index < e_count) {
+            for (Index i = index; i < e_count; i++) {
+                elements[index] = elements[index + 1];
+            }
+
+            e_count--;
+
+            return 1;
+        }
+
+        return 0;
+    }
+    Error replace(const T& t, const Index& index) {
+        if (index < e_count) {
+            elements[index] = t;
+            return 1;
+        }
+
+        return 0;
+    }
+public:
+    Index lookup(const T& t) {
+        for (Index i = 0; i < e_count; i++) {
+            if (elements[i] == t) return index;
+        }
+
+        return 0xFFFFFFFF;
+    }
+    T& at(const Index& index) { return elements[index]; }
+
+    mem_segment* before() { return 0; }
+    mem_segment* behind() { return 0; }
+
+    T& operator[] (const Size& index) { return elements[index]; }
+public:
+    Size size() { return s_size; }
+    Size count() { return e_count; }
 };
 
-template <typename T, Size size>
-class mem_segment<T, size, mem_segment_type_s> {
+/** 单向连接可分叉
+ *
+ */
+template <typename T, Size s>
+class mem_segment<typename T,s, mem_segment_type_sb> {
 public:
-    Size segment_size;
-    Size element_count;
-    union mem_element<T> elements[size + mem_segment_type_s];/** pre nxt*/
+    Size s_size;
+    Size e_count;
+    mem_segment_type type;
+    char branches[s/8 + 1];
+    union mem_element<T> elements[s];/** [element][element][element][--|--][element][element][index][segment] */
+public:
     mem_segment() {
-        /** clear ids
-         */
+        s_size = s;
     }
     ~mem_segment() {
-        /** delete subsgements
-         */
     }
 public:
-    T& operator[](const Index& index) {
-        return elements[index];
-    }
-};
+    bool is_branch(const Index& index){
+        Index i = index / 8;
+        Index b = index % 8;
 
-template <typename T, Size size>
-class mem_segment<T, size, mem_segment_type_d> {
+        char mask = 0b00000001 << b;
+        return branches[i] & mask;
+    }
+    Size branch_count(){
+        Size count = 0;
+
+        for(Index i=0;i < e_count;i ++){
+            count += is_branch(i) ? 1 : 0;
+        }
+
+        return count;
+    }
 public:
-    Size segment_size;
-    Size element_count;
-    union mem_element<T> elements[size + mem_segment_type_d];/** pre nxt*/
-    mem_segment() {
-        /** clear ids
-         */
+    Error append(const T& t) {
+        if (s_size > e_count) { elements[e_count] = t; e_count++; return 1; }
+        return 0;
     }
-    ~mem_segment() {
-        /** delete subsgements
-         */
+    /** insert
+     *  向后移位
+     */
+    Error insert(const T& t, const Index& index) {
+        if (e_count < s_size) {
+            if (index < e_count) {
+                for (Index i = e_count; i > index; i--) {
+                    elements[i] = elements[i - 1];
+                }
+                elements[index] = t;
+                e_count++;
+                return 1;
+            }
+            else {
+                elements[index] = t;
+                e_count++;
+                return 2;
+            }
+        }
+
+        return 0;
     }
+    /** remove
+     *  向前移位
+     */
+    Error remove(const Index& index) {
+        if (index < e_count) {
+            for (Index i = index; i < e_count; i++) {
+                elements[index] = elements[index + 1];
+            }
+
+            e_count--;
+
+            return 1;
+        }
+
+        return 0;
+    }
+    Error replace(const T& t, const Index& index) {
+        if (index < e_count) {
+            elements[index] = t;
+            return 1;
+        }
+
+        return 0;
+    }
+public:
+    Index lookup(const T& t) {
+        for (Index i = 0; i < e_count; i++) {
+            if (elements[i] == t) return index;
+        }
+
+        return 0xFFFFFFFF;
+    }
+    T& at(const Index& index) { return elements[index]; }
+
+    mem_segment* before() { return 0; }
+    mem_segment* behind() { return 0; }
+
+    T& operator[] (const Size& index) { return elements[index]; }
+public:
+    Size size() { return s_size; }
+    Size count() { return e_count; }
 };
 
 /** B-Tree

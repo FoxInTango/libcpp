@@ -77,7 +77,6 @@ public:
 
     Error swap(const unsigned int& l, const unsigned int& r) { return 0; }
     T& at(const unsigned int& index) {}
-    T* addressOf(const unsigned int& index) { return 0; }
 
     Size size() { return Size();}
     Size size() const { return Size(); }
