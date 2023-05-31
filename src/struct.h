@@ -66,7 +66,7 @@ public:
     mem_segment(){
     }
     ~mem_segment(){
-    /** delete subsgements
+    /** delete subsegments
      */
     }
 
