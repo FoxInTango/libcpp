@@ -30,15 +30,15 @@ class mem_segment{
 public:
     Size s_size;
     Size e_count;
-    union mem_element<T>* elements;/** pre nxt*/
+    union mem_element<T>* elements;
 public:
     mem_segment(){
-        if(elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]){
-            s_size = DEFAULT_MEM_SEGMENT_SIZE;
-        }
+        this->s_size = 0;
+        this->e_count = 0;
+        this->elements = 0;
     }
     mem_segment(Size& size) {
-        if (elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]) {
+        if (elements = new mem_element<T>[size]) {
             s_size = size;
         }
     }
@@ -195,6 +195,7 @@ public:
 
         return 0xFFFFFFFF;
     }
+
     T& at(const Index& index) { return elements[index]; }
 
     mem_segment_s* before() { return 0; }
