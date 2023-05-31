@@ -4,10 +4,10 @@
 
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
-void* memnew(const Size& size) {
+inline void* memnew(const Size& size) {
     return new char[size];
 }
-void  memdel(void* p) {
+inline void  memdel(void* p) {
     delete[] (char*)p;
 }
 
