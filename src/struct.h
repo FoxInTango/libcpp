@@ -109,8 +109,8 @@ public:
 /** 单向连接
  *
  */
-template <typename T, Size s>
-class mem_segment<typename T, Size, mem_segment_type_s> {
+template <typename T, Size s, mem_segment_type t>
+class mem_segment<typename T,s, mem_segment_type_s> {
 public:
     Size s_size;
     Size e_count;
@@ -195,8 +195,8 @@ public:
 /** 单向连接可分叉
  *
  */
-template <typename T, Size s>
-class mem_segment<typename T, Size, mem_segment_type_sb> {
+template <typename T, Size s, mem_segment_type t>
+class mem_segment<typename T,s, mem_segment_type_sb> {
 public:
     Size s_size;
     Size e_count;
