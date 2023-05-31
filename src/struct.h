@@ -38,7 +38,7 @@ public:
         }
     }
     mem_segment(Size& size) {
-        if (elements = new mem_element[DEFAULT_MEM_SEGMENT_SIZE]) {
+        if (elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]) {
             s_size = size;
         }
     }
@@ -156,7 +156,7 @@ public:
                 return 1;
             }
             else {
-                elements[index] = t;
+                elements[index] = element;
                 e_count++;
                 return 2;
             }
@@ -217,7 +217,7 @@ public:
     Size e_count;
     Index index;
     Address next;
-    char branches[s / 8 + 1];
+    char* branches;//[s / 8 + 1];
     union mem_element<T>* elements;/** pre nxt*/
     /** [element][element][element][--|--][element][element][index][segment] */
 public:
@@ -303,8 +303,8 @@ public:
     }
     T& at(const Index& index) { return elements[index]; }
 
-    mem_segment* before() { return 0; }
-    mem_segment* behind() { return 0; }
+    mem_segment_sb* before() { return 0; }
+    mem_segment_sb* behind() { return 0; }
 
     T& operator[] (const Size& index) { return elements[index]; }
 public:
