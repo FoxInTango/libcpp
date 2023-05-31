@@ -68,6 +68,6 @@ typedef unsigned long int Index;
 typedef int               Error;
 typedef int               Status;
 typedef void*             Address;
-typedef bool              Bool
+typedef bool              Bool;
 namespaceEnd
 #endif

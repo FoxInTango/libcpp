@@ -11,12 +11,13 @@ Index  hash_in_range(const char* seed, const Index& begin, const Index& end) {
 Index  hash_in_range(const long unsigned int seed, const Index& begin, const Index& end) {
     return begin;
 }
+EXTERN_C_END
 
 template<typename T>
 Index  hash_in_range(const T& seed,const Index& begin,const Index& end){
     return begin;
 }
-EXTERN_C_END
+
 namespaceEnd
 
 #endif
