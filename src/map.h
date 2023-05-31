@@ -28,13 +28,16 @@ static Value VNULL;
 static KVPair<Key,Value> PNULL;
 protected:
     void* map;
+    Key keys[1024];// 测试用 -- 删除
+    Value elements[1024];// 测试用 -- 删除
 public:
     class Iterator {
     public:
         Map* owner;
         Key key;
         Value value;
-        //KVPair<Key,Value>* element;
+        
+        KVPair<Key, Value> pairs[1024];// 测试用 -- 删除
     public:
         Iterator() {
         }
@@ -65,8 +68,8 @@ public:
         bool operator != (const Index& index) { return false; }
         bool operator != (const Iterator& iterator) { return false; }
 
-        KVPair<Key,Value>& operator *() { return owner->PNULL; }
-        KVPair<Key,Value>& operator *(const Iterator& iter) { return owner->PNULL; }
+        KVPair<Key,Value>& operator *() { return this->pairs[0]; }
+        KVPair<Key,Value>& operator *(const Iterator& iter) { return this->pairs[0]; }
     };
 public:
     Map(){
@@ -83,12 +86,11 @@ public:
     Error swap(const unsigned int& l, const unsigned int& r) { return 0; }
 
     Size count(const Key& key) { return 0; }
-    Value& at(const Key& key) { return this->VNULL;}
-    Value& at(const Index& index) { return this->VNULL;; }
+    Value& at(const Key& key) { return this->elements[0];}
+    Value& at(const Index& index) { return this->elements[0]; }
 
     Iterator iteratorAt(const Key& index) { return Iterator(1); }
     Iterator iteratorAt(const Index& index) { return Iterator(1); }
-    Value* addressOf(const Index& index) { return 0; }
 
     Size size() { return Size(); }
     Size size() const { return Size(); }
@@ -96,8 +98,8 @@ public:
     Iterator begin() { return Iterator(); }
     Iterator end() { return Iterator(); }
 public:
-    Value& operator[](const Index& index) { return this->VNULL; }
-    Value& operator[](const Key& key) { return this->VNULL; }
+    Value& operator[](const Index& index) { return this->elements[0]; }
+    Value& operator[](const Key& key) { return this->elements[0]; }
 };
 namespaceEnd
 #endif
