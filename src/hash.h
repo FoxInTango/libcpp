@@ -4,11 +4,11 @@
 namespaceBegin(foxintango)
 EXTERN_C_BEGIN
 
-Index  hash_in_range(const char* seed, const Index& begin, const Index& end) {
+Index  string_hash(const char* seed, const Index& begin, const Index& end) {
     return begin;
 }
 
-Index  hash_in_range(const long unsigned int& seed, const Index& begin, const Index& end) {
+Index  number_hash(const long unsigned int& seed, const Index& begin, const Index& end) {
     return begin;
 }
 EXTERN_C_END
