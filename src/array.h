@@ -16,14 +16,16 @@ public:
     class Iterator {
     public:
         Array* owner;
+        Index index;
         T* element;
     public:
         Iterator() {
         }
         Iterator(const Index& index) {
         }
-        Iterator(Array* owner, const Index& index = 0) {
+        Iterator(Array* owner, T* element) {
             this->owner = owner;
+            this->element = element;
         }
         ~Iterator() {
 
@@ -31,8 +33,7 @@ public:
     public:
         void clean() {}
     public:
-        Iterator& operator  = (const Index& index) { return *this;}
-        
+        Iterator& operator =  (const Index& index) { return *this;}
         Iterator& operator +  (const unsigned int& offset) { return *this; }
         Iterator& operator -  (const unsigned int& offset) { return *this; }
         Iterator& operator += (const unsigned int& offset) { return *this; }
@@ -55,13 +56,14 @@ public:
        void forEach(){} 
     };
 public:
-    Iterator iterator;
+    Iterator i_begin;
+    Iterator i_end;
     mem_segment<T> elements;
-    Size array_size;
-    Size entity_count;
+    Size a_size;/** array size */
+    Size e_count;/** element count */
 public:
     Array() {
-        iterator.owner = this;
+        // 处理begin & end
     }
     Array(const Size& size){
     }
@@ -81,10 +83,10 @@ public:
     Size size() { return Size();}
     Size size() const { return Size(); }
 
-    Iterator begin(){ return Iterator(); }
-    Iterator end() { return Iterator(); }
+    Iterator& begin(){ return this->i_begin; }
+    Iterator& end()  { return this->i_end;   }
 public:
-    T& operator[](const Index& index){ return elements[index];}
+    T& operator[](const Index& index){ return elements[index]; }
 };
 
 namespaceEnd

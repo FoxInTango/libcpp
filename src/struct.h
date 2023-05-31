@@ -123,10 +123,9 @@ class mem_segment_s{
 public:
     Size s_size;
     Size e_count;
-    union mem_element<T>* elements;/** pre nxt*/
     Index index;
     Address next;
-    /** [element][element][element][element][element][element][index][segment] */
+    union mem_element<T>* elements;/** [element][element][element][element][element][element][index][segment] */
 public:
     mem_segment_s() {
         
@@ -218,8 +217,7 @@ public:
     Index index;
     Address next;
     char* branches;//[s / 8 + 1];
-    union mem_element<T>* elements;/** pre nxt*/
-    /** [element][element][element][--|--][element][element][index][segment] */
+    union mem_element<T>* elements;/** [element][element][element][--|--][element][element][index][segment] */
 public:
     mem_segment_sb() {
     }
@@ -308,7 +306,7 @@ public:
 
     T& operator[] (const Size& index) { return elements[index]; }
 public:
-    Size size() { return s_size; }
+    Size size()  { return s_size;  }
     Size count() { return e_count; }
 };
 
