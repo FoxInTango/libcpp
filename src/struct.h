@@ -123,20 +123,20 @@ public:
     ~mem_segment() {
     }
 public:
-    Error append(const T& t) {
-        if (s_size > e_count) { elements[e_count] = t; e_count++; return 1; }
+    Error append(const T& element) {
+        if (s_size > e_count) { elements[e_count] = element; e_count++; return 1; }
         return 0;
     }
     /** insert
      *  向后移位
      */
-    Error insert(const T& t, const Index& index) {
+    Error insert(const T& element, const Index& index) {
         if (e_count < s_size) {
             if (index < e_count) {
                 for (Index i = e_count; i > index; i--) {
                     elements[i] = elements[i - 1];
                 }
-                elements[index] = t;
+                elements[index] = element;
                 e_count++;
                 return 1;
             }
@@ -165,18 +165,18 @@ public:
 
         return 0;
     }
-    Error replace(const T& t, const Index& index) {
+    Error replace(const T& element, const Index& index) {
         if (index < e_count) {
-            elements[index] = t;
+            elements[index] = element;
             return 1;
         }
 
         return 0;
     }
 public:
-    Index lookup(const T& t) {
+    Index lookup(const T& element) {
         for (Index i = 0; i < e_count; i++) {
-            if (elements[i] == t) return i;
+            if (elements[i] == element) return i;
         }
 
         return 0xFFFFFFFF;
@@ -227,25 +227,25 @@ public:
         return count;
     }
 public:
-    Error append(const T& t) {
-        if (s_size > e_count) { elements[e_count] = t; e_count++; return 1; }
+    Error append(const T& element) {
+        if (s_size > e_count) { elements[e_count] = element; e_count++; return 1; }
         return 0;
     }
     /** insert
      *  向后移位
      */
-    Error insert(const T& t, const Index& index) {
+    Error insert(const T& element, const Index& index) {
         if (e_count < s_size) {
             if (index < e_count) {
                 for (Index i = e_count; i > index; i--) {
                     elements[i] = elements[i - 1];
                 }
-                elements[index] = t;
+                elements[index] = element;
                 e_count++;
                 return 1;
             }
             else {
-                elements[index] = t;
+                elements[index] = element;
                 e_count++;
                 return 2;
             }
@@ -269,18 +269,18 @@ public:
 
         return 0;
     }
-    Error replace(const T& t, const Index& index) {
+    Error replace(const T& element, const Index& index) {
         if (index < e_count) {
-            elements[index] = t;
+            elements[index] = element;
             return 1;
         }
 
         return 0;
     }
 public:
-    Index lookup(const T& t) {
+    Index lookup(const T& element) {
         for (Index i = 0; i < e_count; i++) {
-            if (elements[i] == t) return index;
+            if (elements[i] == element) return index;
         }
 
         return 0xFFFFFFFF;

@@ -23,6 +23,9 @@ public:
 };
 template <typename Key,typename Value>
 class Map{
+public:
+static Value VNULL;
+static KVPair<Key,Value> PNULL;
 protected:
     void* map;
 public:
@@ -62,8 +65,8 @@ public:
         bool operator != (const Index& index) { return false; }
         bool operator != (const Iterator& iterator) { return false; }
 
-        KVPair<Key,Value>& operator *() { return KVPair<Key, Value>(); }
-        KVPair<Key,Value>& operator *(const Iterator& iter) { return KVPair<Key, Value>(); }
+        KVPair<Key,Value>& operator *() { return owner->PNULL; }
+        KVPair<Key,Value>& operator *(const Iterator& iter) { return owner->PNULL; }
     };
 public:
     Map(){
@@ -80,8 +83,8 @@ public:
     Error swap(const unsigned int& l, const unsigned int& r) { return 0; }
 
     Size count(const Key& key) { return 0; }
-    Value& at(const Key& key) { return VNULL;}
-    Value& at(const Index& index) { return VNULL; }
+    Value& at(const Key& key) { return this->VNULL;}
+    Value& at(const Index& index) { return this->VNULL;; }
 
     Iterator iteratorAt(const Key& index) { return Iterator(1); }
     Iterator iteratorAt(const Index& index) { return Iterator(1); }
@@ -93,8 +96,8 @@ public:
     Iterator begin() { return Iterator(); }
     Iterator end() { return Iterator(); }
 public:
-    Value& operator[](const Index& index) { return Value(); }
-    Value& operator[](const Key& key) { return Value(); }
+    Value& operator[](const Index& index) { return this->VNULL; }
+    Value& operator[](const Key& key) { return this->VNULL; }
 };
 namespaceEnd
 #endif
