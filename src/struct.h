@@ -33,7 +33,7 @@ public:
     union mem_element<T>* elements;/** pre nxt*/
 public:
     mem_segment(){
-        if(elements = new mem_element[DEFAULT_MEM_SEGMENT_SIZE]){
+        if(elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]){
             s_size = DEFAULT_MEM_SEGMENT_SIZE;
         }
     }
@@ -119,20 +119,23 @@ public:
  *
  */
 template <typename T>
-class mem_segment_s :public mem_segment<T>{
+class mem_segment_s{
 public:
+    Size s_size;
+    Size e_count;
+    union mem_element<T>* elements;/** pre nxt*/
     Index index;
     Address next;
     /** [element][element][element][element][element][element][index][segment] */
 public:
     mem_segment_s() {
-        mem_segment<T>::mem_segment();
+        
     }
     mem_segment_s(const Size& size) {
-        mem_segment<T>::mem_segment(size);
+        
     }
     ~mem_segment_s() {
-        mem_segment<T>::~mem_segment();
+        
     }
 public:
     Error append(const T& element) {
@@ -208,9 +211,14 @@ public:
  *
  */
 template <typename T>
-class mem_segment_sb :public mem_segment_s<T> {
+class mem_segment_sb {
 public:
-    char branches[s/8 + 1];
+    Size s_size;
+    Size e_count;
+    Index index;
+    Address next;
+    char branches[s / 8 + 1];
+    union mem_element<T>* elements;/** pre nxt*/
     /** [element][element][element][--|--][element][element][index][segment] */
 public:
     mem_segment_sb() {
