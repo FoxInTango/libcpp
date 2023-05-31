@@ -13,8 +13,6 @@ const unsigned int ARRAY_DEFAULT_SIZE = 32;
 template <class T>
 class Array{
 public:
-    static T ENULL;// empty element.
-public:
     class Iterator {
     public:
         Array* owner;
@@ -49,8 +47,8 @@ public:
         bool operator != (const Index& index) { return false; }
         bool operator != (const Iterator& iterator) { return false; }
 
-        T& operator *() { return ENULL; }
-        T& operator *(const Iterator& iter) { return ENULL; }
+        T& operator *() { return *element; }
+        T& operator *(const Iterator& iter) { return *element; }
     };
     class Range{
     public:

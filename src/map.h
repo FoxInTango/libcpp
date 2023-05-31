@@ -22,8 +22,6 @@ public:
 };
 template <typename Key,typename Value>
 class Map{
-public:
-    static Value VNULL;// empty value.
 protected:
     void* map;
 public:
