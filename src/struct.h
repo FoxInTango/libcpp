@@ -33,13 +33,15 @@ public:
     union mem_element<T>* elements;
 public:
     mem_segment(){
-        this->s_size = 0;
         this->e_count = 0;
-        this->elements = 0;
+        if (elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]) {
+            this->s_size = DEFAULT_MEM_SEGMENT_SIZE;
+        }
     }
     mem_segment(Size& size) {
+        this->e_count = 0;
         if (elements = new mem_element<T>[size]) {
-            s_size = size;
+            this->s_size = size;
         }
     }
     ~mem_segment(){
@@ -131,7 +133,10 @@ public:
         
     }
     mem_segment_s(const Size& size) {
-        
+        if (elements = new mem_element<T>[size]) {
+            this->s_size = size;
+            memclr(&elements[size + 2], sizeof(mem_element_s<T>) * 2);
+        }
     }
     ~mem_segment_s() {
         

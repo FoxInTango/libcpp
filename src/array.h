@@ -12,6 +12,8 @@ const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
 class Array{
+protected:
+    static T T_NULL;
 public:
     class Iterator {
     public:
@@ -114,8 +116,8 @@ public:
     T* elementAt(const Index& index){
         mem_segment_s<T>* segment = &this->elements;
         while (segment) {
-            if( index > segment[segment->index] * segment->size && index < segment[segment->index] * segment->size + segment->size){
-                return segment[index - segment[segment->index] * segment->size].element;
+            if(index > segment[segment->index] * segment->size && index < segment[segment->index] * segment->size + segment->size){
+                return &segment[index - segment[segment->index] * segment->size].element;
             }
 
             if (segment[index + 1].address) {
@@ -127,11 +129,37 @@ public:
         return 0;
     }
 
-    Error swap(const unsigned int& l, const unsigned int& r) { return 0; }
-    T& at(const unsigned int& index) {}
+    Error swap(const Index& l, const Index& r) {
+        if(l < this->e_count && r < this->e_count){
+            T t = this->at(l);
+            this->at(l) = this->at(r);
+            this->at(r) = t;
 
-    Size size() { return Size();}
-    Size size() const { return Size(); }
+            return 1;
+        }
+
+        return 0;
+    }
+    T& at(const Index& index) {
+        if(index < e_count){
+            mem_segment_s<T>* segment = &this->elements;
+            while (segment) {
+                if (index > segment[segment->index] * segment->size && index < segment[segment->index] * segment->size + segment->size) {
+                    return segment[index - segment[segment->index] * segment->size].element;
+                }
+
+                if (segment[index + 1].address) {
+                    segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+                    continue;
+                }
+            }
+        }
+
+        return this->T_NULL;
+    }
+
+    Size size() { return this->e_count;}
+    Size size() const { return this->e_count; }
 
     Iterator& begin(){ return this->i_begin; }
     Iterator& end()  { return this->i_end;   }
