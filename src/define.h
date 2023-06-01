@@ -69,5 +69,9 @@ typedef int               Error;
 typedef int               Status;
 typedef void*             Address;
 typedef bool              Bool;
+
+#define UNSIGNED_INT_MAX  0XFFFF
+#define UNSIGNED_LONG_MAX 0xFFFFFFFF
+
 namespaceEnd
 #endif

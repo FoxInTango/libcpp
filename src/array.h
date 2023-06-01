@@ -15,17 +15,27 @@ class Array{
 public:
     class Iterator {
     public:
-        Array* owner;
+        Array* target;
         Index index;
         T* element;
     public:
         Iterator() {
-        }
-        Iterator(const Index& index) {
-        }
-        Iterator(Array* owner, T* element) {
-            this->owner = owner;
+            this->target = target;
             this->element = element;
+            this->index = UNSIGNED_LONG_MAX;
+        }
+        Iterator(Array* target,const Index& index) {
+            if(!target) return;
+
+            this->target  = target;
+            this->index   = index;
+            this->element = target->elementAt(index);
+        }
+        Iterator(Array* target, T* element) {
+            if(!target || !element) return ;
+            this->target  = target;
+            this->element = element;
+            this->index   = target->indexOf(element);
         }
         ~Iterator() {
 
@@ -53,19 +63,24 @@ public:
     };
     class Range{
     public:
+        Array* target;
+        Index begin;
+        Index end;
+    public:
        void forEach(){} 
     };
 public:
     Iterator i_begin;
     Iterator i_end;
-    mem_segment<T> elements;
+    mem_segment_s<T> elements;
     Size a_size;/** array size */
     Size e_count;/** element count */
 public:
     Array() {
         // 处理begin & end
     }
-    Array(const Size& size){
+    Array(const Size& size,const Size& segment_size = 0) {
+        // 处理begin & end
     }
    ~Array(){
     }
@@ -76,6 +91,39 @@ public:
     Size remove(const Iterator& index) { return 0; }
     Size replace(const Index& index) { return 0; }
     Size replace(const Iterator& index) { return 0; }
+
+    Index indexOf(T* element){
+        Index index = 0;
+        mem_segment_s<T>* segment = &this->elements;
+        while(segment){
+            for(index = 0;i < segment->count();i ++){
+                if(segment[index].element == element) return index;
+            }
+
+            if(segment[index + 1].address){
+                segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+                continue;
+            }
+        }
+
+        return UNSIGNED_LONG_MAX;
+    }
+
+    T* elementAt(const Index& index){
+        mem_segment_s<T>* segment = &this->elements;
+        while (segment) {
+            if( index > segment[segment->index] * segment->size && index < segment[segment->index] * segment->size + segment->size){
+                return segment[index - segment[segment->index] * segment->size].element;
+            }
+
+            if (segment[index + 1].address) {
+                segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+                continue;
+            }
+        }
+
+        return 0;
+    }
 
     Error swap(const unsigned int& l, const unsigned int& r) { return 0; }
     T& at(const unsigned int& index) {}
