@@ -60,6 +60,8 @@ public:
 
         T& operator *() { return *element; }
         T& operator *(const Iterator& iter) { return *element; }
+
+        operator T(){ return *element; }
     };
     class Range{
     public:
