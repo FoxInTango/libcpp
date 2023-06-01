@@ -24,11 +24,24 @@
 #include "libcpp.h"
 using namespace foxintango;
 
+/** array 
+ * append
+ * insert
+ * remove
+ * indexOf
+ * elementAt
+ * operator[]
+ * 
+ * iterator
+ */
 void sample_array(){
     Array<int> m;
     Array<int>::Iterator& iter = m.begin();
 }
 
+int libcpp_startup(){
+    return 0;
+}
 int libcpp_set_default(){
     sample_array();
     return 0;

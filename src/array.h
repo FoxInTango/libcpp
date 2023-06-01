@@ -98,7 +98,7 @@ public:
         Index index = 0;
         mem_segment_s<T>* segment = &this->elements;
         while(segment){
-            for(index = 0; index < segment->count();i ++){
+            for(index = 0; index < segment->count(); index++){
                 if(segment[index].element == element) return index;
             }
 

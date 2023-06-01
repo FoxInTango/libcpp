@@ -32,6 +32,7 @@
 #include "endian.h"
 #include "define.h"
 
+int libcpp_startup();
 int libcpp_set_default();
 
 #endif
