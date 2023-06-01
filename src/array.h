@@ -110,11 +110,23 @@ public:
     }
     Size insert(const T& t,const Index& index)  { 
         if (index < this->size) {
+            Size e_count = 0;
+            Size s_size = 0;
             mem_segment_s<T>* segment = &this->elements;
             Index s_index = 1;
             while (segment) {
-                if(index 
-
+                if(index - e_count < segment->size){
+                    if(segment->e_count < segment->s_size){
+                        segment->insert(t,index - e_count);
+                    } else {
+                        mem_segment_s<T>* s = new mem_segment_s<T>();
+                        if (s) {
+                            //s->app(t);
+                            segment[segment->size + 1].address = static_cast<Address>(s);
+                            s[segment->size].index = segment[segment->size + 1].index + 1;
+                        }
+                    }
+                }
                 if (segment[index + 1].address) {
                     segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
                     continue;
