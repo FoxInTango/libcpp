@@ -91,8 +91,8 @@ public:
     Size append(const T& t)  { 
         mem_segment_s<T>* segment = &this->elements;
         while (segment) {
-            if (segment[segment->s_size + 1].address) {
-                segment = static_cast<mem_segment_s<T>*>(segment[segment->s_size + 1].address);
+            if (*segment[segment->s_size + 1].address) {
+                segment = static_cast<mem_segment_s<T>*>(*segment[segment->s_size + 1].address);
                 continue;
             }else break;
         }
@@ -103,7 +103,7 @@ public:
             mem_segment_s<T>* s = new mem_segment_s<T>();
             if(s){
                 s->append(t);
-                segment[segment->size + 1].address = static_cast<Address>(s);
+                *segment[segment->size + 1].address = static_cast<Address>(s);
             }
         }
         return this->size += 1;
@@ -122,13 +122,13 @@ public:
                         mem_segment_s<T>* s = new mem_segment_s<T>();
                         if (s) {
                             //s->app(t);
-                            segment[segment->size + 1].address = static_cast<Address>(s);
-                            s[segment->size].index = segment[segment->size + 1].index + 1;
+                            *segment[segment->size + 1].address = static_cast<Address>(s);
+                            *s[segment->size].index = *segment[segment->size + 1].index + 1;
                         }
                     }
                 }
-                if (segment[index + 1].address) {
-                    segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+                if (*segment[index + 1].address) {
+                    segment = static_cast<mem_segment_s<T>*>(*segment[index + 1].address);
                     continue;
                 }
             }
@@ -145,11 +145,11 @@ public:
         mem_segment_s<T>* segment = &this->elements;
         while(segment){
             for(index = 0; index < segment->count(); index++){
-                if(segment[index].element == element) return index;
+                if(*segment[index].element == element) return index;
             }
 
-            if(segment[index + 1].address){
-                segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+            if(*segment[index + 1].address){
+                segment = static_cast<mem_segment_s<T>*>(*segment[index + 1].address);
                 continue;
             }
             else break;
@@ -164,12 +164,12 @@ public:
         mem_segment_s<T>* segment = &this->elements;
         s_size = segment->size;
         while (segment) {
-            if (e_count < index && index < s_size) return segment[index - e_count];
+            if (e_count < index && index < s_size) return *segment[index - e_count];
 
             e_count += segment->e_count;
             s_size += segment->s_size;
-            if (segment[index + 1].address) {
-                segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+            if (*segment[index + 1].address) {
+                segment = static_cast<mem_segment_s<T>*>(*segment[index + 1].address);
                 continue;
             } else break;
         }
@@ -189,8 +189,8 @@ public:
 
             e_count += segment->e_count;
             s_size += segment->s_size;
-            if (segment[index + 1].address) {
-                segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+            if (*segment[index + 1].address) {
+                segment = static_cast<mem_segment_s<T>*>(*segment[index + 1].address);
                 continue;
             }
             else break;
@@ -215,12 +215,12 @@ public:
             mem_segment_s<T>* segment = &this->elements;
             Index s_index = 1;
             while (segment) {
-                if(index > s_index) return segment[index - s_index];
+                if(index > s_index) return *segment[index - s_index];
 
                 s_index += segment->e_count;
 
                 if (segment[index + 1].address) {
-                    segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+                    segment = static_cast<mem_segment_s<T>*>(*segment[index + 1].address);
                     continue;
                 }
             }
