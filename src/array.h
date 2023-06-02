@@ -13,7 +13,7 @@ const unsigned int ARRAY_DEFAULT_SIZE = 32;
 template <class T>
 class foxintangoAPI Array{
 protected:
-    static T T_NULL;
+    //static T T_NULL;
 public:
     class Iterator {
     public:
@@ -76,6 +76,7 @@ public:
 public:
     Iterator iBegin;
     Iterator iEnd;
+    mem_segment_s<T> T_NULL;
     mem_segment_s<T> elements;
     Size aSize;/** array size */
 public:
