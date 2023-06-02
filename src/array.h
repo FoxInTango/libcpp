@@ -74,10 +74,10 @@ public:
        void forEach(){} 
     };
 public:
-    Iterator i_begin;
-    Iterator i_end;
+    Iterator iBegin;
+    Iterator iEnd;
     mem_segment_s<T> elements;
-    Size size;/** array size */
+    Size aSize;/** array size */
 public:
     Array() {
         // 处理begin & end
@@ -91,8 +91,8 @@ public:
     Size append(const T& t)  { 
         mem_segment_s<T>* segment = &this->elements;
         while (segment) {
-            if (segment[segment->size + 1].address) {
-                segment = static_cast<mem_segment_s<T>*>(segment[segment->size + 1].address);
+            if (segment[segment->s_size + 1].address) {
+                segment = static_cast<mem_segment_s<T>*>(segment[segment->s_size + 1].address);
                 continue;
             }else break;
         }
@@ -217,7 +217,7 @@ public:
             while (segment) {
                 if(index > s_index) return segment[index - s_index];
 
-                r_index += segment->e_count;
+                s_index += segment->e_count;
 
                 if (segment[index + 1].address) {
                     segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
@@ -229,11 +229,11 @@ public:
         return this->T_NULL;
     }
 
-    Size size() { return this->size;}
-    Size size() const { return this->size; }
+    Size size() { return this->aSize;}
+    Size size() const { return this->aSize; }
 
-    Iterator& begin(){ return this->i_begin; }
-    Iterator& end()  { return this->i_end;   }
+    Iterator& begin(){ return this->iBegin; }
+    Iterator& end()  { return this->iEnd;   }
 public:
     T& operator[](const Index& index){ return elements[index]; }
 };
