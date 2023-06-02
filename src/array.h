@@ -91,8 +91,8 @@ public:
     Size append(const T& t)  { 
         mem_segment_s<T>* segment = &this->elements;
         while (segment) {
-            if (segment[index + 1].address) {
-                segment = static_cast<mem_segment_s<T>*>(segment[index + 1].address);
+            if (segment[segment->size + 1].address) {
+                segment = static_cast<mem_segment_s<T>*>(segment[segment->size + 1].address);
                 continue;
             }else break;
         }
@@ -103,7 +103,7 @@ public:
             mem_segment_s<T>* s = new mem_segment_s<T>();
             if(s){
                 s->append(t);
-                segment[index + 1].address = static_cast<Address>(s);
+                segment[segment->size + 1].address = static_cast<Address>(s);
             }
         }
         return this->size += 1;
@@ -229,8 +229,8 @@ public:
         return this->T_NULL;
     }
 
-    Size size() { return this->e_count;}
-    Size size() const { return this->e_count; }
+    Size size() { return this->size;}
+    Size size() const { return this->size; }
 
     Iterator& begin(){ return this->i_begin; }
     Iterator& end()  { return this->i_end;   }

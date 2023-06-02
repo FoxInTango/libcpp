@@ -135,7 +135,7 @@ public:
     mem_segment_s(const Size& size) {
         if (elements = new mem_element<T>[size]) {
             this->s_size = size;
-            memclr(&elements[size + 2], sizeof(mem_element_s<T>) * 2);
+            memclr(&elements[size + 2], sizeof(mem_element<T>) * 2);
         }
     }
     ~mem_segment_s() {
