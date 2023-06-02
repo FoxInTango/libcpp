@@ -215,7 +215,7 @@ public:
             mem_segment_s<T>* segment = &this->elements;
             Index s_index = 1;
             while (segment) {
-                if(index > s_index) return segment->at(index - s_index);
+                if(index > s_index) return segment->at(index - s_index).element;
 
                 s_index += segment->e_count;
 
