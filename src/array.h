@@ -92,7 +92,7 @@ public:
         mem_segment_s<T>* segment = &this->elements;
         while (segment) {
             if (segment->at(segment->s_size + 1).address) {
-                segment = static_cast<Address>(segment->at(segment->s_size + 1).address);
+                segment = (mem_segment_s<T>*)(segment->at(segment->s_size + 1).address);
                 continue;
             }else break;
         }
