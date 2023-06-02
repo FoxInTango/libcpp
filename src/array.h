@@ -223,7 +223,7 @@ public:
             }
         }
 
-        return this->T_NULL;
+        return this->elements[0].element;
     }
 
     Size size() { return this->aSize;}
