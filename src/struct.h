@@ -106,12 +106,12 @@ public:
 
         return 0xFFFFFFFF;
     }
-    T& at(const Index& index){ return elements[index].element;}
+    mem_element<T>& at(const Index& index){ return elements[index].element;}
 
     mem_segment* before(){ return 0;}
     mem_segment* behind(){ return 0;}
 
-    T& operator[] (const Size& index) { return elements[index].element;}
+    mem_element<T>& operator[] (const Size& index) { return elements[index].element;}
 public:
     Size size(){ return s_size;}
     Size count(){ return e_count;}
@@ -201,12 +201,12 @@ public:
         return 0xFFFFFFFF;
     }
 
-    T& at(const Index& index) { return elements[index].element; }
+    mem_element<T>& at(const Index& index) { return elements[index]; }
 
     mem_segment_s* before() { return 0; }
     mem_segment_s* behind() { return 0; }
 
-    T& operator[] (const Index& index) { return elements[index].element; }
+    mem_element<T>& operator[] (const Index& index) { return elements[index]; }
 public:
     Size size() { return s_size; }
     Size count() { return e_count; }
@@ -279,7 +279,7 @@ public:
     Error remove(const Index& index) {
         if (index < e_count) {
             for (Index i = index; i < e_count; i++) {
-                elements[index].element = elements[index + 1];
+                elements[index].element = elements[index + 1].element;
             }
 
             e_count--;
@@ -305,12 +305,12 @@ public:
 
         return 0xFFFFFFFF;
     }
-    T& at(const Index& index) { return elements[index].element; }
+    mem_element<T>& at(const Index& index) { return elements[index]; }
 
     mem_segment_sb* before() { return 0; }
     mem_segment_sb* behind() { return 0; }
 
-    T& operator[] (const Size& index) { return elements[index].element; }
+    mem_element<T>& operator[] (const Size& index) { return elements[index]; }
 public:
     Size size()  { return s_size;  }
     Size count() { return e_count; }

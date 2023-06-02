@@ -92,7 +92,7 @@ public:
         mem_segment_s<T>* segment = &this->elements;
         while (segment) {
             if (static_cast<mem_element<T>>(segment->at(segment->s_size + 1)).address) {
-                segment = static_cast<mem_segment_s<T>*>(static_cast<mem_element<T>>(segment->at(segment->s_size + 1)).address);
+                segment = segment->at(segment->s_size + 1)).address;
                 continue;
             }else break;
         }
@@ -103,7 +103,7 @@ public:
             mem_segment_s<T>* s = new mem_segment_s<T>();
             if(s){
                 s->append(t);
-                static_cast<mem_element<T>>(segment->at(segment->s_size + 1)).address = static_cast<Address>(s);
+                segment->at(segment->s_size + 1).address = static_cast<Address>(s);
             }
         }
         return this->aSize += 1;
@@ -122,13 +122,13 @@ public:
                         mem_segment_s<T>* s = new mem_segment_s<T>();
                         if (s) {
                             //s->app(t);
-                            static_cast<mem_element<T>>(segment->at(segment->s_size + 1)).address = static_cast<Address>(s);
-                            static_cast<mem_element<T>>(s->at(s->s_size)).index = static_cast<mem_element<T>>(segment->at(segment->s_size + 1)).index + 1;
+                            segment->at(segment->s_size + 1).address = static_cast<Address>(s);
+                            s->at(s->s_size).index = segment->at(segment->s_size + 1).index + 1;
                         }
                     }
                 }
                 if (segment->at(index + 1).address) {
-                    segment = static_cast<mem_segment_s<T>*>(static_cast<mem_element<T>>(segment->at(index + 1)).address);
+                    segment = static_cast<mem_segment_s<T>*>(segment->at(index + 1).address);
                     continue;
                 }
             }
@@ -149,7 +149,7 @@ public:
             }
 
             if(segment->at(index + 1).address){
-                segment = static_cast<mem_segment_s<T>*>(static_cast<mem_element<T>>(segment->at(index + 1)).address);
+                segment = static_cast<mem_segment_s<T>*>(segment->at(index + 1).address);
                 continue;
             }
             else break;
@@ -164,12 +164,12 @@ public:
         mem_segment_s<T>* segment = &this->elements;
         s_size = segment->s_size;
         while (segment) {
-            if (e_count < index && index < s_size) return &(static_cast<mem_element<T>>(segment->at(index - e_count)));
+            if (e_count < index && index < s_size) return &segment->at(index - e_count);
 
             e_count += segment->e_count;
             s_size += segment->s_size;
-            if (static_cast<mem_element<T>>(segment->at(index + 1)).address) {
-                segment = static_cast<mem_segment_s<T>*>(static_cast<mem_element<T>>(segment->at(index + 1)).address);
+            if (segment->at(index + 1).address) {
+                segment = static_cast<mem_segment_s<T>*>(segment->at(index + 1).address);
                 continue;
             } else break;
         }
@@ -187,7 +187,7 @@ public:
             e_count += segment->e_count;
             s_size += segment->s_size;
             if (segment->at(index + 1).address) {
-                segment = static_cast<mem_segment_s<T>*>(static_cast<mem_element<T>>(segment->at(index + 1)).address);
+                segment = static_cast<mem_segment_s<T>*>(segment->at(index + 1).address);
                 continue;
             }
             else break;
@@ -212,12 +212,12 @@ public:
             mem_segment_s<T>* segment = &this->elements;
             Index s_index = 1;
             while (segment) {
-                if(index > s_index) return static_cast<mem_element<T>>(segment->at(index - s_index)).element;
+                if(index > s_index) return segment->at(index - s_index).element;
 
                 s_index += segment->e_count;
 
                 if (segment->at(index + 1).address) {
-                    segment = static_cast<mem_segment_s<T>*>(static_cast<mem_element<T>>(segment->at(index + 1)).address);
+                    segment = static_cast<mem_segment_s<T>*>(segment->at(index + 1).address);
                     continue;
                 }
             }
