@@ -61,12 +61,12 @@ public:
                 for(Index i = e_count;i > index;i --){
                     elements[i] = elements[i - 1];
                 }
-                elements[index] = element;
+                elements[index].element = element;
                 e_count++;
                 return 1;
             }
             else {
-                elements[index] = element;
+                elements[index].element = element;
                 e_count++;
                 return 2;
             }
@@ -80,7 +80,7 @@ public:
     Error remove(const Index& index){
         if(index < e_count){
             for (Index i = index; i < e_count; i++) {
-                elements[index] = elements[index + 1];
+                elements[index].element = elements[index + 1].element;
             }
 
             e_count--;
@@ -92,7 +92,7 @@ public:
     }
     Error replace(const T& element, const Index& index) {
         if(index < e_count){
-            elements[index] = element;
+            elements[index].element = element;
             return 1;
         }
 
@@ -106,12 +106,12 @@ public:
 
         return 0xFFFFFFFF;
     }
-    mem_element<T>& at(const Index& index){ return elements[index];}
+    mem_element<T>& at(const Index& index){ return elements[index].element;}
 
     mem_segment* before(){ return 0;}
     mem_segment* behind(){ return 0;}
 
-    mem_element<T>& operator[] (const Size& index) { return elements[index];}
+    mem_element<T>& operator[] (const Size& index) { return elements[index].element;}
 public:
     Size size(){ return s_size;}
     Size count(){ return e_count;}
@@ -310,7 +310,7 @@ public:
     mem_segment_sb* before() { return 0; }
     mem_segment_sb* behind() { return 0; }
 
-    mem_element<T>& operator[] (const Size& index) { return elements[index]; }
+    mem_element<T>& operator[] (const Size& index) { return elements[index].element; }
 public:
     Size size()  { return s_size;  }
     Size count() { return e_count; }
