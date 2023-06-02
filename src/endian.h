@@ -36,7 +36,7 @@ inline int endianType() {
     unsigned short v = 0x0001;
     unsigned char  c = ((unsigned char*)&v)[0];
 
-    return c == 1 ? ENDIAN_B : ENDIAN_L;
+    return c == 1 ? ENDIAN_L : ENDIAN_B;
 }
 
 inline int16_t endianSwap16(const int16_t& value) 
