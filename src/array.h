@@ -103,27 +103,27 @@ public:
             mem_segment_s<T>* s = new mem_segment_s<T>();
             if(s){
                 s->append(t);
-                segment->at(segment->size + 1).address = static_cast<Address>(s);
+                segment->at(segment->s_size + 1).address = static_cast<Address>(s);
             }
         }
-        return this->size += 1;
+        return this->aSize += 1;
     }
     Size insert(const T& t,const Index& index)  { 
-        if (index < this->size) {
+        if (index < this->aSize) {
             Size e_count = 0;
             Size s_size = 0;
             mem_segment_s<T>* segment = &this->elements;
             Index s_index = 1;
             while (segment) {
-                if(index - e_count < segment->size){
+                if(index - e_count < segment->s_size){
                     if(segment->e_count < segment->s_size){
                         segment->insert(t,index - e_count);
                     } else {
                         mem_segment_s<T>* s = new mem_segment_s<T>();
                         if (s) {
                             //s->app(t);
-                            segment->at(segment->size + 1).address = static_cast<Address>(s);
-                            s->at(s->s_size].index = segment->at(segment->size + 1).index + 1;
+                            segment->at(segment->s_size + 1).address = static_cast<Address>(s);
+                            s->at(s->s_size).index = segment->at(segment->s_size + 1).index + 1;
                         }
                     }
                 }
@@ -133,7 +133,7 @@ public:
                 }
             }
         } else return this->append(t);
-        return this->size += 1; 
+        return this->aSize += 1; 
     }
     Size remove(const Index& index)  { return 0; }
     Size remove(const Iterator& index) { return 0; }
@@ -162,7 +162,7 @@ public:
         Size e_count = 0;
         Size s_size = 0;
         mem_segment_s<T>* segment = &this->elements;
-        s_size = segment->size;
+        s_size = segment->s_size;
         while (segment) {
             if (e_count < index && index < s_size) return segment->at(index - e_count);
 
@@ -211,7 +211,7 @@ public:
         return 0;
     }
     T& at(const Index& index) {
-        if(index < this->size){
+        if(index < this->aSize){
             mem_segment_s<T>* segment = &this->elements;
             Index s_index = 1;
             while (segment) {

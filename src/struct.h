@@ -143,7 +143,7 @@ public:
     }
 public:
     Error append(const T& element) {
-        if (s_size > e_count) { elements[e_count] = element; e_count++; return 1; }
+        if (s_size > e_count) { elements[e_count].element = element; e_count++; return 1; }
         return 0;
     }
     /** insert
