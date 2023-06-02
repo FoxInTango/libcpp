@@ -11,7 +11,7 @@ namespaceBegin(foxintango)
 const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
-class Array{
+class foxintangoAPI Array{
 protected:
     static T T_NULL;
 public:
