@@ -128,7 +128,7 @@ public:
             if(s){
                 s->setIndex(segment->index() + 1);
                 s->append(t);
-                segment->setBehind(static_cast<Address>(s));
+                segment->setBehind(static_cast<mem_segment<T>*>(s));
                 return this->a_size += 1;
             }
         }
