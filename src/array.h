@@ -76,7 +76,7 @@ public:
 public:
     Iterator iBegin;
     Iterator iEnd;
-    mem_segment<T> T_NULL;
+    mem_element<T> T_NULL;
     mem_segment<T>* elements;
     Size a_size;/** array size */
     Size s_size;/** segment size */
@@ -230,7 +230,8 @@ public:
     T& at(const Index& index) {
         if(index < this->a_size){
             mem_segment<T>* segment = this->elements;
-            Index s_index = 1;
+            Index s_index = 0;
+
             while (segment) {
                 if(index > s_index) return segment->at(index - s_index).element;
 
@@ -240,7 +241,7 @@ public:
             }
         }
 
-        return this->elements->at(index).element;
+        return this->T_NULL.element;
     }
 
     Size size() { return this->a_size;}
