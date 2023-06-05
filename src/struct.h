@@ -11,7 +11,7 @@ union mem_element {
 T       element;
 Address address;
  mem_element(){
-     sizeof(T) > sizeof(Address) ? this->element = 0 : this->address = 0;
+     if(sizeof(T) > sizeof(Address)) {this->element = 0 } else this->address = 0;
  }
 ~mem_element(){}
 };
@@ -168,7 +168,7 @@ public:
     }
     void setBehind(const mem_segment* segment){
         if (this->s_type == mem_segment_type_s || this->s_type == mem_segment_type_d) {
-            this->elements[this->s_size + 1].address = (const_cast<mem_element<T>>(segment)).address;
+            this->elements[this->s_size + 1].address = const_cast<mem_segment<T>*>(segment);
         }
     }
 
