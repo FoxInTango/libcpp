@@ -9,7 +9,6 @@ namespaceBegin(foxintango)
 template <typename T>
 union mem_element {
 T       element;
-Index   index;
 Address address;
 };
 
@@ -76,7 +75,7 @@ public:
     }
 public:
     Error append(const T& element){
-        if(this->s_size > this->e_count){ elements[this->e_count] = element; this->e_count ++; return 0;}
+        if(this->s_size > this->e_count){ elements[this->e_count].element = element; this->e_count ++; return 0;}
         return 1;
     }
     /** insert
@@ -145,15 +144,15 @@ public:
 
     mem_segment* before(){ 
         switch(this->s_type){
-        case mem_segment_type_d:return this->elements[this->s_size].address;
+        case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size].address);
         case mem_segment_type_s:return 0;
         default:return 0;
         }
     }
     mem_segment* behind(){
         switch (this->s_type) {
-        case mem_segment_type_d:return this->elements[this->s_size + 1].address;
-        case mem_segment_type_s:return this->elements[this->s_size + 1].address;
+        case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size + 1].address);
+        case mem_segment_type_s:return static_cast<mem_segment*>(this->elements[this->s_size + 1].address);
         default:return 0;
         }
     }
@@ -165,7 +164,7 @@ public:
     }
     void setBehind(const mem_segment* segment){
         if (this->s_type == mem_segment_type_s || this->s_type == mem_segment_type_d) {
-            this->elements[this->s_size + 1].address = segment;
+            this->elements[this->s_size + 1].address = const_cast<Address>(segment);
         }
     }
 
