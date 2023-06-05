@@ -40,7 +40,7 @@ public:
         this->e_count = 0;
         this->s_index = 0;
         this->s_type  = mem_segment_type_s;
-        if (elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]) {
+        if (this->elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]) {
             this->s_size = DEFAULT_MEM_SEGMENT_SIZE;
         }
     }
@@ -51,31 +51,31 @@ public:
 
         switch(type){
         case mem_segment_type_r:{
-            if (elements = new mem_element<T>[size]) {
+            if (this->elements = new mem_element<T>[size]) {
                 this->s_size = size;
                 this->s_type = mem_segment_type_r;
-                memclr(elements, sizeof(T) * (size), 0);
+                memclr(this->elements, sizeof(T) * (size), 0);
             }
         }break;
         case mem_segment_type_s: {
-            if (elements = new mem_element<T>[size + 1]) {
+            if (this->elements = new mem_element<T>[size + 1]) {
                 this->s_size = size;
                 this->s_type = mem_segment_type_s;
-                memclr(elements, sizeof(T) * (size + 1), 0);
+                memclr(this->elements, sizeof(T) * (size + 1), 0);
             }
         }break;
         case mem_segment_type_d: {
-            if (elements = new mem_element<T>[size + 2]) {
+            if (this->elements = new mem_element<T>[size + 2]) {
                 this->s_size = size;
                 this->s_type = mem_segment_type_d;
-                memclr(elements,sizeof(T) * (size + 2),0);
+                memclr(this->elements,sizeof(T) * (size + 2),0);
             }
         }break;
         default:break;
         }
     }
     ~mem_segment(){
-        if(elements) delete[] elements;
+        if(this->elements) delete[] this->elements;
     }
 public:
     Error append(const T& element){
@@ -89,14 +89,14 @@ public:
         if(e_count < s_size){
             if(index < e_count){
                 for(Index i = e_count;i > index;i --){
-                    elements[i] = elements[i - 1];
+                    this->elements[i] = this->elements[i - 1];
                 }
-                elements[index].element = element;
+                this->elements[index].element = element;
                 this->e_count++;
                 return 0;
             }
             else {
-                elements[index].element = element;
+                this->elements[index].element = element;
                 this->e_count++;
                 return 0;
             }
@@ -110,7 +110,7 @@ public:
     Error remove(const Index& index){
         if(index < this->e_count){
             for (Index i = index; i < this->e_count; i++) {
-                elements[index].element = elements[index + 1].element;
+                this->elements[index].element = this->elements[index + 1].element;
             }
 
             this->e_count--;
@@ -122,7 +122,7 @@ public:
     }
     Error replace(const T& element, const Index& index) {
         if(index < this->e_count){
-            elements[index].element = element;
+            this->elements[index].element = element;
             return 0;
         }
 
@@ -131,12 +131,12 @@ public:
 public:
     Index lookup(const T& element) {
         for(Index i = 0;i < this->e_count;i ++){
-            if(elements[i] == element) return i;
+            if(this->elements[i] == element) return i;
         }
 
         return 0xFFFFFFFF;
     }
-    mem_element<T>& at(const Index& index){ return elements[index].element;}
+    mem_element<T>& at(const Index& index){ return this->elements[index];}
 
     void setIndex(const Index& index){
         this->s_index = index;
