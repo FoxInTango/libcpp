@@ -172,8 +172,8 @@ public:
         }
 
         switch(this->s_type){
-        case mem_segment_type_s:{this->elements[this->s_size].address = const_cast<mem_segment<T>*>(segment)}break;
-        case mem_segment_type_d:{this->elements[this->s_size + 1].address = const_cast<mem_segment<T>*>(segment)}break;
+        case mem_segment_type_s:{this->elements[this->s_size].address = const_cast<mem_segment<T>*>(segment);}break;
+        case mem_segment_type_d:{this->elements[this->s_size + 1].address = const_cast<mem_segment<T>*>(segment);}break;
         default:break;
         }
     }
