@@ -16,9 +16,8 @@ Address address;
 typedef int mem_segment_type;
 const int mem_segment_type_r  = 0b00000000;// 独立
 const int mem_segment_type_s  = 0b00000001;// 单向
-const int mem_segment_type_sb = 0b00000011;// 单向可分叉
 const int mem_segment_type_d  = 0b10000001;// 双向
-const int mem_segment_type_db = 0b10000011;// 双向可分叉
+
 
 #define DEFAULT_MEM_SEGMENT_SIZE 1024
 
@@ -28,20 +27,48 @@ const int mem_segment_type_db = 0b10000011;// 双向可分叉
 template <typename T>
 class mem_segment{
 public:
-    Size s_size;
-    Size e_count;
+    Size  s_size;  // segment size
+    Size  e_count; // element count
+    Index s_index; // segment index
+    mem_segment_type s_type; // segment type
     union mem_element<T>* elements;
 public:
     mem_segment(){
         this->e_count = 0;
+        this->s_index = 0;
+        this->s_type  = mem_segment_type_s;
         if (elements = new mem_element<T>[DEFAULT_MEM_SEGMENT_SIZE]) {
             this->s_size = DEFAULT_MEM_SEGMENT_SIZE;
         }
     }
-    mem_segment(Size& size) {
+
+    mem_segment(Size& size, const mem_segment_type& type = mem_segment_type_r) {
         this->e_count = 0;
-        if (elements = new mem_element<T>[size]) {
-            this->s_size = size;
+        this->s_index = 0;
+
+        switch(type){
+        case mem_segment_type_r:{
+            if (elements = new mem_element<T>[size]) {
+                this->s_size = size;
+                this->s_type = mem_segment_type_r;
+                memclr(elements, sizeof(T) * (size), 0);
+            }
+        }break;
+        case mem_segment_type_s: {
+            if (elements = new mem_element<T>[size + 1]) {
+                this->s_size = size;
+                this->s_type = mem_segment_type_s;
+                memclr(elements, sizeof(T) * (size + 1), 0);
+            }
+        }break;
+        case mem_segment_type_d: {
+            if (elements = new mem_element<T>[size + 2]) {
+                this->s_size = size;
+                this->s_type = mem_segment_type_d;
+                memclr(elements,sizeof(T) * (size + 2),0);
+            }
+        }break;
+        default:break;
         }
     }
     ~mem_segment(){
@@ -49,8 +76,8 @@ public:
     }
 public:
     Error append(const T& element){
-        if(s_size > e_count){ elements[e_count] = element; e_count ++; return 1;}
-        return 0;
+        if(this->s_size > this->e_count){ elements[this->e_count] = element; this->e_count ++; return 0;}
+        return 1;
     }
     /** insert
      *  向后移位
@@ -62,45 +89,45 @@ public:
                     elements[i] = elements[i - 1];
                 }
                 elements[index].element = element;
-                e_count++;
-                return 1;
+                this->e_count++;
+                return 0;
             }
             else {
                 elements[index].element = element;
-                e_count++;
-                return 2;
+                this->e_count++;
+                return 0;
             }
         }
 
-        return 0;
+        return 1;
     }
     /** remove
      *  向前移位
      */
     Error remove(const Index& index){
-        if(index < e_count){
-            for (Index i = index; i < e_count; i++) {
+        if(index < this->e_count){
+            for (Index i = index; i < this->e_count; i++) {
                 elements[index].element = elements[index + 1].element;
             }
 
-            e_count--;
+            this->e_count--;
 
-            return 1;
+            return 0;
         }
 
-        return 0;
+        return 1;
     }
     Error replace(const T& element, const Index& index) {
-        if(index < e_count){
+        if(index < this->e_count){
             elements[index].element = element;
-            return 1;
+            return 0;
         }
 
-        return 0;
+        return 1;
     }
 public:
     Index lookup(const T& element) {
-        for(Index i = 0;i < e_count;i ++){
+        for(Index i = 0;i < this->e_count;i ++){
             if(elements[i] == element) return i;
         }
 
@@ -108,212 +135,44 @@ public:
     }
     mem_element<T>& at(const Index& index){ return elements[index].element;}
 
-    mem_segment* before(){ return 0;}
-    mem_segment* behind(){ return 0;}
+    void setIndex(const Index& index){
+        this->s_index = index;
+    }
+
+    Index index(){
+        return this->s_index;
+    }
+
+    mem_segment* before(){ 
+        switch(this->s_type){
+        case mem_segment_type_d:return this->elements[this->s_size].address;
+        case mem_segment_type_s:return 0;
+        default:return 0;
+        }
+    }
+    mem_segment* behind(){
+        switch (this->s_type) {
+        case mem_segment_type_d:return this->elements[this->s_size + 1].address;
+        case mem_segment_type_s:return this->elements[this->s_size + 1].address;
+        default:return 0;
+        }
+    }
+
+    void setBefore(const mem_segment* segment){
+        if(this->s_type == mem_segment_type_s || this->s_type == mem_segment_type_d){
+            this->elements[this->s_size].address = segment;
+        }
+    }
+    void setBehind(const mem_segment* segment){
+        if (this->s_type == mem_segment_type_s || this->s_type == mem_segment_type_d) {
+            this->elements[this->s_size + 1].address = segment;
+        }
+    }
 
     mem_element<T>& operator[] (const Size& index) { return elements[index].element;}
 public:
-    Size size(){ return s_size;}
-    Size count(){ return e_count;}
-};
-
-/** 单向连接
- *
- */
-template <typename T>
-class mem_segment_s{
-public:
-    Size s_size;
-    Size e_count;
-    Index index;
-    Address next;
-    union mem_element<T>* elements;/** [element][element][element][element][element][element][index][segment] */
-public:
-    mem_segment_s() {
-        
-    }
-    mem_segment_s(const Size& size) {
-        if (elements = new mem_element<T>[size]) {
-            this->s_size = size;
-            memclr(&elements[size + 2], sizeof(mem_element<T>) * 2);
-        }
-    }
-    ~mem_segment_s() {
-        
-    }
-public:
-    Error append(const T& element) {
-        if (s_size > e_count) { elements[e_count].element = element; e_count++; return 1; }
-        return 0;
-    }
-    /** insert
-     *  向后移位
-     */
-    Error insert(const T& element, const Index& index) {
-        if (e_count < s_size) {
-            if (index < e_count) {
-                for (Index i = e_count; i > index; i--) {
-                    elements[i] = elements[i - 1];
-                }
-                elements[index].element = element;
-                e_count++;
-                return 1;
-            }
-            else {
-                elements[index].element = element;
-                e_count++;
-                return 2;
-            }
-        }
-
-        return 0;
-    }
-    /** remove
-     *  向前移位
-     */
-    Error remove(const Index& index) {
-        if (index < e_count) {
-            for (Index i = index; i < e_count; i++) {
-                elements[index].element = elements[index + 1].element;
-            }
-
-            e_count--;
-
-            return 1;
-        }
-
-        return 0;
-    }
-    Error replace(const T& element, const Index& index) {
-        if (index < e_count) {
-            elements[index].element = element;
-            return 1;
-        }
-
-        return 0;
-    }
-public:
-    Index lookup(const T& element) {
-        for (Index i = 0; i < e_count; i++) {
-            if (elements[i] == element) return i;
-        }
-
-        return 0xFFFFFFFF;
-    }
-
-    mem_element<T>& at(const Index& index) { return elements[index]; }
-
-    mem_segment_s* before() { return 0; }
-    mem_segment_s* behind() { return 0; }
-
-    mem_element<T>& operator[] (const Index& index) { return elements[index]; }
-public:
-    Size size() { return s_size; }
-    Size count() { return e_count; }
-};
-
-/** 单向连接可分叉
- *
- */
-template <typename T>
-class mem_segment_sb {
-public:
-    Size s_size;
-    Size e_count;
-    Index index;
-    Address next;
-    char* branches;//[s / 8 + 1];
-    union mem_element<T>* elements;/** [element][element][element][--|--][element][element][index][segment] */
-public:
-    mem_segment_sb() {
-    }
-    ~mem_segment_sb() {
-    }
-public:
-    bool is_branch(const Index& index){
-        Index i = index / 8;
-        Index b = index % 8;
-
-        char mask = 0b00000001 << b;
-        return branches[i] & mask;
-    }
-    Size branch_count(){
-        Size count = 0;
-
-        for(Index i=0;i < e_count;i ++){
-            count += is_branch(i) ? 1 : 0;
-        }
-
-        return count;
-    }
-public:
-    Error append(const T& element) {
-        if (s_size > e_count) { elements[e_count] = element; e_count++; return 1; }
-        return 0;
-    }
-    /** insert
-     *  向后移位
-     */
-    Error insert(const T& element, const Index& index) {
-        if (e_count < s_size) {
-            if (index < e_count) {
-                for (Index i = e_count; i > index; i--) {
-                    elements[i] = elements[i - 1];
-                }
-                elements[index].element = element;
-                e_count++;
-                return 1;
-            }
-            else {
-                elements[index].element = element;
-                e_count++;
-                return 2;
-            }
-        }
-
-        return 0;
-    }
-    /** remove
-     *  向前移位
-     */
-    Error remove(const Index& index) {
-        if (index < e_count) {
-            for (Index i = index; i < e_count; i++) {
-                elements[index].element = elements[index + 1].element;
-            }
-
-            e_count--;
-
-            return 1;
-        }
-
-        return 0;
-    }
-    Error replace(const T& element, const Index& index) {
-        if (index < e_count) {
-            elements[index].element = element;
-            return 1;
-        }
-
-        return 0;
-    }
-public:
-    Index lookup(const T& element) {
-        for (Index i = 0; i < e_count; i++) {
-            if (elements[i] == element) return index;
-        }
-
-        return 0xFFFFFFFF;
-    }
-    mem_element<T>& at(const Index& index) { return elements[index]; }
-
-    mem_segment_sb* before() { return 0; }
-    mem_segment_sb* behind() { return 0; }
-
-    mem_element<T>& operator[] (const Size& index) { return elements[index]; }
-public:
-    Size size()  { return s_size;  }
-    Size count() { return e_count; }
+    Size size(){ return this->s_size;}
+    Size count(){ return this->e_count;}
 };
 
 /** B-Tree
