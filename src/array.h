@@ -233,7 +233,7 @@ public:
             Index e_count = 0;
 
             while (segment) {
-                if(index > e_count && index < segment->count() ) return segment->at(index - e_count).element;
+                if(index > e_count && index - e_count < segment->count() ) return segment->at(index - e_count).element;
 
                 e_count += segment->e_count;
 
