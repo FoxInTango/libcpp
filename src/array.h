@@ -160,7 +160,7 @@ public:
 
                 segment = segment->behind();
             }
-        } else { this->a_size += 1; return this->append(t)};
+        } else { this->a_size += 1; return this->append(t); };
     }
     Size remove(const Index& index)  { return 0; }
     Size remove(const Iterator& index) { return 0; }
