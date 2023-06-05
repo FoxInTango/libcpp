@@ -239,11 +239,11 @@ public:
             }
         }
 
-        return this->elements[0].element;
+        return this->elements->at(0).element;
     }
 
-    Size size() { return this->aSize;}
-    Size size() const { return this->aSize; }
+    Size size() { return this->a_size;}
+    Size size() const { return this->a_size; }
 
     Iterator& begin(){ return this->iBegin; }
     Iterator& end()  { return this->iEnd;   }
