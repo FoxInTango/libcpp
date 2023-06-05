@@ -155,12 +155,12 @@ public:
                             s->setIndex(segment->index() + 1);// s->at(s->s_size).index = segment->at(segment->s_size + 1).index + 1;
                         }
                     }
+                    this->a_size += 1;
                 }
 
                 segment = segment->behind();
             }
-        } else return this->append(t);
-        return this->a_size += 1; 
+        } else { this->a_size += 1; return this->append(t)};
     }
     Size remove(const Index& index)  { return 0; }
     Size remove(const Iterator& index) { return 0; }
