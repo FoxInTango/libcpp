@@ -240,7 +240,7 @@ public:
             }
         }
 
-        return this->elements->at(0).element;
+        return this->elements->at(index).element;
     }
 
     Size size() { return this->a_size;}
