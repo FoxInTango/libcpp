@@ -117,7 +117,8 @@ public:
 public:
     Size append(const T& t)  { 
         mem_segment<T>* segment = this->elements;
-        while (segment = segment->behind()) {
+        while (segment->behind()) {
+            if(segment->behind()) segment = segment->behind();else break;
         }
 
         if(segment->count() < segment->size()) {
