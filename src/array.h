@@ -227,7 +227,7 @@ public:
     }
 
     T& at(const Index& index) {
-        if(index < this->aSize){
+        if(index < this->a_size){
             mem_segment<T>* segment = this->elements;
             Index s_index = 1;
             while (segment) {
