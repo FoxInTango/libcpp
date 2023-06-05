@@ -249,7 +249,7 @@ public:
     Iterator& begin(){ return this->iBegin; }
     Iterator& end()  { return this->iEnd;   }
 public:
-    T& operator[](const Index& index){ return elements[index]; }
+    T& operator[](const Index& index){ return this->at(index); }
 };
 
 namespaceEnd
