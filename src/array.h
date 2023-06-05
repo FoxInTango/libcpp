@@ -116,6 +116,7 @@ public:
     }
 public:
     Size append(const T& t)  { 
+        return 0;
         mem_segment<T>* segment = this->elements;
         while (segment->behind()) {
             if(segment->behind()) segment = segment->behind();else break;
