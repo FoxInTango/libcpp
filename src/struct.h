@@ -79,7 +79,7 @@ public:
     }
 public:
     Error append(const T& element){
-        if(this->s_size > this->e_count){ elements[this->e_count].element = element; this->e_count ++; return 0;}
+        if(this->elements && this->s_size > this->e_count){ this->elements[this->e_count].element = element; this->e_count ++; return 0;}
         return 1;
     }
     /** insert
@@ -156,13 +156,13 @@ public:
     mem_segment* behind(){
         switch (this->s_type) {
         case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size + 1].address);
-        case mem_segment_type_s:return static_cast<mem_segment*>(this->elements[this->s_size + 1].address);
+        case mem_segment_type_s:return static_cast<mem_segment*>(this->elements[this->s_size].address);
         default:return 0;
         }
     }
 
     void setBefore(const mem_segment* segment){
-        if(this->s_type == mem_segment_type_s || this->s_type == mem_segment_type_d){
+        if(this->s_type == mem_segment_type_d){
             this->elements[this->s_size].address = segment;
         }
     }
@@ -170,9 +170,15 @@ public:
         if (this->s_type == mem_segment_type_s || this->s_type == mem_segment_type_d) {
             this->elements[this->s_size + 1].address = const_cast<mem_segment<T>*>(segment);
         }
+
+        switch(this->s_type){
+        case mem_segment_type_s:{this->elements[this->s_size].address = const_cast<mem_segment<T>*>(segment)}break;
+        case mem_segment_type_d:{this->elements[this->s_size + 1].address = const_cast<mem_segment<T>*>(segment)}break;
+        default:break;
+        }
     }
 
-    mem_element<T>& operator[] (const Size& index) { return elements[index].element;}
+    mem_element<T>& operator[] (const Size& index) { return this->elements[index].element;}
 public:
     Size size(){ return this->s_size;}
     Size count(){ return this->e_count;}
