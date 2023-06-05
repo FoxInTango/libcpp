@@ -230,12 +230,12 @@ public:
     T& at(const Index& index) {
         if(index < this->a_size){
             mem_segment<T>* segment = this->elements;
-            Index s_index = 0;
+            Index e_count = 0;
 
             while (segment) {
-                if(index > s_index) return segment->at(index - s_index).element;
+                if(index > e_count && index < segment->count() ) return segment->at(index - e_count).element;
 
-                s_index += segment->e_count;
+                e_count += segment->e_count;
 
                 segment = segment->behind();
             }
