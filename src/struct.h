@@ -89,7 +89,7 @@ public:
         if(this->e_count < this->s_size){ // 可插入
             if(index < this->e_count){ // 中部插入
                 for(Index i = e_count;i > index;i --){
-                    this->elements[i] = this->elements[i - 1];
+                    this->elements[i].element = this->elements[i - 1].element;
                 }
                 this->elements[index].element = element;
                 this->e_count++;
