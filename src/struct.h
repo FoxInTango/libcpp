@@ -3,13 +3,12 @@
 #include "memory.h"
 #include "define.h"
 namespaceBegin(foxintango)
-
 /** 内存分片 : 拼接[前拼接,后拼接],截断
  */
 template <typename T>
 union mem_element {
 T       element;
-Address address;
+mem_segment* address;
  mem_element(){
      if(sizeof(T) > sizeof(Address)) {this->element = 0; } else this->address = 0;
  }
