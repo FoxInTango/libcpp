@@ -24,8 +24,8 @@ const int mem_segment_type_d  = 0b10000001;// 双向
 
 #define DEFAULT_MEM_SEGMENT_SIZE 1024
 
-/** 独立
- *  
+/** TODO
+ *  range : remove insert replace append
  */
 template <typename T>
 class mem_segment{

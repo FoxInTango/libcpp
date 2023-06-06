@@ -8,6 +8,10 @@ namespaceBegin(foxintango)
 /** TODO
  *  Fill with model from libcpp_startup(Model&) 
  */
+ /** TODO
+  *  range : remove insert replace append
+  *  before behind --> left right
+  */
 const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
@@ -157,15 +161,17 @@ public:
                     } else {
                         mem_segment<T>* s = new mem_segment<T>(this->s_size, mem_segment_type_s);
                         if (s) {
-                            s->append(t);
+                            s->append(segment->at(segment->size());
+                            s->setIndex(segment->index() + 1);
+                            segment->remove(segment->size() -1);
+                            segment->insert(t,index - e_count);
+                            segment->setBehind(s);
                             this->a_size += 1;
-                            segment->setBehind(s);// at(segment->s_size + 1).address = static_cast<Address>(s);
-                            s->setIndex(segment->index() + 1);// s->at(s->s_size).index = segment->at(segment->s_size + 1).index + 1;
                         }
                     }
                 }
-
-                segment = segment->behind();
+                e_count += segment->count();
+                segment  = segment->behind();
             }
         } else { return this->append(t); };
     }
