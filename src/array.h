@@ -163,6 +163,7 @@ public:
                         if (s) {
                             s->append(segment->at(segment->size() - 1).element);
                             s->setIndex(segment->index() + 1);
+                            s->setBehind(segment->behind());
                             segment->remove(segment->size() -1);
                             segment->insert(t,index - e_count);
                             segment->setBehind(s);
