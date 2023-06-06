@@ -86,8 +86,8 @@ public:
      *  向后移位
      */
     Error insert(const T& element,const Index& index){
-        if(e_count < s_size){
-            if(index < e_count){
+        if(this->e_count < this->s_size){
+            if(index < this->e_count){
                 for(Index i = e_count;i > index;i --){
                     this->elements[i] = this->elements[i - 1];
                 }
@@ -174,7 +174,7 @@ public:
         }
     }
 
-    mem_element<T>& operator[] (const Size& index) { return this->elements[index].element;}
+    mem_element<T>& operator[] (const Size& index) { return this->elements[index];}
 public:
     Size size(){ return this->s_size;}
     Size count(){ return this->e_count;}
