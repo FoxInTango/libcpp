@@ -161,7 +161,7 @@ public:
                     } else {
                         mem_segment<T>* s = new mem_segment<T>(this->s_size, mem_segment_type_s);
                         if (s) {
-                            s->append(segment->at(segment->size()).element);
+                            s->append(segment->at(segment->size() - 1).element);
                             s->setIndex(segment->index() + 1);
                             segment->remove(segment->size() -1);
                             segment->insert(t,index - e_count);
