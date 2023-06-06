@@ -93,7 +93,7 @@ public:
         }
         memclr(&this->T_NULL,sizeof(this->T_NULL),255);
     }
-    Array(const Array) {
+    Array(const Array& array) {
 
     }
     /** 
