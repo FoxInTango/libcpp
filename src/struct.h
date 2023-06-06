@@ -45,7 +45,7 @@ public:
         }
     }
 
-    mem_segment(Size& size, const mem_segment_type& type = mem_segment_type_r) {
+    mem_segment(const Size& size, const mem_segment_type& type = mem_segment_type_r) {
         this->e_count = 0;
         this->s_index = 0;
 
