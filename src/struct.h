@@ -86,8 +86,8 @@ public:
      *  向后移位
      */
     Error insert(const T& element,const Index& index){
-        if(this->e_count < this->s_size){
-            if(index < this->e_count){
+        if(this->e_count < this->s_size){ // 可插入
+            if(index < this->e_count){ // 中部插入
                 for(Index i = e_count;i > index;i --){
                     this->elements[i] = this->elements[i - 1];
                 }
@@ -95,10 +95,12 @@ public:
                 this->e_count++;
                 return 0;
             }
-            else {
-                this->elements[index].element = element;
-                this->e_count++;
-                return 0;
+            else { // 尾部追加
+                if (this->e_count + 1 <= this->s_size) {
+                    this->elements[this->e_count].element = element;
+                    this->e_count++;
+                    return 0;
+                } else return 1;
             }
         }
 
