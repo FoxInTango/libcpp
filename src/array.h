@@ -115,14 +115,7 @@ public:
     }
 
    ~Array(){
-       if(this->elements){
-           mem_segment<T>* segment = this->elements;
-           while(segment){
-               mem_segment<T>* next = segment->behind();
-               delete segment;
-               segment = next;
-           }
-       }
+       this->clean();
     }
 public:
     Size append(const T& t) {
@@ -182,7 +175,16 @@ public:
     Size replace(const Iterator& index) { return 0; }
 
     void clean(){
+        if (this->elements) {
+            mem_segment<T>* segment = this->elements;
+            while (segment) {
+                mem_segment<T>* next = segment->behind();
+                delete segment;
+                segment = next;
+            }
+        }
 
+        memclr(this,sizeof(Array),0);
     }
 
     Index indexOf(T* element){
