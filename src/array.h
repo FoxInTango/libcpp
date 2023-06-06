@@ -12,14 +12,15 @@ const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
 class foxintangoAPI Array{
-protected:
-    //static T T_NULL;
+/** 赋值与拷贝
+ */
 public:
     class Iterator {
     public:
         Array* target;
         Index index;
         T* element;
+        T  T_NULL;
     public:
         Iterator() {
             this->target = target;
@@ -90,6 +91,10 @@ public:
         if(this->elements){
             this->elements->setIndex(0);
         }
+        memclr(&this->T_NULL,sizeof(this->T_NULL),255);
+    }
+    Array(const Array) {
+
     }
     /** 
      * size:segment size 
@@ -102,6 +107,7 @@ public:
         if (this->elements) {
             this->elements->setIndex(0);
         }
+        memclr(&this->T_NULL,sizeof(this->T_NULL),255);
     }
 
    ~Array(){
@@ -147,25 +153,30 @@ public:
                 if(index - e_count < segment->size()){
                     if(segment->e_count < segment->s_size){
                         segment->insert(t,index - e_count);
+                        this->a_size += 1;
                     } else {
                         mem_segment<T>* s = new mem_segment<T>(this->s_size, mem_segment_type_s);
                         if (s) {
                             s->append(t);
+                            this->a_size += 1;
                             segment->setBehind(s);// at(segment->s_size + 1).address = static_cast<Address>(s);
                             s->setIndex(segment->index() + 1);// s->at(s->s_size).index = segment->at(segment->s_size + 1).index + 1;
                         }
                     }
-                    this->a_size += 1;
                 }
 
                 segment = segment->behind();
             }
-        } else { this->a_size += 1; return this->append(t); };
+        } else { return this->append(t); };
     }
     Size remove(const Index& index)  { return 0; }
     Size remove(const Iterator& index) { return 0; }
     Size replace(const Index& index) { return 0; }
     Size replace(const Iterator& index) { return 0; }
+
+    void clean(){
+
+    }
 
     Index indexOf(T* element){
         Index index = 0;
@@ -251,6 +262,11 @@ public:
     Iterator& end()  { return this->iEnd;   }
 public:
     T& operator[](const Index& index){ return this->at(index); }
+
+    Array& operator = (const Array& array){
+        this->~Array();
+        return *this;
+    }
 };
 
 namespaceEnd

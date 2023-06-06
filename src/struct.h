@@ -197,7 +197,7 @@ class tree_node_s {
 };
 
 /** bst avl rbt
- *
+ *    了解替罪羊树
  */
 
 template <typename T>
