@@ -369,6 +369,9 @@ public:
             last_segment = new_segment;
             if (segment->behind()) segment = segment->behind(); else segment = 0;
         }
+
+        this->a_size = array.a_size;
+        this->s_size = array.s_size;
         return *this;
     }
 };
