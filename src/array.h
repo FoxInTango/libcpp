@@ -112,7 +112,8 @@ public:
             if (segment->behind()) segment = segment->behind(); else segment = 0;
         }
 
-        return *this;
+        this->a_size = array.a_size;
+        this->s_size = array.s_size;
     }
     /** 
      * size:segment size 
@@ -302,6 +303,15 @@ public:
         }
 
         return segment == this->elements && index < this->elements.s_size ? this->elements : 0;
+    }
+
+    Size segmentCount(){
+        mem_segment<T>* segment = this->elements;
+        Size count = 0;
+        while(segment){
+            count ++;
+            segment = segment->behind();
+        }
     }
 
     Error swap(const Index& l, const Index& r) {
