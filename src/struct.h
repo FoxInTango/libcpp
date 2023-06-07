@@ -29,6 +29,8 @@ const int mem_segment_type_d  = 0b10000001;// 双向
  */
 template <typename T>
 class mem_segment{
+    /** 赋值与拷贝
+     */
 public:
     Size  s_size;  // segment size
     Size  e_count; // element count
@@ -76,6 +78,19 @@ public:
     }
     ~mem_segment(){
         if(this->elements) delete[] this->elements;
+    }
+public:
+    mem_segment* clone(){
+        mem_segment* segment = new mem_segment(this->s_size, this->s_type);
+        for(Index i = 0;i < this->s_size;i ++){
+            segment->elements[i].element = this->elements[i].element;
+        }
+        switch(this->s_type){
+        case mem_segment_type_r:{}break;
+        case mem_segment_type_s:{}break;
+        case mem_segment_type_d:{}break;
+        default:break;
+        }  
     }
 public:
     Error append(const T& element){

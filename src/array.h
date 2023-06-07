@@ -98,7 +98,19 @@ public:
         memclr(&this->T_NULL,sizeof(this->T_NULL),255);
     }
     Array(const Array& array) {
-
+        mem_segment<T>* segment = array.elements;
+        mem_segment<T>* last_segment = 0;
+        while (segment) {
+            mem_segment<T>* new_segment = segment->clone();
+            if(segment == array.elements){
+                this->elements = new_segment;
+                
+            } else {
+                last_segment->setBehind(new_segment);
+            }
+            last_segment = new_segment;
+            if (segment->behind()) segment = segment->behind(); else segment = 0;
+        }
     }
     /** 
      * size:segment size 
@@ -118,7 +130,11 @@ public:
        this->clean();
     }
 public:
-    Size append(const T& t) {
+    /** Error:
+     *     0: sucessed
+     *     1: failed  -- failed to create new mem_segment
+     */
+    Error append(const T& t) {
         mem_segment<T>* segment = this->elements;
         while (segment->behind()) {
             if(segment->behind()) segment = segment->behind();else break;
@@ -126,21 +142,26 @@ public:
 
         if(segment->count() < segment->size()) {
             segment->append(t);
-            return this->a_size += 1;
+            this->a_size += 1;
+            return 0;
         }else {
             mem_segment<T>* s = new mem_segment<T>(this->s_size,mem_segment_type_s);
             if(s){
                 s->setIndex(segment->index() + 1);
                 s->append(t);
                 segment->setBehind(static_cast<mem_segment<T>*>(s));
-                return this->a_size += 1;
+                this->a_size += 1;
+                return 0;
             }
         }
         
-        return 0;
+        return 1;
     }
-
-    Size insert(const T& t,const Index& index)  { 
+    /** Error:
+     *     0: sucessed
+     *     1: failed  -- failed to create new mem_segment
+     */
+    Error insert(const T& t,const Index& index)  {
         if (index < this->a_size) {
             mem_segment<T>* segment = this->elements;
             Size  e_count = 0;
@@ -151,6 +172,7 @@ public:
                     if(segment->e_count < segment->s_size){
                         segment->insert(t,index - e_count);
                         this->a_size += 1;
+                        return 0;
                     } else {
                         mem_segment<T>* s = new mem_segment<T>(this->s_size, mem_segment_type_s);
                         if (s) {
@@ -161,7 +183,8 @@ public:
                             segment->insert(t,index - e_count);
                             segment->setBehind(s);
                             this->a_size += 1;
-                        }
+                            return 0;
+                        } else return 1;
                     }
                 }
                 e_count += segment->count();
@@ -169,10 +192,54 @@ public:
             }
         } else { return this->append(t); };
     }
-    Size remove(const Index& index)  { return 0; }
-    Size remove(const Iterator& index) { return 0; }
-    Size replace(const Index& index) { return 0; }
-    Size replace(const Iterator& index) { return 0; }
+    /** Error:
+     *     0: sucessed
+     *     1: index out of range
+     */
+    Error remove(const Index& index)  {
+        if (index < this->a_size) {
+            mem_segment<T>* segment = this->elements;
+            Size  e_count = 0;
+            Size  s_size = 0;
+            Index s_index = 1;
+            while (segment) {
+                if (index - e_count < segment->size()) {
+                    if (segment->e_count < segment->s_size) {
+                        segment->remove(index - e_count);
+                        this->a_size -= 1;
+                        return 0;
+                    }
+                }
+                e_count += segment->count();
+                segment = segment->behind();
+            }
+        }
+        return 1;
+    }
+    /** Error:
+     *     0: sucessed
+     *     1: failed  -- index out of range
+     */
+    Error remove(const Iterator& iterator) { return this->remove(iterator.index); }
+
+    /** Error:
+     *     0: sucessed
+     *     1: failed  -- index out of range
+     */
+    Error replace(const T& t,const Index& index) { 
+        if(index < this->a_size){
+            this->at(index) = t;
+
+            return 0;
+        }
+
+        return 1;
+    }
+    /** Error:
+     *     0: sucessed
+     *     1: failed  -- index out of range
+     */
+    Error replace(const T& t,const Iterator& iterator) { return this->replace(iterator.index); }
 
     void clean(){
         if (this->elements) {
@@ -273,7 +340,21 @@ public:
     T& operator[](const Index& index){ return this->at(index); }
 
     Array& operator = (const Array& array){
-        this->~Array();
+        this->clean();
+        mem_segment<T>* segment = array.elements;
+        mem_segment<T>* last_segment = 0;
+        while (segment) {
+            mem_segment<T>* new_segment = segment->clone();
+            if (segment == array.elements) {
+                this->elements = new_segment;
+
+            }
+            else {
+                last_segment->setBehind(new_segment);
+            }
+            last_segment = new_segment;
+            if (segment->behind()) segment = segment->behind(); else segment = 0;
+        }
         return *this;
     }
 };
