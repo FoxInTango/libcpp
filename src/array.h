@@ -111,6 +111,8 @@ public:
             last_segment = new_segment;
             if (segment->behind()) segment = segment->behind(); else segment = 0;
         }
+
+        return *this;
     }
     /** 
      * size:segment size 

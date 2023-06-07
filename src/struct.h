@@ -179,7 +179,7 @@ public:
         default:return 0;
         }
     }
-
+    // TODO ：设置 INDEX
     void setBefore(const mem_segment* segment){
         if(this->s_type == mem_segment_type_d){
             this->elements[this->s_size].address = segment;
