@@ -312,6 +312,8 @@ public:
             count ++;
             segment = segment->behind();
         }
+
+        return count;
     }
 
     Error swap(const Index& l, const Index& r) {
