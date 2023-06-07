@@ -85,6 +85,8 @@ public:
         for(Index i = 0;i < this->s_size;i ++){
             segment->elements[i].element = this->elements[i].element;
         }
+
+        return segment;
         switch(this->s_type){
         case mem_segment_type_r:{}break;
         case mem_segment_type_s:{}break;
