@@ -26,7 +26,6 @@ public:
 static Value V_NULL;
 static KVPair<Key,Value> PNULL;
 protected:
-    Size size;
     MapType type;
     map_internal<Key,Value>* internal_map;
 public:
