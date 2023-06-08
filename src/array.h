@@ -169,7 +169,7 @@ public:
             mem_segment<T>* segment = this->elements;
             Size  e_count = 0;
             while(segment) {
-                if(index - e_count < segment->count()){
+                if(index - e_count < e_count + segment->count()){// 已验数目 + 当前数目 > index ：index 
                     if(segment->e_count < segment->s_size){
                         segment->insert(t,index - e_count);
                         this->a_size += 1;
