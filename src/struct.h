@@ -195,7 +195,7 @@ public:
     }
 
     Error placeAt(const T& t,const Index& index) {
-    
+        return 1;
     }
 
     mem_element<T>& operator[] (const Size& index) { return this->elements[index];}
