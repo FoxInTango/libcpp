@@ -7,6 +7,7 @@ namespaceBegin(foxintango)
 inline void* memnew(const Size& size) {
     return new char[size];
 }
+
 inline void  memdel(const void* p) {
     delete[] (char*)p;
 }
@@ -16,6 +17,10 @@ inline void  memcpy(void* s,void* t,const unsigned int& size) {
 
 }
 */
+inline Address memcln(const Address& source,const Size& length,const Address& target = 0){
+    return 0;
+}
+
 inline void memclr(const Address target, const Size& length,const char& value = 0) {
     if(target) {
         for(Index i = 0;i < length;i ++) {

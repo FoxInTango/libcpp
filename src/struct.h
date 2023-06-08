@@ -139,6 +139,7 @@ public:
 
         return 1;
     }
+
     Error replace(const T& element, const Index& index) {
         if(index < this->e_count){
             this->elements[index].element = element;
