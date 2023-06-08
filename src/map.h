@@ -28,7 +28,7 @@ static KVPair<Key,Value> PNULL;
 protected:
     Size size;
     MapType type;
-    map_internal* internal_map;
+    map_internal<Key,Value>* internal_map;
 public:
     class Iterator {
     public:
