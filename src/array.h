@@ -168,10 +168,8 @@ public:
         if (index < this->a_size) {
             mem_segment<T>* segment = this->elements;
             Size  e_count = 0;
-            Size  s_size  = 0;
-            Index s_index = 1;
             while(segment) {
-                if(index - e_count < segment->size()){
+                if(index - e_count < segment->count()){
                     if(segment->e_count < segment->s_size){
                         segment->insert(t,index - e_count);
                         this->a_size += 1;

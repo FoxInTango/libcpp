@@ -158,8 +158,27 @@ public:
     }
     mem_element<T>& at(const Index& index){ return this->elements[index];}
 
-    void setIndex(const Index& index){
-        this->s_index = index;
+    /** Error Code 
+     *  0b00000001 : segment index behind out of range 
+     *  0b10000000 : segment index before out of range
+     */
+    Error setIndex(const Index& index){
+        Error error;
+
+        if(this->behind()){
+            if (index + 1 == 0xFFFFFFFF) { error = 0b00000001;}
+            else { this->behind()->setIndex(this->s_index + 1);}
+        }
+
+        if(this->before()){
+            if (index - 1 == 0x00000000) { error = 0b10000000;} 
+            else { this->before()->setIndex(index -1);}
+        }
+
+        if(!error){ 
+            this->s_index = index;
+            return 0;
+        } else return error;
     }
 
     Index index(){
