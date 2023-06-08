@@ -14,15 +14,21 @@ const MapType MAP_TYPE_RB = 3;
 
 #define MAP_TYPE_DEFAULT MAP_TYPE_HASH
 
+/**
+ Map -- Hash ----- hash_fn | hash_internal_index
+              |---
+     -- AVL  ----- 
+     -- RB   -----
+ */
 template <typename Key,typename Value>
 class Map{
 public:
-static Value VNULL;
+static Value V_NULL;
 static KVPair<Key,Value> PNULL;
 protected:
     Size size;
     MapType type;
-    map_internal* map;
+    map_internal* internal_map;
 public:
     class Iterator {
     public:
@@ -69,21 +75,21 @@ public:
     Iterator iteratorAt(const Index& index) { return Iterator(1); }
 public:
     Map(){
-        this->map = new map_hash<Key,Value>();
+        this->internal_map = new map_hash<Key,Value>();
         this->size = 0;
         this->type = MAP_TYPE_DEFAULT;
     }
     Map(const MapType& type){
         switch(this->type){
         case MAP_TYPE_HASH:{
-            this->map = new map_hash<Key,Value>();
+            this->internal_map = new map_hash<Key,Value>();
             this->size = 0;
             this->type = MAP_TYPE_HASH;
         }break;
-        case MAP_TYPE_AVL:{this->map = 0;}break;
-        case MAP_TYPE_RB:{this->map = 0;}break;
+        case MAP_TYPE_AVL:{this->internal_map = 0;}break;
+        case MAP_TYPE_RB:{this->internal_map = 0;}break;
         default:{
-            this->map = new map_hash<Key, Value>();
+            this->internal_map = new map_hash<Key, Value>();
             this->size = 0;
             this->type = MAP_TYPE_HASH;
         }break;
@@ -91,12 +97,12 @@ public:
     }
     Map(const Map& map){
         this->clean();
-        this->map = map.map->clone();
+        this->internal = map.internal->clone();
     }
     ~Map() {
         switch (this->type) {
         case MAP_TYPE_HASH: {
-            if(this->map) delete (map_hash<Key, Value>*)this->map;
+            if(this->internal_map) delete (map_hash<Key, Value>*)this->internal_map;
         }break;
         case MAP_TYPE_AVL: {this->map = 0; }break;
         case MAP_TYPE_RB: {this->map = 0; }break;
@@ -104,22 +110,22 @@ public:
         }
     }
 public:
-    virtual Error insert(const Key& key, const Value& value) { return this->map ? this->map->insert(key,value) : 1; }
-    virtual Error insert(const KVPair<Key, Value>& pair) { return this->map ? this->map->insert(pair) : 1; }
-    virtual Error remove(const Key& key) { return this-map ? this->map->remove(key) : 1; }
-    virtual Error remove(const KVPair<Key, Value>& pair) { return this->map ? this->map->remove(pair) : 1; }
+    virtual Error insert(const Key& key, const Value& value) { return this->internal_map ? this->internal_map->insert(key,value) : 1; }
+    virtual Error insert(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->insert(pair) : 1; }
+    virtual Error remove(const Key& key) { return this->internal_map ? this->internal_map->remove(key) : 1; }
+    virtual Error remove(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->remove(pair) : 1; }
 
-    Error swap(const Key& l, const Key& r) { return this->map ? this->map->swap(l,r) : 1; }
-    Size count(const Key& key) { return this->map ? this->map->count(key) : 1; }
-    Value& at(const Key& key) { return this->map ? this->map->at(key) : this->map->null();}
+    Error swap(const Key& l, const Key& r) { return this->internal_map ? this->internal_map->swap(l,r) : 1; }
+    Size count(const Key& key) { return this->internal_map ? this->internal_map->count(key) : 1; }
+    Value& at(const Key& key) { return this->internal_map ? this->internal_map->at(key) : this->V_NULL;}
 
-    Size size() { return this->size; }
-    Size size() const { return this->size; }
-    Error clean() { return this->map ? this->map->clean() : 1 ;}
+    Size size() { return this->internal_map ? this->internal_map->size() : 1; }
+    Size size() const { return this->internal_map ? this->internal_map->size() : 1; }
+    Error clean() { return this->internal_map ? this->internal_map->clean() : 1 ;}
 public:
     Map& operator = (const Map& map){
         this->clean();
-        this->map = map.map->clone();
+        this->internal_map = map.internal_map->clone();
         return *this;
     }
 

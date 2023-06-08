@@ -194,6 +194,10 @@ public:
         }
     }
 
+    Error placeAt(const T& t,const Index& index) {
+    
+    }
+
     mem_element<T>& operator[] (const Size& index) { return this->elements[index];}
 public:
     Size size(){ return this->s_size;}

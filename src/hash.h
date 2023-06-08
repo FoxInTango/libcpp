@@ -29,7 +29,7 @@ typedef struct _hash_s{
     void* address;
     Size size;
     union hash{
-        hash_fn fn;
+        hash_fn fn; //0 < fn < 10 : internal
         hash_type type;
     };
 }hash_s;
@@ -52,8 +52,8 @@ public:
     virtual Size size() { return 0; }
     virtual Size size() const { return 0; }
 public:
-    virtual map_internal* clone() { return 0; }
-    virtual Error clean() {}
+    virtual map_internal<Key, Value>* clone() { return 0; }
+    virtual Error clean() { return 0;}
 };
 
 namespaceEnd

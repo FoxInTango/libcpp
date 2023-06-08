@@ -9,6 +9,9 @@ public:
     Key   key;
     Value value;
 };
+
+/** Error Code : 
+ */
 template <typename Key, typename Value>
 class map_internal{
 protected:
@@ -32,8 +35,8 @@ public:
     virtual Size size() { return 0; }
     virtual Size size() const { return 0; }
 public:
-    virtual map_internal* clone(){ return 0; }
-    virtual Error clean(){}
+    virtual map_internal<Key,Value>* clone(){ return 0; }
+    virtual Error clean(){ return 1;}
 public:
     Value& null(){ return this->V_NULL; }
 };
