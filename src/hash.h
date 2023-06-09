@@ -17,7 +17,7 @@ EXTERN_C_END
 class foxintangoAPI hashable{
 public:
     hashable();
-    hashable(const char8_t* string);
+    hashable(const char* string);
     hashable(const char16_t* string);
     hashable(const char32_t* string);
     hashable(const char& number);
