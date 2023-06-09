@@ -14,6 +14,28 @@ inline Index  number_hash(const long unsigned int& seed, const Index& begin, con
 }
 EXTERN_C_END
 
+class foxintangoAPI hashable{
+public:
+    hashable();
+    hashable(const char8_t* string);
+    hashable(const char16_t* string);
+    hashable(const char32_t* string);
+    hashable(const char& number);
+    hashable(const unsigned char& number);
+    hashable(const short& number);
+    hashable(const unsigned short& number);
+    hashable(const int& number);
+    hashable(const unsigned int& number);
+    hashable(const float& number);
+    hashable(const long& number);
+    hashable(const double& number);
+    virtual ~hashable();
+public:
+    unsigned char operator [](const Index& index);
+public:
+    unsigned int hash();
+};
+
 /**
 template<typename T>
 Index  hash_in_range(const T& seed,const Index& begin,const Index& end){
@@ -35,7 +57,7 @@ typedef struct _hash_s{
 }hash_s;
 
 template <typename Key, typename Value>
-class map_hash :public map_internal<Key,Value>{
+class foxintangoAPI map_hash :public map_internal<Key,Value>{
 public:
     map_hash() {}
     ~map_hash() { this->clean();}

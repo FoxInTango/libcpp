@@ -204,7 +204,7 @@ public:
             Size  s_size = 0;
             Index s_index = 1;
             while (segment) {
-                if (index - e_count < segment->size()) {
+                if (index - e_count < segment->count()) {
                     if (segment->e_count < segment->s_size) {
                         segment->remove(index - e_count);
                         this->a_size -= 1;
@@ -320,10 +320,10 @@ public:
             this->at(l) = this->at(r);
             this->at(r) = t;
 
-            return 1;
+            return 0;
         }
 
-        return 0;
+        return 1;
     }
 
     T& at(const Index& index) {
