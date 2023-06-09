@@ -29,50 +29,6 @@ protected:
     MapType type;
     map_internal<Key,Value>* internal_map;
 public:
-    class Iterator {
-    public:
-        Map* owner;
-        Key key;
-        Value value;
-    public:
-        Iterator() {
-        }
-        Iterator(const Index& index) {
-        }
-        Iterator(Map* owner, const Index& index = 0) {
-            this->owner = owner;
-        }
-        ~Iterator() {
-
-        }
-    public:
-        void clean() {}
-    public:
-        Iterator& operator = (const Index& index) { return *this; }
-
-        Iterator& operator +  (const unsigned int& offset) { return *this; }
-        Iterator& operator -  (const unsigned int& offset) { return *this; }
-        Iterator& operator += (const unsigned int& offset) { return *this; }
-        Iterator& operator -= (const unsigned int& offset) { return *this; }
-        Iterator& operator ++ () { return *this; }
-        Iterator& operator -- () { return *this; }
-        Iterator& operator ++ (int) { return *this; }
-        Iterator& operator -- (int) { return *this; }
-
-        bool operator == (const Index& index) { return false; }
-        bool operator == (const Iterator& iterator) { return false; }
-        bool operator != (const Index& index) { return false; }
-        bool operator != (const Iterator& iterator) { return false; }
-
-        KVPair<Key,Value>& operator *() { return this->pairs[0]; }
-        KVPair<Key,Value>& operator *(const Iterator& iter) { return this->pairs[0]; }
-    };
-public:
-    Iterator begin() { return Iterator(); }
-    Iterator end() { return Iterator(); }
-    Iterator iteratorAt(const Key& index) { return Iterator(1); }
-    Iterator iteratorAt(const Index& index) { return Iterator(1); }
-public:
     Map(){
         this->internal_map = new map_hash<Key,Value>();
         this->size = 0;

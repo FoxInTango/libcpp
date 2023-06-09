@@ -56,6 +56,9 @@ typedef struct _hash_s{
     };
 }hash_s;
 
+class foxintangoAPI hash_table{};
+class foxintangoAPI hash_tree{};
+
 template <typename Key, typename Value>
 class foxintangoAPI map_hash :public map_internal<Key,Value>{
 public:

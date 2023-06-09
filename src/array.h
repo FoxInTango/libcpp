@@ -18,69 +18,7 @@ template <class T>
 class foxintangoAPI Array{
 /** 赋值与拷贝
  */
-public:
-    class Iterator {
-    public:
-        Array* target;
-        Index index;
-        T* element;
-        T  T_NULL;
-    public:
-        Iterator() {
-            this->target = target;
-            this->element = element;
-            this->index = UNSIGNED_LONG_MAX;
-        }
-        Iterator(Array* target,const Index& index) {
-            if(!target) return;
-
-            this->target  = target;
-            this->index   = index;
-            this->element = target->elementAt(index);
-        }
-        Iterator(Array* target, T* element) {
-            if(!target || !element) return ;
-            this->target  = target;
-            this->element = element;
-            this->index   = target->indexOf(element);
-        }
-        ~Iterator() {
-
-        }
-    public:
-        void clean() {}
-    public:
-        Iterator& operator =  (const Index& index) { return *this;}
-        Iterator& operator +  (const unsigned int& offset) { return *this; }
-        Iterator& operator -  (const unsigned int& offset) { return *this; }
-        Iterator& operator += (const unsigned int& offset) { return *this; }
-        Iterator& operator -= (const unsigned int& offset) { return *this; }
-        Iterator& operator ++ ()    { return *this; }
-        Iterator& operator ++ (int) { return *this; }
-        Iterator& operator -- ()    { return *this; }
-        Iterator& operator -- (int) { return *this; }
-
-        bool operator == (const Index& index) { return false;}
-        bool operator == (const Iterator& iterator) { return false; }
-        bool operator != (const Index& index) { return false; }
-        bool operator != (const Iterator& iterator) { return false; }
-
-        T& operator *() { return *element; }
-        T& operator *(const Iterator& iter) { return *element; }
-
-        operator T(){ return *element; }
-    };
-    class Range{
-    public:
-        Array* target;
-        Index begin;
-        Index end;
-    public:
-       void forEach(){} 
-    };
-public:
-    Iterator iBegin;
-    Iterator iEnd;
+ public:
     mem_element<T> T_NULL;
     mem_segment<T>* elements;
     Size a_size;/** array size */
@@ -345,9 +283,6 @@ public:
 
     Size size() { return this->a_size;}
     Size size() const { return this->a_size; }
-
-    Iterator& begin(){ return this->iBegin; }
-    Iterator& end()  { return this->iEnd;   }
 public:
     T& operator[](const Index& index){ return this->at(index); }
 
