@@ -15,11 +15,12 @@ typedef enum _ROTATE_DIRECTION{
 template <typename T>
 class tree_node{
 public:
-    T t;
+    T* t;// 集约化处理
     tree_node* m_super;
     mem_segment<tree_node*>* m_subnodes;
 public:
     tree_node(){
+        this->t = 0;
         this->m_super = 0;
         this->m_subnodes = 0;
     }
@@ -34,6 +35,8 @@ public:
     Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
 
     Error rotate(const ROTATE_DIRECTION& direction){ return 0; }
+public:
+    virtual tree_node* at(T& t){ return 0; }
 };
 
 
@@ -55,8 +58,13 @@ public:
 template <typename T>
 class dual_path_tree_node :public b_tree_node {
 public:
+    Index m_path_code;
+    dual_path_tree_node* m_sibling;
+public:
     dual_path_tree_node() {
+        this->m_sibling = 0;
     }
+
     ~dual_path_tree_node(){
     }
 };
