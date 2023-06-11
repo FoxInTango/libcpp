@@ -4,16 +4,18 @@
 #include "define.h"
 namespaceBegin(foxintango)
 
-/** 内存分片 : 拼接[前拼接,后拼接],截断
- */
 template <typename T>
 union mem_element {
 T       element;
 Address address;
  mem_element(){
-     if(sizeof(T) > sizeof(Address)) {this->element = 0; } else this->address = 0;
+     if(sizeof(T) > sizeof(Address)) { this->element = 0; } else this->address = 0;
  }
 ~mem_element(){}
+};
+
+class bit_array{
+
 };
 
 typedef int mem_segment_type;
@@ -26,6 +28,7 @@ const int mem_segment_type_d  = 0b10000001;// 双向
 
 /** TODO
  *  range : remove insert replace append
+ *  callback 机制 -- 动态把握 扩展性
  */
 template <typename T>
 class mem_segment{
@@ -35,6 +38,7 @@ public:
     Size  s_size;  // segment size
     Size  e_count; // element count
     Index s_index; // segment index
+    bit_array* bits;
     mem_segment_type s_type; // segment type
     union mem_element<T>* elements;
 public:
@@ -216,43 +220,16 @@ public:
     Error placeAt(const T& t,const Index& index) {
         return 1;
     }
-
+public:
     mem_element<T>& operator[] (const Size& index) { return this->elements[index];}
 public:
     Size size(){ return this->s_size;}
     Size count(){ return this->e_count;}
+public:
+    Size expand(const Size& size);
+    Size narrow(const Size& size);
+    Size resize(const Size& size);
 };
 
-/** B-Tree
- */
-template <typename T>
-class tree_node_s {
-    /** super
-     */
-    struct tree_node_s* s;
-    /** left
-     */
-    struct tree_node_s* l;
-    /** right
-     */
-    struct tree_node_s* r;
-    T entity;
-};
-
-/** bst avl rbt
- *    了解替罪羊树
- */
-
-template <typename T>
-unsigned long int tree_insert_node(struct tree_node_s<T>& t, const T& e) { return 0; }
-
-template <typename T>
-unsigned long int tree_remove_node(struct tree_node_s<T>& t, const T& e) { return 0; }
-
-template <typename T>
-T& tree_lookup_at(unsigned long int& index) { return T(); }
-
-template <typename T>
-T& tree_lookup_at(T& t) { return T(); }
 namespaceEnd
 #endif
