@@ -155,11 +155,6 @@ public:
         }
         return 1;
     }
-    /** Error:
-     *     0: sucessed
-     *     1: failed  -- index out of range
-     */
-    Error remove(const Iterator& iterator) { return this->remove(iterator.index); }
 
     /** Error:
      *     0: sucessed
@@ -174,11 +169,6 @@ public:
 
         return 1;
     }
-    /** Error:
-     *     0: sucessed
-     *     1: failed  -- index out of range
-     */
-    Error replace(const T& t,const Iterator& iterator) { return this->replace(iterator.index); }
 
     void clean(){
         if (this->elements) {

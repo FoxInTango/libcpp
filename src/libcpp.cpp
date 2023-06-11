@@ -36,7 +36,6 @@ using namespace foxintango;
  */
 void sample_array(){
     Array<int> m;
-    Array<int>::Iterator& iter = m.begin();
 }
 
 int libcpp_startup(){
