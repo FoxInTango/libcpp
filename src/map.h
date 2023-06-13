@@ -49,7 +49,7 @@ public:
     }
     Map(const Map& map){
         this->clean();
-        this->internal = map.internal->clone();
+        this->internal_map = map.internal_map->clone();
     }
     ~Map() {
         switch (this->type) {
