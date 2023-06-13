@@ -31,21 +31,18 @@ protected:
 public:
     Map(){
         this->internal_map = new map_hash<Key,Value>();
-        this->size = 0;
         this->type = MAP_TYPE_DEFAULT;
     }
     Map(const MapType& type){
         switch(this->type){
         case MAP_TYPE_HASH:{
             this->internal_map = new map_hash<Key,Value>();
-            this->size = 0;
             this->type = MAP_TYPE_HASH;
         }break;
         case MAP_TYPE_AVL:{this->internal_map = 0;}break;
         case MAP_TYPE_RB:{this->internal_map = 0;}break;
         default:{
             this->internal_map = new map_hash<Key, Value>();
-            this->size = 0;
             this->type = MAP_TYPE_HASH;
         }break;
         }
@@ -59,8 +56,8 @@ public:
         case MAP_TYPE_HASH: {
             if(this->internal_map) delete (map_hash<Key, Value>*)this->internal_map;
         }break;
-        case MAP_TYPE_AVL: {this->map = 0; }break;
-        case MAP_TYPE_RB: {this->map = 0; }break;
+        case MAP_TYPE_AVL: {this->internal_map = 0; }break;
+        case MAP_TYPE_RB: {this->internal_map = 0; }break;
         default: {}break;
         }
     }
