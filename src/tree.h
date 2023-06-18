@@ -32,6 +32,8 @@ public:
         return this->m_subnodes && index < this->m_subnodes->count() ? return this->m_subnodes[index] : 0;
     }
 
+    tree_node* clone(){ return 0;}
+
     Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
 
     Error rotate(const ROTATE_DIRECTION& direction){ return 0; }
