@@ -24,11 +24,12 @@
 #ifndef _LIB_CPP_H_
 #define _LIB_CPP_H_
 
+#include "error.h"
+#include "string.h"
 #include "map.h"
 #include "set.h"
 #include "array.h"
 #include "struct.h"
-#include "set.h"
 #include "endian.h"
 #include "define.h"
 
