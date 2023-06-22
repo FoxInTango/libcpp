@@ -40,7 +40,6 @@ public:
     Error& operator += (const char* description);
 public:
     operator int();
-    operator bool();
 };
 namespaceEnd
 EXTERN_C_END
