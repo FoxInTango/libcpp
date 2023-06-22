@@ -21,8 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef _LIBCPP_ERROR_H_
-#define _LIBCPP_ERROR_H_
+#ifndef _LIBCPP_STRING_H_
+#define _LIBCPP_STRING_H_
 #include "define.h"
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
