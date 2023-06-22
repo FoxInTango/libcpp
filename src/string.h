@@ -24,7 +24,6 @@ SOFTWARE.
 #ifndef _LIBCPP_STRING_H_
 #define _LIBCPP_STRING_H_
 #include "define.h"
-EXTERN_C_BEGIN
 namespaceBegin(foxintango)
 /**  UTF-8, a transformation format of ISO 10646
  * https://www.ietf.org/rfc/rfc3629.txt
@@ -72,5 +71,4 @@ Size unicode_swap_endian(Unicode* unicode) {
     return 0;
 }
 namespaceEnd
-EXTERN_C_END
 #endif
