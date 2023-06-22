@@ -66,7 +66,7 @@ public:
     virtual Error insert(const Key& key, const Value& value) { return this->internal_map ? this->internal_map->insert(key,value) : Error(1); }
     virtual Error insert(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->insert(pair) : Error(1); }
     virtual Error remove(const Key& key) { return this->internal_map ? this->internal_map->remove(key) : Error(1); }
-    virtual Error remove(const Value& value) { return this->internal_map ? this->internal_map->remove(value) : Error(1); }
+    //virtual Error remove(const Value& value) { return this->internal_map ? this->internal_map->remove(value) : Error(1); }
     virtual Error remove(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->remove(pair) : Error(1); }
 
 
