@@ -67,8 +67,6 @@ bool string_compare(const T* t, const T* s, const Size& length = 0) {
     return true;
 }
 
-Size unicode_swap_endian(Unicode* unicode) {
-    return 0;
-}
+Size unicode_swap_endian(Unicode* unicode);
 namespaceEnd
 #endif
