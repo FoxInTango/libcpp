@@ -68,6 +68,7 @@ typedef unsigned long int Index;
 typedef int               Status;
 typedef void*             Address;
 typedef bool              Bool;
+typedef char32_t          Unicode;
 
 #define UNSIGNED_INT_MAX  0XFFFF
 #define UNSIGNED_LONG_MAX 0xFFFFFFFF
