@@ -2,6 +2,7 @@
 #define _MAP_H_foxintango
 #include "hash.h"
 #include "struct.h"
+#include "error.h"
 #include "define.h"
 
 namespaceBegin(foxintango)
@@ -62,18 +63,18 @@ public:
         }
     }
 public:
-    virtual Error insert(const Key& key, const Value& value) { return this->internal_map ? this->internal_map->insert(key,value) : 1; }
-    virtual Error insert(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->insert(pair) : 1; }
-    virtual Error remove(const Key& key) { return this->internal_map ? this->internal_map->remove(key) : 1; }
-    virtual Error remove(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->remove(pair) : 1; }
+    virtual Error insert(const Key& key, const Value& value) { return this->internal_map ? this->internal_map->insert(key,value) : Error(1); }
+    virtual Error insert(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->insert(pair) : Error(1); }
+    virtual Error remove(const Key& key) { return this->internal_map ? this->internal_map->remove(key) : Error(1); }
+    virtual Error remove(const KVPair<Key, Value>& pair) { return this->internal_map ? this->internal_map->remove(pair) : Error(1); }
 
-    Error swap(const Key& l, const Key& r) { return this->internal_map ? this->internal_map->swap(l,r) : 1; }
-    Size count(const Key& key) { return this->internal_map ? this->internal_map->count(key) : 1; }
+    Error swap(const Key& l, const Key& r) { return this->internal_map ? this->internal_map->swap(l,r) : Error(1); }
+    Size count(const Key& key) { return this->internal_map ? this->internal_map->count(key) : 0; }
     Value& at(const Key& key) { return this->internal_map ? this->internal_map->at(key) : this->V_NULL;}
 
-    Size size() { return this->internal_map ? this->internal_map->size() : 1; }
-    Size size() const { return this->internal_map ? this->internal_map->size() : 1; }
-    Error clean() { return this->internal_map ? this->internal_map->clean() : 1 ;}
+    Size size() { return this->internal_map ? this->internal_map->size() : 0; }
+    Size size() const { return this->internal_map ? this->internal_map->size() : 0; }
+    Error clean() { return this->internal_map ? this->internal_map->clean() : Error(1);}
 public:
     Map& operator = (const Map& map){
         this->clean();
