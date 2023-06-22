@@ -32,7 +32,7 @@ public:
     char* description;// UTF-8
 public:
     Error();
-    Error(const int& code,const char* description);
+    Error(const int& code,const char* description = 0);
     Error(const Error& error);
     ~Error();
 public:
