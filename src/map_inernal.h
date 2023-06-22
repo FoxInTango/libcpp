@@ -26,6 +26,7 @@ public:
     virtual Error insert(const Key& key,const Value& value){ return 1;}
     virtual Error insert(const KVPair<Key,Value>& pair){ return 1; }
     virtual Error remove(const Key& key){ return 1; }
+    virtual Error remove(const Value& value) { return 1;}
     virtual Error remove(const KVPair<Key, Value>& pair){ return 1; }
 
     virtual Value& at(const Key& key) { return this->V_NULL; }
