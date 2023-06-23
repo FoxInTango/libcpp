@@ -28,8 +28,8 @@ const MapType MAP_TYPE_RB = 3;
 template <typename Key,typename Value>
 class Map{
 public:
-static Value V_NULL;
-static KVPair<Key,Value> PNULL;
+Value V_NULL;
+KVPair<Key,Value> P_NULL;
 protected:
     MapType type;
     map_internal<Key,Value>* internal_map;
