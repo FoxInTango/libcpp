@@ -11,6 +11,7 @@ namespaceBegin(foxintango)
  /** TODO
   *  range : remove insert replace append
   *  before behind --> left right
+  *  交 并 补 差
   */
 const unsigned int ARRAY_DEFAULT_SIZE = 32;
 

@@ -5,6 +5,10 @@
 #include "error.h"
 #include "define.h"
 
+/** TODO
+ *  交 并 补 差
+ */
+
 namespaceBegin(foxintango)
 
 typedef int MapType;
