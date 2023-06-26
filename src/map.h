@@ -1,5 +1,7 @@
 #ifndef _MAP_H_foxintango
 #define _MAP_H_foxintango
+
+#include "container.h"
 #include "hash.h"
 #include "struct.h"
 #include "error.h"

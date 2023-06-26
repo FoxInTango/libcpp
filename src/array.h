@@ -1,6 +1,7 @@
 #ifndef _ARRAY_H_foxintango
 #define _ARRAY_H_foxintango
 
+#include "container.h"
 #include "struct.h"
 #include "define.h"
 namespaceBegin(foxintango)
