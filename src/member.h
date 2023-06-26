@@ -1,7 +1,6 @@
 #ifndef _LIBCPP_MEMBER_H_
 #define _LIBCPP_MEMBER_H_
 #include "define.h"
-EXTERN_C_BEGIN
 namespaceBegin(foxintango)
 template <typename T>
 class Member{
@@ -16,5 +15,4 @@ public:
     operator T() { return this->t; }
 };
 namespaceEnd
-EXTERN_C_END
 #endif
