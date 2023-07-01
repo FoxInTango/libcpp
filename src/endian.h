@@ -29,10 +29,9 @@
 
 namespaceBegin(foxintango)
 
-#define ENDIAN_L 0
-#define ENDIAN_B 1
+typedef enum _Endian{ENDIAN_L,ENDIAN_B}Endian;
 
-inline int endianType() {
+inline int CurrentEndian() {
     unsigned short v = 0x0001;
     unsigned char  c = ((unsigned char*)&v)[0];
 
