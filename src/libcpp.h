@@ -30,6 +30,8 @@
 #include "set.h"
 #include "array.h"
 #include "struct.h"
+#include "member.h"
+#include "memory.h"
 #include "endian.h"
 #include "define.h"
 
