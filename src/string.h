@@ -44,7 +44,7 @@ Size string_length(const T* s) {
     return l;
 }
 template <typename T>
-Size string_copy(T* const t, T* const s, const Size& length = 0) {
+Size string_copy(const T* const t, const T* const s, const Size& length = 0) {
     if (!t || !s) return 0;
     Index index = 0;
     Size l = length > 0 ? length : UNSIGNED_LONG_MAX;
