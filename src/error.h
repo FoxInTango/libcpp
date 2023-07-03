@@ -37,7 +37,6 @@ public:
     ~Error();
 public:
     Error& operator  = (const Error& error);
-    Error& operator += (const char* description);
 public:
     operator int();
 };
