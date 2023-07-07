@@ -31,7 +31,6 @@ Error::Error(const Error& error){
 }
 
 Error::~Error(){
-
     if(this->description) delete this->description;
 }
 

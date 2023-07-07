@@ -2,6 +2,9 @@
 #define _LIBCPP_MEMBER_H_
 #include "define.h"
 namespaceBegin(foxintango)
+
+/** TODO 解决指针问题
+ */
 template <typename T>
 class Member{
 public:
