@@ -19,7 +19,7 @@ class tree_node{
 public:
     Error error;
 public:
-    T* t;// 集约化处理
+    T t;// 集约化处理
     tree_node* m_super;
     mem_segment<tree_node*>* m_subnodes;
 public:
