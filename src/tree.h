@@ -33,7 +33,7 @@ public:
 public:
     tree_node* super() { return this->m_super; }
     tree_node* subnodeAt(const Index& index){
-        return this->m_subnodes && index < this->m_subnodes->count() ? return this->m_subnodes[index] : 0;
+        return this->m_subnodes && index < this->m_subnodes->count() ? this->m_subnodes[index] : 0;
     }
 
     tree_node* clone(){ return 0;}
@@ -53,9 +53,9 @@ public:
     b_tree_node(){}
     ~b_tree_node(){}
 public:
-    tree_node* super(){}
-    tree_node* left(){}
-    tree_node* right(){}
+    tree_node* super(){ return this->m_super; }
+    tree_node* left() { return  this->m_subnodes && this->m_subnodes->size()     ? this->subnodeAt(0) : 0; }
+    tree_node* right(){ return  this->m_subnodes && this->m_subnodes->size() > 1 ? this->subnodeAt(1) : 0; }
 };
 /** 双子路径树
  *
