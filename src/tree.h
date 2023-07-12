@@ -53,9 +53,9 @@ public:
     b_tree_node(){}
     ~b_tree_node(){}
 public:
-    tree_node* super(){ return this->m_super; }
-    tree_node* left() { return  this->m_subnodes && this->m_subnodes->size()     ? this->subnodeAt(0) : 0; }
-    tree_node* right(){ return  this->m_subnodes && this->m_subnodes->size() > 1 ? this->subnodeAt(1) : 0; }
+    tree_node<T>* super(){ return  this->m_super; }
+    tree_node<T>* left() { return  this->m_subnodes && this->m_subnodes->size()     ? this->subnodeAt(0) : 0; }
+    tree_node<T>* right(){ return  this->m_subnodes && this->m_subnodes->size() > 1 ? this->subnodeAt(1) : 0; }
 };
 /** 双子路径树
  *
