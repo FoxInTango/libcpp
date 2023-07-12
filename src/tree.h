@@ -2,6 +2,8 @@
 #define _LIB_CPP_TREE_H_foxintango
 #include "array.h"
 #include "struct.h"
+#include "error.h"
+#include "member.h"
 #include "memory.h"
 #include "define.h"
 
@@ -14,6 +16,8 @@ typedef enum _ROTATE_DIRECTION{
 
 template <typename T>
 class tree_node{
+public:
+    Error error;
 public:
     T* t;// 集约化处理
     tree_node* m_super;
@@ -35,16 +39,16 @@ public:
     tree_node* clone(){ return 0;}
 
     Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
-
-    Error rotate(const ROTATE_DIRECTION& direction){ return 0; }
 public:
     virtual tree_node* at(T& t){ return 0; }
+public:
+    virtual Error& insert(T& t){ return this->error; }
+    virtual Error& remove(T& t){ return this->error; }
+    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 };
 
-
-
 template <typename T>
-class b_tree_node :public tree_node{
+class b_tree_node :public tree_node<T>{
 public:
     b_tree_node(){}
     ~b_tree_node(){}
@@ -58,7 +62,7 @@ public:
  */
 
 template <typename T>
-class dual_path_tree_node :public b_tree_node {
+class dual_path_tree_node :public b_tree_node<T> {
 public:
     Index m_path_code;
     dual_path_tree_node* m_sibling;
@@ -72,11 +76,19 @@ public:
 };
 
 template <typename T>
-class avl_tree_node :public b_tree_node{
+class avl_tree_node :public b_tree_node<T>{
 
 };
 template <typename T>
-class rb_tree_node :public b_tree_node {};
+class rb_tree_node :public b_tree_node<T>{
+public:
+    rb_tree_node(){}
+    ~rb_tree_node(){}
+public:
+    virtual Error& insert(T& t) { return this->error; }
+    virtual Error& remove(T& t) { return this->error; }
+    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
+};
 
 /** B-Tree
  */
