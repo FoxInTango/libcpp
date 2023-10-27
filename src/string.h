@@ -47,12 +47,12 @@ template <typename T>
 Size string_copy(T* const t, const T* const s, const Size& length = 0) {
     if (!t || !s) return 0;
     Index index = 0;
-    Size l = length > 0 ? length : UNSIGNED_LONG_MAX;
-    while (index < l&& s[index] != 0) {
+    Size l = length > 0 ? length : string_length<T>(s);
+    while (index < l && s[index] != 0) {
         t[index] = s[index];
         index++;
     }
-    return 0;
+    return index + 1;
 }
 
 template <typename T>
