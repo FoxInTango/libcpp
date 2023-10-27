@@ -43,6 +43,7 @@ Size string_length(const T* s) {
 
     return l;
 }
+/*
 template <typename T>
 Size string_copy(T* const t, const T* const s, const Size& length = 0) {
     if (!t || !s) return 0;
@@ -54,7 +55,7 @@ Size string_copy(T* const t, const T* const s, const Size& length = 0) {
     }
     return index + 1;
 }
-
+*/
 template <typename T>
 bool string_compare(const T* t, const T* s, const Size& length = 0) {
     Index index = 0;
