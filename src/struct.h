@@ -167,7 +167,7 @@ public:
      */
     Error setIndex(const Index& index){
         Error error;
-
+        /*
         if(this->behind()){
             if (index + 1 == 0xFFFFFFFF) { error = 0b00000001;}
             else { this->behind()->setIndex(this->s_index + 1);}
@@ -177,7 +177,7 @@ public:
             if (index - 1 == 0x00000000) { error = 0b10000000;} 
             else { this->before()->setIndex(index -1);}
         }
-
+        */
         if(!error){ 
             this->s_index = index;
             return 0;
@@ -189,7 +189,6 @@ public:
     }
 
     mem_segment* before(){ 
-        return 0;
         switch(this->s_type){
         case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size].address);
         case mem_segment_type_s:return 0;
@@ -197,7 +196,6 @@ public:
         }
     }
     mem_segment* behind(){
-        return 0;
         switch (this->s_type) {
         case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size + 1].address);
         case mem_segment_type_s:return static_cast<mem_segment*>(this->elements[this->s_size].address);
