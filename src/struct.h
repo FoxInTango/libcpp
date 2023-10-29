@@ -189,6 +189,7 @@ public:
     }
 
     mem_segment* before(){ 
+        return 0;
         switch(this->s_type){
         case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size].address);
         case mem_segment_type_s:return 0;
@@ -196,6 +197,7 @@ public:
         }
     }
     mem_segment* behind(){
+        return 0;
         switch (this->s_type) {
         case mem_segment_type_d:return static_cast<mem_segment*>(this->elements[this->s_size + 1].address);
         case mem_segment_type_s:return static_cast<mem_segment*>(this->elements[this->s_size].address);
