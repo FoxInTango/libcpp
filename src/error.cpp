@@ -9,7 +9,7 @@ Error::Error(){
 
 Error::Error(const int& code, const char* desc){
     this->code = code;
-
+    this->description = 0;
     if(!desc) return ;
 
     Size l = string_length<char>(desc);
@@ -22,6 +22,7 @@ Error::Error(const int& code, const char* desc){
 
 Error::Error(const Error& error){
     this->code = error.code;
+    this->description = 0;
     if(error.description){
         Size l = string_length<char>(description);
         this->description = new char[l + 1];
