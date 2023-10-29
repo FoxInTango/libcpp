@@ -31,7 +31,7 @@ public:
         
         this->a_size   = 0;
         this->s_size   = ARRAY_DEFAULT_SIZE;
-        this->elements = new mem_segment<T>(this->s_size, mem_segment_type_d); // 
+        this->elements = new mem_segment<T>(this->s_size, mem_segment_type_s); // 
         
         if(this->elements){
             //this->elements->setIndex(0);

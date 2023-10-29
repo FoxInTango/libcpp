@@ -54,7 +54,6 @@ public:
     mem_segment(const Size& size, const mem_segment_type& type = mem_segment_type_r) {
         this->e_count = 0;
         this->s_index = 0;
-        //printf("mem_segment alloc  -- size : %ul type:%d",size,type);
         switch(type){
         case mem_segment_type_r:{
             if (this->elements = new mem_element<T>[size]) {
@@ -74,7 +73,7 @@ public:
             if (this->elements = new mem_element<T>[size + 2]) {
                 this->s_size = size;
                 this->s_type = mem_segment_type_d;
-                memclr(this->elements,sizeof(T) * (size + 2),0);
+                memclr(this->elements, sizeof(T) * (size + 2),0);
             }
         }break;
         default:break;
