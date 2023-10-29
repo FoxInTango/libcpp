@@ -28,7 +28,6 @@ class foxintangoAPI Array{
 public:
     Array() {
         // 处理begin & end
-        
         this->a_size   = 0;
         this->s_size   = ARRAY_DEFAULT_SIZE;
         this->elements = new mem_segment<T>(this->s_size, mem_segment_type_s); // 
@@ -36,7 +35,7 @@ public:
         if(this->elements){
             this->elements->setIndex(0);
         }
-        //memclr(&this->T_NULL,sizeof(this->T_NULL),255);
+        memclr(&this->T_NULL,sizeof(this->T_NULL),255);
         
     }
     Array(const Array& array) {
