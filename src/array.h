@@ -37,9 +37,8 @@ public:
         if(this->elements){
             //this->elements->setIndex(0);
         }
-        /*
         memclr(&this->T_NULL,sizeof(this->T_NULL),255);
-        */
+        
     }
     Array(const Array& array) {
         mem_segment<T>* segment = array.elements;
