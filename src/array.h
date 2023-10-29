@@ -34,7 +34,7 @@ public:
         this->elements = new mem_segment<T>(this->s_size, mem_segment_type_s); // 
         
         if(this->elements){
-            //this->elements->setIndex(0);
+            this->elements->setIndex(0);
         }
         //memclr(&this->T_NULL,sizeof(this->T_NULL),255);
         
