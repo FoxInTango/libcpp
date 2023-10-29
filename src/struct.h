@@ -166,8 +166,7 @@ public:
      *  0b10000000 : segment index before out of range
      */
     Error setIndex(const Index& index){
-        return 0;
-        /*
+        
         Error error;
         
         if(this->behind()){
@@ -184,7 +183,7 @@ public:
             this->s_index = index;
             return 0;
         } else return error;
-        */
+        
     }
 
     Index index(){
