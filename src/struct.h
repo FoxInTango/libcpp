@@ -1,5 +1,6 @@
 #ifndef _LIB_CPP_STRUCT_H_foxintango
 #define _LIB_CPP_STRUCT_H_foxintango
+#include "error.h"
 #include "memory.h"
 #include "define.h"
 namespaceBegin(foxintango)
