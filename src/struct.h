@@ -165,7 +165,7 @@ public:
      *  0b00000001 : segment index behind out of range 
      *  0b10000000 : segment index before out of range
      */
-    Error setIndex(const Index& index){
+    int setIndex(const Index& index){
         return 0;
         /*
         Error error;
