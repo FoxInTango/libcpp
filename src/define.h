@@ -62,7 +62,10 @@ namespaceBegin(foxintango)
  *  __FUNCTION__
  *  __PRETTY_FUNCTION__  namespace::classname::functionname
  * */
-
+ /** 环境宏
+  *  Pre - defined C / C++ Compiler Macros https://sourceforge.net/p/predef/wiki/Home/ 
+  *     from C/C++有无宏指令可以指示当前编译器的位数？ - Pluto Hades的回答 - 知乎 https://www.zhihu.com/question/366578332/answer/977059288
+  */
 typedef unsigned long int Size;
 typedef unsigned long int Index;
 typedef int               Status;
