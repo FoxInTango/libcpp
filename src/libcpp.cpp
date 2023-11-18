@@ -42,7 +42,7 @@ int libcpp_startup(){
     return 0;
 }
 int libcpp_set_default(){
-    sample_array();
+    //sample_array();
     return 0;
 }
 

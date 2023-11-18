@@ -29,7 +29,7 @@ public:
     hashable(const float& number);
     hashable(const long& number);
     hashable(const double& number);
-    virtual ~hashable();
+    virtual ~hashable(){}
 public:
     unsigned char operator [](const Index& index);
 public:
@@ -56,8 +56,8 @@ typedef struct _hash_s{
     };
 }hash_s;
 
-class foxintangoAPI hash_table{};
-class foxintangoAPI hash_tree{};
+//class foxintangoAPI hash_table{};
+//class foxintangoAPI hash_tree{};
 
 template <typename Key, typename Value>
 class foxintangoAPI map_hash :public map_internal<Key,Value>{
