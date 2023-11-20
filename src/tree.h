@@ -52,7 +52,7 @@ public:
     }
 
     virtual bool operator == (const tree_node& n){
-        return this->t == n->t ? true : false;
+        return this->t == n.t ? true : false;
     }
 };
 
