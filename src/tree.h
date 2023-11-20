@@ -99,10 +99,26 @@ template <typename T>
 class rb_tree_node :public b_tree_node<T>{
 public:
     rb_tree_node(){}
+    rb_tree_node(const T& t) { this->t = t; }
     ~rb_tree_node(){}
 public:
     virtual Error& insert(T& t) { 
-        return this->error; 
+        if(t < this->t){
+            if(this->m_subnodes[0]){
+                this->m_subnodes[0]->insert(t);
+            } else {
+                this->m_subnodes[0] = new rb_tree_node(t);
+            }
+        } else if(t > this->t){
+            if (this->m_subnodes[1]) {
+                this->m_subnodes[1]->insert(t);
+            }
+            else {
+                this->m_subnodes[1] = new rb_tree_node(t);
+            }
+        } else {
+          // 重复 忽略？
+        }
     }
     virtual Error& remove(T& t) { return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
