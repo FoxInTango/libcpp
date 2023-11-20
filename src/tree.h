@@ -108,7 +108,7 @@ public:
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 public:
     virtual rb_tree_node& operator = (const T& t) {
-        set(t);
+        this->t = t;
         return *this;
     }
 };
