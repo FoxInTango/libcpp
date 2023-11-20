@@ -5,9 +5,11 @@
 #include "define.h"
 namespaceBegin(foxintango)
 template <typename T>
+class mem_segment;
+template <typename T>
 union mem_element {
-T       element;
-Address address;
+T            element;
+mem_segment* address;
  mem_element(){
      if(sizeof(T) > sizeof(Address)) { this->element = 0; } else this->address = 0;
  }
