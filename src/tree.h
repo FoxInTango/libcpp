@@ -156,7 +156,7 @@ public:
         return *this;
     }
 
-    virtual bool operator == (const tree_node& n) {
+    virtual bool operator == (const rb_tree_node& n) {
         return this->t == n.t ? true : false;
     }
 };
