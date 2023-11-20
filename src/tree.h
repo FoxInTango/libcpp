@@ -39,6 +39,10 @@ public:
     tree_node* clone(){ return 0;}
 
     Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
+
+    void set(const T& t){
+        this->t = t;
+    }
 public:
     virtual tree_node* at(T& t){ return 0; }
 public:
@@ -47,7 +51,7 @@ public:
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 public:
     virtual tree_node& operator = (const T& t){
-        this->t = t;
+        set(t);
         return *this;
     }
 
@@ -102,6 +106,11 @@ public:
     }
     virtual Error& remove(T& t) { return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
+public:
+    virtual rb_tree_node& operator = (const T& t) {
+        set(t);
+        return *this;
+    }
 };
 
 /** B-Tree
