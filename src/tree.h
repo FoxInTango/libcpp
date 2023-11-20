@@ -45,6 +45,15 @@ public:
     virtual Error& insert(T& t){ return this->error; }
     virtual Error& remove(T& t){ return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
+public:
+    virtual tree_node& operator = (const T& t){
+        this->t = t;
+        return *this;
+    }
+
+    virtual bool operator == (const tree_node& n){
+        return this->t == n->t ? true : false;
+    }
 };
 
 template <typename T>
@@ -79,13 +88,18 @@ template <typename T>
 class avl_tree_node :public b_tree_node<T>{
 
 };
+
+/** 红黑树
+ */
 template <typename T>
 class rb_tree_node :public b_tree_node<T>{
 public:
     rb_tree_node(){}
     ~rb_tree_node(){}
 public:
-    virtual Error& insert(T& t) { return this->error; }
+    virtual Error& insert(T& t) { 
+        return this->error; 
+    }
     virtual Error& remove(T& t) { return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 };
