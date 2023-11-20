@@ -106,6 +106,19 @@ public:
     rb_tree_node(const T& t) { this->m_subnodes = new mem_segment<rb_tree_node*>(2); this->t = t; }
     ~rb_tree_node(){}
 public:
+    tree_node* super() { return this->m_super; }
+    tree_node* subnodeAt(const Index& index) {
+        return this->m_subnodes && index < this->m_subnodes->count() ? this->m_subnodes[index] : 0;
+    }
+
+    tree_node* clone() { return 0; }
+
+    Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
+
+    void set(const T& t) {
+        this->t = t;
+    }
+public:
     virtual Error& insert(const T& t) { 
         if(t < this->t){
             if(this->m_subnodes[0]){
@@ -133,12 +146,16 @@ public:
 
         return Error(0);
     }
-    virtual Error& remove(const T& t) { return this->error; }
-    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
+    virtual Error& remove(const T& t) { return Error(0); }
+    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return Error(0); }
 public:
     virtual rb_tree_node& operator = (const T& t) {
         this->set(t);
         return *this;
+    }
+
+    virtual bool operator == (const tree_node& n) {
+        return this->t == n.t ? true : false;
     }
 };
 
