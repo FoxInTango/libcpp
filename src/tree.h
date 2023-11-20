@@ -96,7 +96,11 @@ class avl_tree_node :public b_tree_node<T>{
 /** 红黑树
  */
 template <typename T>
-class rb_tree_node :public b_tree_node<T>{
+class rb_tree_node {
+public:
+    T t;// 集约化处理
+    tree_node* m_super;
+    mem_segment<rb_tree_node*>* m_subnodes;
 public:
     rb_tree_node(){ this->m_subnodes = new mem_segment<rb_tree_node*>(2);}
     rb_tree_node(const T& t) { this->m_subnodes = new mem_segment<rb_tree_node*>(2); this->t = t; }
@@ -108,6 +112,10 @@ public:
                 this->m_subnodes[0]->insert(t);
             } else {
                 this->m_subnodes[0] = new rb_tree_node(t);
+
+                if(this->m_subnodes[0]){
+                    this->m_subnodes[0]->m_super = this;
+                }
             }
         } else if(t > this->t){
             if (this->m_subnodes[1]) {
@@ -115,10 +123,15 @@ public:
             }
             else {
                 this->m_subnodes[1] = new rb_tree_node(t);
+                if (this->m_subnodes[1]) {
+                    this->m_subnodes[1]->m_super = this;
+                }
             }
         } else {
           // 重复 忽略？
         }
+
+        return Error(0);
     }
     virtual Error& remove(const T& t) { return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
