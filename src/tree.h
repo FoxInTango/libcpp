@@ -102,20 +102,21 @@ public:
 public:
     T t;// 集约化处理
     rb_tree_node* m_super;
-    mem_segment<rb_tree_node*>* m_subnodes;
+    rb_tree_node* m_left;
+    rb_tree_node* m_right;
 public:
-    rb_tree_node(){ this->m_subnodes = new mem_segment<rb_tree_node*>(2);}
-    rb_tree_node(const T& t) { this->m_subnodes = new mem_segment<rb_tree_node*>(2); this->t = t; }
-    ~rb_tree_node(){}
+    rb_tree_node(){ memclr(this,sizeof(rb_tree_node),0); }
+    rb_tree_node(const T& t) { memclr(this, sizeof(rb_tree_node), 0); this->t = t; }
+    ~rb_tree_node(){
+        if(m_left) delete this->m_left;
+        if(m_right) delete this->m_right;
+    }
 public:
     rb_tree_node* super() { return this->m_super; }
-    rb_tree_node* subnodeAt(const Index& index) {
-        return this->m_subnodes && index < this->m_subnodes->count() ? this->m_subnodes[index] : 0;
-    }
-
+    
+    rb_tree_node* left(){ return this->m_left; }
+    rb_tree_node* right(){ return this->m_right; }
     rb_tree_node* clone() { return 0; }
-
-    Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
 
     void set(const T& t) {
         this->t = t;
@@ -123,23 +124,23 @@ public:
 public:
     virtual Error& insert(const T& t) { 
         if(t < this->t){
-            if(this->m_subnodes[0].element){
-                this->m_subnodes[0].element->insert(t);
+            if(this->m_left){
+                this->m_left->insert(t);
             } else {
-                this->m_subnodes[0].element = new rb_tree_node(t);
+                this->m_left = new rb_tree_node(t);
 
-                if(this->m_subnodes[0]){
-                    this->m_subnodes[0].element->m_super = this;
+                if(this->m_left){
+                    this->m_left->m_super = this;
                 }
             }
         } else if(t > this->t){
-            if (this->m_subnodes[1].element) {
-                this->m_subnodes[1].element->insert(t);
+            if (this->m_right) {
+                this->m_right->insert(t);
             }
             else {
-                this->m_subnodes[1].element = new rb_tree_node(t);
-                if (this->m_subnodes[1].element) {
-                    this->m_subnodes[1].element->m_super = this;
+                this->m_right = new rb_tree_node(t);
+                if (this->m_right) {
+                    this->m_right->m_super = this;
                 }
             }
         } else {
