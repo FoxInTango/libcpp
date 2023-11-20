@@ -98,6 +98,8 @@ class avl_tree_node :public b_tree_node<T>{
 template <typename T>
 class rb_tree_node {
 public:
+    Error error;
+public:
     T t;// 集约化处理
     tree_node* m_super;
     mem_segment<rb_tree_node*>* m_subnodes;
@@ -106,12 +108,12 @@ public:
     rb_tree_node(const T& t) { this->m_subnodes = new mem_segment<rb_tree_node*>(2); this->t = t; }
     ~rb_tree_node(){}
 public:
-    tree_node* super() { return this->m_super; }
-    tree_node* subnodeAt(const Index& index) {
+    rb_tree_node* super() { return this->m_super; }
+    rb_tree_node* subnodeAt(const Index& index) {
         return this->m_subnodes && index < this->m_subnodes->count() ? this->m_subnodes[index] : 0;
     }
 
-    tree_node* clone() { return 0; }
+    rb_tree_node* clone() { return 0; }
 
     Size subcount() { return this->m_subnodes ? this->m_subnodes->count() : 0; }
 
@@ -144,10 +146,10 @@ public:
           // 重复 忽略？
         }
 
-        return Error(0);
+        return this->error;
     }
-    virtual Error& remove(const T& t) { return Error(0); }
-    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return Error(0); }
+    virtual Error& remove(const T& t) { return this->error; }
+    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 public:
     virtual rb_tree_node& operator = (const T& t) {
         this->set(t);
