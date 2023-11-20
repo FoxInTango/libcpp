@@ -101,7 +101,7 @@ public:
     Error error;
 public:
     T t;// 集约化处理
-    tree_node* m_super;
+    rb_tree_node* m_super;
     mem_segment<rb_tree_node*>* m_subnodes;
 public:
     rb_tree_node(){ this->m_subnodes = new mem_segment<rb_tree_node*>(2);}
