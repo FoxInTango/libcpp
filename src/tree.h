@@ -46,8 +46,8 @@ public:
 public:
     virtual tree_node* at(T& t){ return 0; }
 public:
-    virtual Error& insert(T& t){ return this->error; }
-    virtual Error& remove(T& t){ return this->error; }
+    virtual Error& insert(const T& t){ return this->error; }
+    virtual Error& remove(const T& t){ return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 public:
     virtual tree_node& operator = (const T& t){
@@ -102,7 +102,7 @@ public:
     rb_tree_node(const T& t) { this->m_subnodes = new mem_segment<rb_tree_node*>(2); this->t = t; }
     ~rb_tree_node(){}
 public:
-    virtual Error& insert(T& t) { 
+    virtual Error& insert(const T& t) { 
         if(t < this->t){
             if(this->m_subnodes[0]){
                 this->m_subnodes[0]->insert(t);
@@ -120,7 +120,7 @@ public:
           // 重复 忽略？
         }
     }
-    virtual Error& remove(T& t) { return this->error; }
+    virtual Error& remove(const T& t) { return this->error; }
     virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 public:
     virtual rb_tree_node& operator = (const T& t) {
