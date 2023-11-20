@@ -123,23 +123,23 @@ public:
 public:
     virtual Error& insert(const T& t) { 
         if(t < this->t){
-            if(this->m_subnodes[0]){
-                this->m_subnodes[0]->insert(t);
+            if(this->m_subnodes[0].element){
+                this->m_subnodes[0].element->insert(t);
             } else {
-                this->m_subnodes[0] = new rb_tree_node(t);
+                this->m_subnodes[0].element = new rb_tree_node(t);
 
                 if(this->m_subnodes[0]){
-                    this->m_subnodes[0]->m_super = this;
+                    this->m_subnodes[0].element->m_super = this;
                 }
             }
         } else if(t > this->t){
-            if (this->m_subnodes[1]) {
-                this->m_subnodes[1]->insert(t);
+            if (this->m_subnodes[1].element) {
+                this->m_subnodes[1].element->insert(t);
             }
             else {
-                this->m_subnodes[1] = new rb_tree_node(t);
-                if (this->m_subnodes[1]) {
-                    this->m_subnodes[1]->m_super = this;
+                this->m_subnodes[1].element = new rb_tree_node(t);
+                if (this->m_subnodes[1].element) {
+                    this->m_subnodes[1].element->m_super = this;
                 }
             }
         } else {
