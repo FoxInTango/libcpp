@@ -98,8 +98,8 @@ class avl_tree_node :public b_tree_node<T>{
 template <typename T>
 class rb_tree_node :public b_tree_node<T>{
 public:
-    rb_tree_node(){}
-    rb_tree_node(const T& t) { this->t = t; }
+    rb_tree_node(){ this->m_subnodes = new mem_segment<rb_tree_node*>(2);}
+    rb_tree_node(const T& t) { this->m_subnodes = new mem_segment<rb_tree_node*>(2); this->t = t; }
     ~rb_tree_node(){}
 public:
     virtual Error& insert(T& t) { 
