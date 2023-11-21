@@ -134,7 +134,14 @@ public:
     rb_tree_node* clone() { return 0; }
     void traverse(rb_node_callback callback) {
         callback(this->t);
+        if(this->m_left){
+            this->m_left->traverse(callback);
+        }
+        if (this->m_right) {
+            this->m_right->traverse(callback);
+        }
     }
+
     rb_tree_node* lookup(const T& t){}
 
     void set(const T& t) {
