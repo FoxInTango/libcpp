@@ -128,11 +128,27 @@ public:
     }
 public:
     rb_tree_node* super() { return this->m_super; }
-    
-    rb_tree_node* left(){ return this->m_left; }
-    rb_tree_node* right(){ return this->m_right; }
-    rb_tree_node* clone() { return 0; }
-    void traverse(rb_node_callback callback) {
+    rb_tree_node* left()  { return this->m_left;  }
+    rb_tree_node* right() { return this->m_right; }
+
+    rb_tree_node* clone(rb_tree_node* super = 0) { 
+        rb_tree_node* n = new rb_tree_node();
+
+        if(n) n->t = this->t;
+        if(super) n->m_super = super;
+
+        if(this->m_left){
+            this->m_left->clone(n);
+        }
+
+        if (this->m_right) {
+            this->m_right->clone(n);
+        }
+
+        return n;
+    }
+
+    void foreach(rb_node_callback callback) {
         callback(this->t);
         if(this->m_left){
             this->m_left->traverse(callback);

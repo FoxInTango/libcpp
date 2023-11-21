@@ -43,9 +43,10 @@ void libcpp_tst(){
         r1.insert(i);
     }
 
-    r1.traverse(tree_node_callback);
+    r1.foreach(tree_node_callback);
 
-    rb_tree_node<int>* s = r1.lookup(200);
+    rb_tree_node<int>* n = r1.clone();
+    rb_tree_node<int>* s = n->lookup(200);
 
     if(s){
         printf("r1.lookup(200); %d\n", s->t);
