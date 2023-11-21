@@ -142,7 +142,19 @@ public:
         }
     }
 
-    rb_tree_node* lookup(const T& t){}
+    rb_tree_node* lookup(const T& t){
+        if(this->t == t) return this;
+
+        if(this->t > t && this->m_left){
+            return this->m_left->lookup(t);
+        }
+
+        if(this->t < t && this->m_right){
+            return this->m_right->lookup(t);
+        }
+
+        return 0;
+    }
 
     void set(const T& t) {
         this->t = t;

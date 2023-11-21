@@ -44,4 +44,10 @@ void libcpp_tst(){
     }
 
     r1.traverse(tree_node_callback);
+
+    rb_tree_node<int>* s = r1.lookup(200);
+
+    if(s){
+        printf("r1.lookup(200); %d\n", s->t);
+    }
 }
