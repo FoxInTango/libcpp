@@ -3,4 +3,4 @@
 
 void libcpp_tst();
 
-#endif;
+#endif
