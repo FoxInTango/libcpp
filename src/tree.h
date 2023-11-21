@@ -124,7 +124,7 @@ public:
     rb_tree_node* right(){ return this->m_right; }
     rb_tree_node* clone() { return 0; }
     void traverse(rb_node_callback callback) {
-        //callback(this->t);
+        callback(this->t);
     }
     rb_tree_node* lookup(const T& t){}
 
