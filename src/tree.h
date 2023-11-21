@@ -94,7 +94,11 @@ class avl_tree_node :public b_tree_node<T>{
 };
 
 /** 红黑树
+ *  Errors : 0 操作成功
+ *           
  */
+//template <typename T> typedef  void (*rb_node_callback)(T& t);
+
 template <typename T>
 class rb_tree_node {
 public:
@@ -105,6 +109,7 @@ public:
     rb_tree_node* m_super;
     rb_tree_node* m_left;
     rb_tree_node* m_right;
+    typedef  void (*rb_node_callback)(T& t);
 public:
     rb_tree_node(){ memclr(this,sizeof(rb_tree_node),0); }
     rb_tree_node(const T& t) { memclr(this, sizeof(rb_tree_node), 0); this->t = t; }
@@ -118,6 +123,10 @@ public:
     rb_tree_node* left(){ return this->m_left; }
     rb_tree_node* right(){ return this->m_right; }
     rb_tree_node* clone() { return 0; }
+    void traverse(rb_node_callback callback) {
+        callback(this->t);
+    }
+    rb_tree_node* lookup(const T& t){}
 
     void set(const T& t) {
         this->t = t;
@@ -145,22 +154,38 @@ public:
                 }
             }
         } else {
-          // 重复 忽略？
+          this->t = t;
         }
 
         return this->error;
     }
-    virtual Error& remove(const T& t) { return this->error; }
-    virtual Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
+    
+    Error& remove(const T& t) { return this->error; }
+    Error& rotate(const ROTATE_DIRECTION& direction) { return this->error; }
 public:
-    virtual rb_tree_node& operator = (const T& t) {
+    rb_tree_node& operator = (const T& t) {
         this->set(t);
         return *this;
     }
 
-    virtual bool operator == (const rb_tree_node& n) {
+    bool operator == (const rb_tree_node& n) {
         return this->t == n.t ? true : false;
     }
+    /*
+    T&   operator [] (const T& t){
+        if(this->t == t){
+            return *this;
+        }
+
+        if(this->t > t && this->left){
+            return this->left->operator[](t);
+        }
+
+        if (this->t < t && this->right) {
+            return this->right->operator[](t);
+        }
+    }
+    */
 };
 
 /** B-Tree

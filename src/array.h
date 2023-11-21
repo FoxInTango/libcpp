@@ -55,6 +55,8 @@ public:
 
         this->a_size = array.a_size;
         this->s_size = array.s_size;
+
+        memclr(&this->T_NULL, sizeof(this->T_NULL), 255);
     }
     /** 
      * size:segment size 
