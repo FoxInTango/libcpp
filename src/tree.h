@@ -134,24 +134,27 @@ public:
     rb_tree_node* clone(rb_tree_node* super = 0) { 
         rb_tree_node* n = new rb_tree_node();
 
-        if(n) n->t = this->t;
-        if(super) {
-            n->m_super = super;
-            if(super->t > n->t){
-                super->m_left  = n;
-            } else {
-                super->m_right = n;
+        if(n) { 
+            n->t = this->t;
+            if (super) {
+                n->m_super = super;
+                if (super->t > n->t) {
+                    super->m_left = n;
+                }
+                else {
+                    super->m_right = n;
+                }
+            }
+
+            if (this->m_left) {
+                this->m_left->clone(n);
+            }
+
+            if (this->m_right) {
+                this->m_right->clone(n);
             }
         }
-
-        if(this->m_left){
-            this->m_left->clone(n);
-        }
-
-        if (this->m_right) {
-            this->m_right->clone(n);
-        }
-
+        
         return n;
     }
 
