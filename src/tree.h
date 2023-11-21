@@ -100,7 +100,8 @@ class rb_tree_node {
 public:
     Error error;
 public:
-    T t;// 集约化处理
+    T t;
+    Bool color;
     rb_tree_node* m_super;
     rb_tree_node* m_left;
     rb_tree_node* m_right;
