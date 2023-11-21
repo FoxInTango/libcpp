@@ -51,4 +51,5 @@ void libcpp_tst(){
     if(s){
         printf("r1.lookup(200); %d\n", s->t);
     }
+    n->foreach(tree_node_callback);
 }
