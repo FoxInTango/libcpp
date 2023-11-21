@@ -38,7 +38,7 @@ void libcpp_tst(){
     }
 
     for(int i = 0;i < 1000;i ++){
-        r1.insert(i);
+        //r1.insert(i);
     }
 
     r1.traverse(tree_node_callback);
