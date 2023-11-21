@@ -111,8 +111,17 @@ public:
     rb_tree_node* m_right;
     typedef  void (*rb_node_callback)(T& t);
 public:
-    rb_tree_node(){ memclr(this,sizeof(rb_tree_node),0); }
-    rb_tree_node(const T& t) { memclr(this, sizeof(rb_tree_node), 0); this->t = t; }
+    rb_tree_node(){ 
+        this->m_left  = 0;
+        this->m_right = 0;
+        memclr(this,sizeof(rb_tree_node),0); 
+    }
+    rb_tree_node(const T& t) { 
+        this->m_left = 0;
+        this->m_right = 0;
+        memclr(this, sizeof(rb_tree_node), 0); 
+        this->t = t; 
+    }
     ~rb_tree_node(){
         if(m_left) delete this->m_left;
         if(m_right) delete this->m_right;
@@ -132,7 +141,7 @@ public:
         this->t = t;
     }
 public:
-    virtual Error& insert(const T& t) { 
+    Error& insert(const T& t) { 
         if(t < this->t){
             if(this->m_left){
                 this->m_left->insert(t);
