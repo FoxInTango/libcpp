@@ -1,6 +1,6 @@
-#include "tstcpp.h"
+#include "tst.h"
 
-#include <libcpp/libcpp.h>
+#include "libcpp.h"
 using namespace foxintango;
 #include <stdio.h>
 #include <iostream>

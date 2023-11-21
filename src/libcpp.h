@@ -24,7 +24,7 @@
 #ifndef _LIB_CPP_H_
 #define _LIB_CPP_H_
 
-#include "tstcpp.h"
+#include "tst.h"
 #include "error.h"
 #include "string.h"
 #include "map.h"
