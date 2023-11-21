@@ -138,9 +138,9 @@ public:
         if(super) {
             n->m_super = super;
             if(super->t > n->t){
-                super->m_left = n;
+                super->m_left  = n;
             } else {
-                super->m_right = n
+                super->m_right = n;
             }
         }
 
