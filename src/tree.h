@@ -151,10 +151,10 @@ public:
     void foreach(rb_node_callback callback) {
         callback(this->t);
         if(this->m_left){
-            this->m_left->traverse(callback);
+            this->m_left->foreach(callback);
         }
         if (this->m_right) {
-            this->m_right->traverse(callback);
+            this->m_right->foreach(callback);
         }
     }
 
