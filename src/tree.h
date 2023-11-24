@@ -101,11 +101,12 @@ class avl_tree_node :public b_tree_node<T>{
 
 template <typename T>
 class rb_tree_node {
+typedef enum _rb_tree_node_color{RBT_BLACK,RBT_RED}rb_tree_node_color;
 public:
     Error error;
 public:
     T t;
-    Bool color;
+    rb_tree_node_color m_color;
     rb_tree_node* m_super;
     rb_tree_node* m_left;
     rb_tree_node* m_right;
@@ -114,12 +115,11 @@ public:
     rb_tree_node(){ 
         this->m_left  = 0;
         this->m_right = 0;
-        memclr(this,sizeof(rb_tree_node),0); 
+        this->m_color = RBT_BLACK;
     }
     rb_tree_node(const T& t) { 
         this->m_left = 0;
         this->m_right = 0;
-        memclr(this, sizeof(rb_tree_node), 0); 
         this->t = t; 
     }
     ~rb_tree_node(){

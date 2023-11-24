@@ -34,7 +34,7 @@ namespaceBegin(foxintango)
   *
   * 数值的科学计数法
   */
-    template <typename T>
+template <typename T>
 Size string_length(const T* s) {
     Size l = 0;
     while (s[l]) {
@@ -69,5 +69,18 @@ bool string_compare(const T* t, const T* s, const Size& length = 0) {
 }
 
 Size unicode_swap_endian(Unicode* unicode);
+
+/**
+ * 数值转换
+ * 十进制
+ *     整数 - 负数
+ *     浮点数
+ *     科学记数法
+ * 二进制
+ * 八进制
+ * 十六进制
+ * 日期转换 
+ * 年月日 - 时分秒毫秒微秒
+ */
 namespaceEnd
 #endif
