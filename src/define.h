@@ -57,6 +57,11 @@ namespaceBegin(foxintango)
 #endif
 
 /** 源码宏
+ *  1,编译器识别
+ *  2,编译平台识别
+ *  3,标准库识别
+ *  4,目标平台识别
+ * 
  *  __FILE__
  *  __LINE__
  *  __FUNCTION__
@@ -65,6 +70,9 @@ namespaceBegin(foxintango)
  /** 环境宏
   *  Pre - defined C / C++ Compiler Macros https://sourceforge.net/p/predef/wiki/Home/ 
   *     from C/C++有无宏指令可以指示当前编译器的位数？ - Pluto Hades的回答 - 知乎 https://www.zhihu.com/question/366578332/answer/977059288
+  * https://stackoverflow.com/questions/48857887/pretty-function-in-visual-c
+  *     EDG's C++ Front End documentation mentions that its supports some of the GCC pre-defines like __PRETTY_FUNCTION__ on page 71 - "1.13 Predefined Macros" together with Microsoft's __FUNCSIG__.
+  * https://blog.csdn.net/fpcc/article/details/130896812 新的c++17以后提供了本地库std::source_location && 其实在VC中还有一个类似的宏__FUNCDNAME__，它也是用来得到函数的修饰名
   */
 typedef unsigned long int Size;
 typedef unsigned long int Index;
