@@ -67,6 +67,42 @@ namespaceBegin(foxintango)
  *  __FUNCTION__
  *  __PRETTY_FUNCTION__  namespace::classname::functionname
  * */
+
+ /** some thing funny.
+ */
+class C1 {
+public:
+    C1() {}
+    ~C1() {};
+public:
+    void print() {
+        printf("Here C1 printing.");
+        const char* name = __PRETTY_FUNCTION__;
+        printf("    __PRETTY_FUNCTION__:%s\n", name);
+    }
+};
+class C2 {
+public:
+    C2() {}
+    ~C2() {};
+public:
+    void print() {
+        printf("Here C2 printing.");
+        const char* name = __PRETTY_FUNCTION__;
+        printf("    __PRETTY_FUNCTION__:%s\n", name);
+    }
+};
+
+template <class T>
+class C :public T {
+public:
+    C() {
+        this->print();
+        const char* name = __PRETTY_FUNCTION__;
+        printf("    __PRETTY_FUNCTION__:%s\n", name);
+    }
+    ~C() {}
+};
  /** 环境宏
   *  Pre - defined C / C++ Compiler Macros https://sourceforge.net/p/predef/wiki/Home/ 
   *     from C/C++有无宏指令可以指示当前编译器的位数？ - Pluto Hades的回答 - 知乎 https://www.zhihu.com/question/366578332/answer/977059288
