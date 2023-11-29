@@ -9,7 +9,7 @@ using namespace foxintango;
 void tree_node_callback(int& t){
     printf("tree_node_callback %d\n",t);
 }
-/*
+
 void number_onset(const int& n) {}
 
 class Members{
@@ -22,7 +22,7 @@ public:
         number.onset = number_onset;
     }
 };
-*/
+
 void member_tst(){
 
 }
