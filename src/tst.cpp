@@ -15,7 +15,7 @@ void number_onset(int& o, const int& n) {
     o = n;
 }
 
-int number_onget(int& o){
+int number_onget(const int& o){
     printf("Members number on get number: %d\n", o);
     return o;
 }
