@@ -10,11 +10,12 @@ void tree_node_callback(int& t){
     printf("tree_node_callback %d\n",t);
 }
 
+void number_onset(const int& n) {}
 class Members{
 public:
     Member<int> number;
 public:
-    void number_onset(const int& n){}
+    
 public:
     Members(){
         number.onset = number_onset;
