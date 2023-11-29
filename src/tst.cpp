@@ -6,7 +6,7 @@ using namespace foxintango;
 #include <iostream>
 #include <stdlib.h>
 
-void tree_node_callback(const int& t){
+void tree_node_callback(int& t){
     printf("tree_node_callback %d\n",t);
 }
 
