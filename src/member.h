@@ -10,10 +10,10 @@ class Member{
 public:
     T t;
 public:
-    Member(){}
-    Member(const T& t) { this->t = t;  }
-    Member(const T* t) { this->t = *t; }
-    Member(const Member& m) { this->t = m.t;}
+    Member(){ this->onset = 0; this->onget = 0;}
+    Member(const T& t) { this->onset = 0; this->onget = 0; this->t = t;  }
+    Member(const T* t) { this->onset = 0; this->onget = 0; this->t = *t; }
+    Member(const Member& m) { this->onset = 0; this->onget = 0; this->t = m.t;}
 public:
     typedef void (*set_callback)(T& o,const T& n);
     typedef T(*get_callback)(const T& o);
