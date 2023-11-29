@@ -76,9 +76,9 @@ public:
     ~C1() {};
 public:
     void print() {
-        printf("Here C1 printing.");
+        //printf("Here C1 printing.");
         const char* name = __PRETTY_FUNCTION__;
-        printf("    __PRETTY_FUNCTION__:%s\n", name);
+        //printf("    __PRETTY_FUNCTION__:%s\n", name);
     }
 };
 class C2 {
@@ -87,9 +87,9 @@ public:
     ~C2() {};
 public:
     void print() {
-        printf("Here C2 printing.");
+        //printf("Here C2 printing.");
         const char* name = __PRETTY_FUNCTION__;
-        printf("    __PRETTY_FUNCTION__:%s\n", name);
+        //printf("    __PRETTY_FUNCTION__:%s\n", name);
     }
 };
 
@@ -99,7 +99,7 @@ public:
     C() {
         this->print();
         const char* name = __PRETTY_FUNCTION__;
-        printf("    __PRETTY_FUNCTION__:%s\n", name);
+        //printf("    __PRETTY_FUNCTION__:%s\n", name);
     }
     ~C() {}
 };
