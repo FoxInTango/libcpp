@@ -10,7 +10,15 @@ void tree_node_callback(int& t){
     printf("tree_node_callback %d\n",t);
 }
 
-void number_onset(const int& n) {}
+void number_onset(const int& o, const int& n) {
+    printf("Members number on set old: %d  new: %d\n", o,n);
+    o = n;
+}
+
+int number_onget(const int& o){
+    printf("Members number on get number: %d\n", o);
+    return o;
+}
 
 class Members{
 public:
@@ -20,13 +28,26 @@ public:
 public:
     Members(){
         number.onset = number_onset;
+        number.onget = number_onget;
     }
 };
 
-void member_tst(){
+void member_tst();
+void rt_tst();
 
-}
 void libcpp_tst(){
+    member_tst();
+}
+
+void member_tst(){
+    Members m;
+
+    m.number = 30;
+
+    int a = m.number;
+}
+
+void rt_tst(){
     tree_node<int> n1, n2;
 
     n1 = 2;
