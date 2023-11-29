@@ -6,16 +6,16 @@ using namespace foxintango;
 #include <iostream>
 #include <stdlib.h>
 
-void tree_node_callback(int& t){
+void tree_node_callback(const int& t){
     printf("tree_node_callback %d\n",t);
 }
 
-void number_onset(const int& o, const int& n) {
+void number_onset(int& o, const int& n) {
     printf("Members number on set old: %d  new: %d\n", o,n);
     o = n;
 }
 
-int number_onget(const int& o){
+int number_onget(int& o){
     printf("Members number on get number: %d\n", o);
     return o;
 }
