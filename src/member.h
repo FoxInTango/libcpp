@@ -4,11 +4,13 @@
 namespaceBegin(foxintango)
 
 /** TODO 解决指针问题
+ *  尝试动态成员名，采取继承方式添加成员
  */
-template <typename T>
+template <typename T,const char* name>
 class Member{
 public:
     T t;
+    T name;
 public:
     Member(){ this->onset = 0; this->onget = 0;}
     Member(const T& t) { this->onset = 0; this->onget = 0; this->t = t;  }

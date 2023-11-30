@@ -32,6 +32,13 @@ public:
     }
 };
 
+class ExtendMember :public Member<int,"extend">{
+public:
+    ExtendMember(){
+        this->name = 20;
+    }
+};
+
 void member_tst();
 void rt_tst();
 
