@@ -20,6 +20,13 @@ int number_onget(const int& o){
     return o;
 }
 
+class ExtendMember :public Member<int, "extend"> {
+public:
+    ExtendMember() {
+        this->name = 20;
+    }
+};
+
 class Members{
 public:
     Member<int> number;
@@ -32,12 +39,7 @@ public:
     }
 };
 
-class ExtendMember :public Member<int,"extend">{
-public:
-    ExtendMember(){
-        this->name = 20;
-    }
-};
+
 
 void member_tst();
 void rt_tst();
