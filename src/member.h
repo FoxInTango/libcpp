@@ -8,11 +8,11 @@ namespaceBegin(foxintango)
  */
 
 #define MemberName(name) T name;
-template <typename T,const char* name>
+template <typename T,const char* n>
 class Member{
 public:
     T t;
-    MemberName(name)
+    MemberName(n)
 public:
     Member(){ this->onset = 0; this->onget = 0;}
     Member(const T& t) { this->onset = 0; this->onget = 0; this->t = t;  }
