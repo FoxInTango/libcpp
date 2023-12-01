@@ -1,6 +1,6 @@
 #ifndef _ARRAY_H_foxintango
 #define _ARRAY_H_foxintango
-#include "error.h"
+#include "object.h"
 #include "container.h"
 #include "struct.h"
 #include "define.h"
@@ -17,7 +17,7 @@ namespaceBegin(foxintango)
 const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
-class foxintangoAPI Array{
+class foxintangoAPI Array :public Object{
 /** 赋值与拷贝
  */
  public:

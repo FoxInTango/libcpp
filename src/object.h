@@ -21,24 +21,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef _LIBCPP_ERROR_H_
-#define _LIBCPP_ERROR_H_
+#ifndef _LIBCPP_OBJECT_H_
+#define _LIBCPP_OBJECT_H_
 #include "define.h"
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
-class Error {
+
+class Object {
+protected:
+    char** descriptions;
+    Size   description_number;
 public:
-    int code;
-    char* description;// UTF-8
+    Object();
+    ~Object();
 public:
-    Error();
-    Error(const int& code,const char* description = 0);
-    Error(const Error& error);
-    ~Error();
-public:
-    Error& operator  = (const Error& error);
-public:
-    operator int();
+    const char* error(const int& code);
 };
 namespaceEnd
 EXTERN_C_END
