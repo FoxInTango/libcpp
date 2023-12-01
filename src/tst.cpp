@@ -22,7 +22,7 @@ int number_onget(const int& o){
 
 class Members{
 public:
-    Member<int,"any"> number;
+    Member<int> number;
 public:
     
 public:
