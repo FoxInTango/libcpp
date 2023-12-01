@@ -29,7 +29,7 @@ public:
 
 class Members{
 public:
-    Member<int> number;
+    Member<int,"any"> number;
 public:
     
 public:
