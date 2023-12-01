@@ -23,6 +23,7 @@ int number_onget(const int& o){
 class Members{
 public:
     Member<int> number;
+    setMember(mem,int)
 public:
     
 public:

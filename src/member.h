@@ -62,5 +62,7 @@ public:
     operator T()  { return  this->onget ? this->onget(this->t) : this->t; }
     operator T*() { return &this->t; }
 };
+
+#define setMember(name,type) Member<type> name;
 namespaceEnd
 #endif
