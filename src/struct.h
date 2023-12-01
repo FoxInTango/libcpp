@@ -1,6 +1,6 @@
 #ifndef _LIB_CPP_STRUCT_H_foxintango
 #define _LIB_CPP_STRUCT_H_foxintango
-#include "error.h"
+#include "object.h"
 #include "memory.h"
 #include "define.h"
 namespaceBegin(foxintango)
@@ -33,7 +33,7 @@ const int mem_segment_type_d  = 0b10000001;// 双向
  *  callback 机制 -- 动态把握 扩展性
  */
 template <typename T>
-class mem_segment{
+class mem_segment :public Object{
     /** 赋值与拷贝
      */
 public:
