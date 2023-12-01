@@ -25,7 +25,6 @@
 #define _LIB_CPP_H_
 
 #include "tst.h"
-#include "error.h"
 #include "string.h"
 #include "map.h"
 #include "set.h"
@@ -35,6 +34,7 @@
 #include "member.h"
 #include "memory.h"
 #include "endian.h"
+#include "object.h"
 #include "define.h"
 
 int libcpp_startup();
