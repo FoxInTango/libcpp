@@ -2,7 +2,7 @@
 #define _LIB_CPP_TREE_H_foxintango
 #include "array.h"
 #include "struct.h"
-#include "error.h"
+#include "object.h"
 #include "member.h"
 #include "memory.h"
 #include "define.h"
@@ -100,7 +100,7 @@ class avl_tree_node :public b_tree_node<T>{
 //template <typename T> typedef  void (*rb_node_callback)(T& t);
 
 template <typename T>
-class rb_tree_node {
+class rb_tree_node :public Object{
 typedef enum _rb_tree_node_color{RBT_BLACK,RBT_RED}rb_tree_node_color;
 public:
     Error error;
