@@ -99,6 +99,38 @@ class avl_tree_node :public b_tree_node<T>{
  */
 //template <typename T> typedef  void (*rb_node_callback)(T& t);
 
+/** 红黑树 
+RB-INSERT-FIXUP(T, z)
+while color[p[z]] = RED                                                     // 若“当前节点(z)的父节点是红色”，则进行以下处理。
+     if p[z] == left[p[p[z]]]                                               // 若“z的父节点”是“z的祖父节点的左孩子”，则进行以下处理。
+           then y ← right[p[p[z]]]                                         // 将y设置为“z的叔叔节点(z的祖父节点的右孩子)”
+                if color[y] = RED                                           // Case 1条件：叔叔是红色
+                   then color[p[z]] ← BLACK                    ▹ Case 1   //  (01) 将“父节点”设为黑色。
+                        color[y] ← BLACK                       ▹ Case 1   //  (02) 将“叔叔节点”设为黑色。
+                        color[p[p[z]]] ← RED                   ▹ Case 1   //  (03) 将“祖父节点”设为“红色”。
+                        z ← p[p[z]]                            ▹ Case 1   //  (04) 将“祖父节点”设为“当前节点”(红色节点)
+                else if z = right[p[z]]                                     // Case 2条件：叔叔是黑色，且当前节点是右孩子
+                        then z ← p[z]                          ▹ Case 2   //  (01) 将“父节点”作为“新的当前节点”。
+                             LEFT-ROTATE(T, z)                  ▹ Case 2   //  (02) 以“新的当前节点”为支点进行左旋。
+                     else color[p[z]] ← BLACK                  ▹ Case 3   // Case 3条件：叔叔是黑色，且当前节点是左孩子。(01) 将“父节点”设为“黑色”。
+                          color[p[p[z]]] ← RED                 ▹ Case 3   //  (02) 将“祖父节点”设为“红色”。
+                          RIGHT-ROTATE(T, p[p[z]])              ▹ Case 3   //  (03) 以“祖父节点”为支点进行右旋。
+     else (same as then clause with "right" and "left" exchanged)           // 若“z的父节点”是“z的祖父节点的右孩子”，将上面的操作中“right”和“left”交换位置，然后依次执行。
+           then y ← right[p[p[z]]]                                         // 将y设置为“z的叔叔节点(z的祖父节点的左孩子)”
+                if color[y] = RED                                           // Case 1条件：叔叔是红色
+                   then color[p[z]] ← BLACK                    ▹ Case 1   //  (01) 将“父节点”设为黑色。
+                        color[y] ← BLACK                       ▹ Case 1   //  (02) 将“叔叔节点”设为黑色。
+                        color[p[p[z]]] ← RED                   ▹ Case 1   //  (03) 将“祖父节点”设为“红色”。
+                        z ← p[p[z]]                            ▹ Case 1   //  (04) 将“祖父节点”设为“当前节点”(红色节点)
+                else if z = right[p[z]]                                     // Case 2条件：叔叔是黑色，且当前节点是左孩子
+                        then z ← p[z]                          ▹ Case 2   //  (01) 将“父节点”作为“新的当前节点”。
+                             LEFT-ROTATE(T, z)                  ▹ Case 2   //  (02) 以“新的当前节点”为支点进行右旋。
+                     else color[p[z]] ← BLACK                  ▹ Case 3   // Case 3条件：叔叔是黑色，且当前节点是右孩子。(01) 将“父节点”设为“黑色”。
+                          color[p[p[z]]] ← RED                 ▹ Case 3   //  (02) 将“祖父节点”设为“红色”。
+                          RIGHT-ROTATE(T, p[p[z]])              ▹ Case 3   //  (03) 以“祖父节点”为支点进行左旋。
+
+16 color[root[T]] ← BLACK
+ */
 template <typename T>
 class rb_tree_node :public Object{
 typedef enum _rb_tree_node_color{RBT_BLACK,RBT_RED}rb_tree_node_color;
