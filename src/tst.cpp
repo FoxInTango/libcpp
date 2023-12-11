@@ -31,13 +31,35 @@ public:
     }
 };
 
-
+namespace ns_level_0{
+class class_level_0{
+public:
+    class class_level_1{
+    public:
+        class_level_1() {
+            printf("Here class_level_1 printing : ");
+            const char* name = __PRETTY_FUNCTION__;
+            printf("    __PRETTY_FUNCTION__:%s\n", name);
+        };
+        ~class_level_1() {};
+    };
+public:
+    class_level_0(){
+        printf("Here class_level_0 printing : ");
+        const char* name = __PRETTY_FUNCTION__;
+        printf("    __PRETTY_FUNCTION__:%s\n", name);
+    };
+   ~class_level_0(){};
+};
+};
 
 void member_tst();
 void rt_tst();
 
 void libcpp_tst(){
     member_tst();
+    ns_level_0::class_level_0 l0;
+    ns_level_0::class_level_0::class_level_1 l1;
 }
 
 void member_tst(){

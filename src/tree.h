@@ -200,6 +200,9 @@ public:
         }
     }
 
+    rb_tree_node* max(){ return 0; }
+    rb_tree_node* min(){ return 0; }
+
     rb_tree_node* lookup(const T& t){
         if(this->t == t) return this;
 

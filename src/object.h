@@ -27,10 +27,13 @@ SOFTWARE.
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
 
-class Object {
+class Object { //改名为 class 或 type ? 或者整一个prototype?
 protected:
     char** descriptions;
     Size   description_number;
+
+    char* classname;// 层级
+    char* spacename;// 层级
 public:
     Object();
     ~Object();
