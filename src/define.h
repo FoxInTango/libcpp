@@ -68,6 +68,7 @@ namespaceBegin(foxintango)
  *  __PRETTY_FUNCTION__  namespace::classname::functionname
  * */
 
+
  /** some thing funny.
  */
 class C1 {
