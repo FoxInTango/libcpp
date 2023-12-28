@@ -56,6 +56,7 @@ namespaceBegin(foxintango)
     #define foxintangoAPI
 #endif
 
+
 /** 源码宏
  *  1,编译器识别
  *  2,编译平台识别
