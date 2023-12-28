@@ -62,7 +62,7 @@ namespaceBegin(foxintango)
  *  3,标准库识别
  *  4,目标平台识别 目标平台版本识别
  * 
- *  条件输出
+ *  条件输出 放在libecho 中
  *     #define debug
  *     
  *     #ifdef debug
