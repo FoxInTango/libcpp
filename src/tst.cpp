@@ -38,16 +38,16 @@ public:
     public:
         class_level_1() {
             printf("Here class_level_1 printing : ");
-            const char* name = __PRETTY_FUNCTION__;
-            printf("    __PRETTY_FUNCTION__:%s\n", name);
+            //const char* name = __PRETTY_FUNCTION__;
+            //printf("    __PRETTY_FUNCTION__:%s\n", name);
         };
         ~class_level_1() {};
     };
 public:
     class_level_0(){
         printf("Here class_level_0 printing : ");
-        const char* name = __PRETTY_FUNCTION__;
-        printf("    __PRETTY_FUNCTION__:%s\n", name);
+        //const char* name = __PRETTY_FUNCTION__;
+        //printf("    __PRETTY_FUNCTION__:%s\n", name);
     };
    ~class_level_0(){};
 };

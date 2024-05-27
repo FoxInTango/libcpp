@@ -29,6 +29,42 @@ inline void memclr(const Address target, const Size& length,const char& value = 
     }
 }
 
+/** implementation of new & delete
+ */
+#ifdef PLATFORM_BARE 
+/* NOTE : ARCH 
+ **/
+#endif
+
+#ifdef PLATFORM_LINUX
+#ifdef PLATFORM_LINUX_API
+
+#endif
+
+#ifdef PLATFORM_LINUX_KPI
+
+#endif
+#endif
+
+#ifdef PLATFORM_DARWIN
+#ifdef PLATFORM_DARWIN_API
+
+#endif
+
+#ifdef PLATFORM_DARWIN_KPI
+
+#endif
+#endif //PLATFORM_DARWIN
+
+#ifdef PLATFORM_WIN
+#ifdef PLATFORM_WIN32_API
+
+#endif
+
+#ifdef PLATFORM_WIN32_KPI
+
+#endif
+#endif // PLATFORM_WIN
 namespaceEnd
 EXTERN_C_END
 #endif

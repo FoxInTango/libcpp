@@ -45,6 +45,3 @@ int libcpp_set_default(){
     //sample_array();
     return 0;
 }
-
-
-

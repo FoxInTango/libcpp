@@ -42,9 +42,17 @@ namespaceBegin(foxintango)
  * */
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(WIN64) || defined(_WIN64) || defined(_WIN64_)
     #ifdef foxintangoEXPORT
+        #if defined(_USRDLL)
         #define foxintangoAPI __declspec(dllexport)
+        #else 
+        #define foxintangoAPI
+        #endif
     #else
+        #if defined(_USRDLL)
         #define foxintangoAPI __declspec(dllimport)
+        #else
+        #define foxintangoAPI
+        #endif
     #endif
 #elif defined(ANDROID) || defined(_ANDROID_)
     #define foxintangoAPI __attribute__ ((visibility("default")))

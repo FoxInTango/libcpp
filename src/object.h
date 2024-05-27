@@ -27,7 +27,7 @@ SOFTWARE.
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
 
-class Object { //改名为 class 或 type ? 或者整一个prototype?
+class foxintangoAPI fox { //改名为 class 或 type ? 或者整一个prototype?
 protected:
     char** descriptions;
     Size   description_number;
@@ -35,8 +35,8 @@ protected:
     char* classname;// 层级
     char* spacename;// 层级
 public:
-    Object();
-    ~Object();
+    fox();
+    ~fox();
 public:
     const char* error(const int& code);
 };

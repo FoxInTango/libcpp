@@ -29,7 +29,7 @@ const MapType MAP_TYPE_RB = 3;
      -- RB   -----
  */
 template <typename Key,typename Value>
-class Map :public Object{
+class Map :public fox {
 public:
 Value V_NULL;
 KVPair<Key,Value> P_NULL;

@@ -15,7 +15,7 @@ typedef enum _ROTATE_DIRECTION{
 }ROTATE_DIRECTION;
 
 template <typename T>
-class tree_node{
+class tree_node :public fox {
 public:
     Error error;
 public:
@@ -132,7 +132,7 @@ while color[p[z]] = RED                                                     // Ë
 16 color[root[T]] ‚Üê BLACK
  */
 template <typename T>
-class rb_tree_node :public Object{
+class rb_tree_node :public fox {
 typedef enum _rb_tree_node_color{RBT_BLACK,RBT_RED}rb_tree_node_color;
 public:
     Error error;

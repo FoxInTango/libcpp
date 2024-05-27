@@ -4,3 +4,4 @@
 
 namespaceBegin(foxintango)
 namespaceEnd
+#endif

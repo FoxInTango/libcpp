@@ -17,7 +17,7 @@ namespaceBegin(foxintango)
 const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
-class foxintangoAPI Array :public Object{
+class foxintangoAPI Array :public fox {
 /** 赋值与拷贝
  */
  public:
