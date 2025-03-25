@@ -39,6 +39,7 @@ namespaceBegin(foxintango)
 #endif 
 
 /** Platform 
+ *  TODO: 内核 宏
  * */
 #if defined(WIN32) || defined(_WIN32) || defined(_WIN32_) || defined(WIN64) || defined(_WIN64) || defined(_WIN64_)
     #ifdef foxintangoEXPORT
@@ -137,6 +138,9 @@ typedef int               Error;
 
 #define UNSIGNED_INT_MAX  0XFFFF
 #define UNSIGNED_LONG_MAX 0xFFFFFFFF
+
+//TODO
+// Trace
 
 namespaceEnd
 #endif

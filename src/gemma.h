@@ -21,13 +21,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef _LIBCPP_OBJECT_H_
-#define _LIBCPP_OBJECT_H_
+#ifndef _LIBCPP_GEMMA_H_
+#define _LIBCPP_GEMMA_H_
 #include "define.h"
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
 
-class foxintangoAPI fox { //改名为 class 或 type ? 或者整一个prototype?
+/** 数据分布
+ */
+class foxintangoAPI Gemma { //改名为 class 或 type ? 或者整一个prototype?
+
+public:
+    class ModelLoader;// 从序列化数据里加载类模型 XML,JSON,YAML,MARKDOWN
+    class ModelLayout;// 类数据分布格式
+public:
+    void setLoader(ModelLoader* loader,int LOADER_TYPE);
 protected:
     char** descriptions;
     Size   description_number;
@@ -35,8 +43,8 @@ protected:
     char* classname;// 层级
     char* spacename;// 层级
 public:
-    fox();
-    ~fox();
+    Gemma();
+    ~Gemma();
 public:
     const char* error(const int& code);
 };

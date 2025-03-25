@@ -1,6 +1,6 @@
 #ifndef _ARRAY_H_foxintango
 #define _ARRAY_H_foxintango
-#include "object.h"
+#include "gemma.h"
 #include "container.h"
 #include "struct.h"
 #include "define.h"
@@ -17,7 +17,7 @@ namespaceBegin(foxintango)
 const unsigned int ARRAY_DEFAULT_SIZE = 32;
 
 template <class T>
-class foxintangoAPI Array :public fox {
+class foxintangoAPI Array :public Gemma {
 /** 赋值与拷贝
  */
  public:

@@ -34,7 +34,7 @@
 #include "member.h"
 #include "memory.h"
 #include "endian.h"
-#include "object.h"
+#include "gemma.h"
 #include "define.h"
 
 int libcpp_startup();

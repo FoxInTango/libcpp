@@ -38,7 +38,7 @@ inline int CurrentEndian() {
     return c == 1 ? ENDIAN_L : ENDIAN_B;
 }
 
-/*
+
 inline int16_t endianSwap16(const int16_t& value) 
 {
         return (value << 8) | ((value >> 8) & 0xFF);
@@ -76,7 +76,6 @@ inline uint64_t endianSwap64u(const uint64_t& value)
     v = ((v     << 16) & 0xFFFF0000FFFF0000ULL) | ((v     >> 16) & 0x0000FFFF0000FFFFULL);
     return (v << 32) | (v >> 32);
 }
-*/
 namespaceEnd
 
 #endif

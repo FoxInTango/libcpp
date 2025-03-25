@@ -2,7 +2,7 @@
 #define _LIB_CPP_TREE_H_foxintango
 #include "array.h"
 #include "struct.h"
-#include "object.h"
+#include "gemma.h"
 #include "member.h"
 #include "memory.h"
 #include "define.h"
@@ -15,7 +15,7 @@ typedef enum _ROTATE_DIRECTION{
 }ROTATE_DIRECTION;
 
 template <typename T>
-class tree_node :public fox {
+class tree_node :public Gemma {
 public:
     Error error;
 public:
@@ -229,6 +229,7 @@ public:
                 this->m_left = new rb_tree_node(t);
 
                 if(this->m_left){
+                    this->m_left->m_color = RBT_RED;
                     this->m_left->m_super = this;
                 }
             }
@@ -239,6 +240,7 @@ public:
             else {
                 this->m_right = new rb_tree_node(t);
                 if (this->m_right) {
+                    this->m_right->m_color = RBT_RED;
                     this->m_right->m_super = this;
                 }
             }
