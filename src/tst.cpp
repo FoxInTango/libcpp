@@ -28,7 +28,7 @@ public:
     Members(){
         number.onset = number_onset;
         //number.onget = number_onget;
-        number.onget = [](int& o) { return 0; };
+        //number.onget = [](int& o) { return 0; };
     }
 };
 

@@ -25,7 +25,7 @@
 #define _ENDIAN_H_
 
 #include "define.h"
-//#include <stdint.h>
+#include <stdint.h>
 
 namespaceBegin(foxintango)
 

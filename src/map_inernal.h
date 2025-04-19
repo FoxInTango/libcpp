@@ -1,6 +1,6 @@
 #ifndef _MAP_INTERNAL_H_foxintango
 #define _MAP_INTERNAL_H_foxintango
-#include "object.h"
+#include "gemma.h"
 #include "memory.h"
 #include "define.h"
 namespaceBegin(foxintango)
@@ -14,7 +14,7 @@ public:
 /** Error Code : 
  */
 template <typename Key, typename Value>
-class map_internal :public fox {
+class map_internal :public Gemma  {
 protected:
     Value V_NULL;
 public:

@@ -5,7 +5,7 @@
 #include "container.h"
 #include "hash.h"
 #include "struct.h"
-#include "object.h"
+#include "gemma.h"
 #include "define.h"
 
 /** TODO
@@ -29,7 +29,7 @@ const MapType MAP_TYPE_RB = 3;
      -- RB   -----
  */
 template <typename Key,typename Value>
-class Map :public fox {
+class Map :public Gemma {
 public:
 Value V_NULL;
 KVPair<Key,Value> P_NULL;

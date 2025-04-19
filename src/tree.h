@@ -132,7 +132,7 @@ while color[p[z]] = RED                                                     // Ë
 16 color[root[T]] ‚Üê BLACK
  */
 template <typename T>
-class rb_tree_node :public fox {
+class rb_tree_node :public Gemma  {
 typedef enum _rb_tree_node_color{RBT_BLACK,RBT_RED}rb_tree_node_color;
 public:
     Error error;
