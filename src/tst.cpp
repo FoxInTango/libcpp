@@ -28,7 +28,7 @@ public:
     Members(){
         number.onset = number_onset;
         //number.onget = number_onget;
-        //number.onget = [](int& o) { return 0; };
+        number.onget = [](const int& o) { printf("Members number on get number : %d",o);return 0; };
     }
 };
 
@@ -38,7 +38,7 @@ public:
     class class_level_1{
     public:
         class_level_1() {
-            printf("Here class_level_1 printing : ");
+            printf("Here class_level_1 printing : \n");
             //const char* name = __PRETTY_FUNCTION__;
             //printf("    __PRETTY_FUNCTION__:%s\n", name);
         };
@@ -46,7 +46,7 @@ public:
     };
 public:
     class_level_0(){
-        printf("Here class_level_0 printing : ");
+        printf("Here class_level_0 printing : \n");
         //const char* name = __PRETTY_FUNCTION__;
         //printf("    __PRETTY_FUNCTION__:%s\n", name);
     };
@@ -69,6 +69,8 @@ void member_tst(){
     m.number = 30;
 
     int a = m.number;
+
+    printf("m.number = %d\n",a);
 }
 
 void rt_tst(){
