@@ -37,7 +37,7 @@
 #include "gemma.h"
 #include "define.h"
 
-int libcpp_startup();
-int libcpp_set_default();
+int foxintangoAPI libcpp_startup();
+int foxintangoAPI libcpp_set_default();
 
 #endif

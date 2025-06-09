@@ -65,4 +65,8 @@ public:
 
 #define setMember(name,type) Member<type> name;
 namespaceEnd
+/*
+#ifdef 
+#define MEMBER(x) 
+*/
 #endif
