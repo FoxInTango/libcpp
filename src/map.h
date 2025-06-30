@@ -1,7 +1,7 @@
 #ifndef _MAP_H_foxintango
 #define _MAP_H_foxintango
 
-#include "tree.h"
+#include "internal/tree.h"
 #include "container.h"
 #include "hash.h"
 #include "struct.h"

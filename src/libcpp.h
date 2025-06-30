@@ -23,12 +23,9 @@
  */
 #ifndef _LIB_CPP_H_
 #define _LIB_CPP_H_
-
-#include "tst.h"
 #include "string.h"
 #include "map.h"
 #include "set.h"
-#include "tree.h"
 #include "array.h"
 #include "struct.h"
 #include "member.h"

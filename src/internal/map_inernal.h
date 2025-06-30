@@ -1,8 +1,8 @@
 #ifndef _MAP_INTERNAL_H_foxintango
 #define _MAP_INTERNAL_H_foxintango
-#include "gemma.h"
-#include "memory.h"
-#include "define.h"
+#include "../gemma.h"
+#include "../memory.h"
+#include "../define.h"
 namespaceBegin(foxintango)
 template <typename Key, typename Value>
 class KVPair {

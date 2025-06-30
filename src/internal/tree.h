@@ -1,11 +1,11 @@
 #ifndef _LIB_CPP_TREE_H_foxintango
 #define _LIB_CPP_TREE_H_foxintango
-#include "array.h"
-#include "struct.h"
-#include "gemma.h"
-#include "member.h"
-#include "memory.h"
-#include "define.h"
+#include "../array.h"
+#include "../struct.h"
+#include "../gemma.h"
+#include "../member.h"
+#include "../memory.h"
+#include "../define.h"
 
 namespaceBegin(foxintango)
 

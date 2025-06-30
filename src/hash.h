@@ -1,6 +1,6 @@
 #ifndef _HASH_H_foxintango
 #define _HASH_H_foxintango
-#include "map_inernal.h"
+#include "internal/map_inernal.h"
 #include "define.h"
 namespaceBegin(foxintango)
 EXTERN_C_BEGIN
