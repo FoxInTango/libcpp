@@ -37,7 +37,6 @@ BINARY_INSTALL_PATH  = ${MAKE_FILE_DIR}bin
 LIBRARY_INSTALL_PATH = ${MAKE_FILE_DIR}lib
 DEPENDS_LIBRARY_PATH = ${MAKE_FILE_DIR}libraries
 DEPENDS_THIRDS_PATH  = ${MAKE_FILE_DIR}thirds
-
 # Path where headers to be installed.
 ifdef ROOT_HEADER_INSTALL_PATH
     HEADER_INSTALL_PATH = ${ROOT_HEADER_INSTALL_PATH}
@@ -93,7 +92,7 @@ ifdef ROOT_LIBRARY_PATH
     LDFLAGS += -L${ROOT_LIBRARY_PATH}
 endif
 ifdef ROOT_RUNTIME_PATH
-
+    LDFLAGS += -Wl,-rpath=${ROOT_RUNTIME_PATH}
 endif
 
 TARGET_BIN_DIR := ./bin
@@ -239,9 +238,9 @@ uninstall :
 	-rm -rf $(HEADER_INSTALL_PATH)/$(TARGET_NAME)
 	-rm -rf $(BINARY_INSTALL_PATH)/$(TARGET_NAME)${TARGET_BIN_EXT}
 	-rm -rf $(LIBRARY_INSTALL_PATH)/$(TARGET_NAME).*
-publish:
+publish:$(PUBLISH_TARGETS)
 	-git add . && git commit -m "$(shell date)" && git push
-update:
+update:$(UPDATE_TARGETS)
 	-git pull
 echo:
 	@echo TARGET_NAME:$(TARGET_NAME)
