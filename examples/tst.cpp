@@ -1,8 +1,8 @@
 #include "tst.h"
 
 //#include "libcpp.h"
-#include "tree.h"
-#include "member.h"
+#include "../src/internal/experimental/tree.h"
+#include "../src/member.h"
 using namespace foxintango;
 #include <stdio.h>
 #include <iostream>

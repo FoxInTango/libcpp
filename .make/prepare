@@ -1,0 +1,13 @@
+PREPARE_TARGETS += prepare.dir
+
+prepare.dir:
+	-mkdir lib bin
+ifneq ($(wildcard $(MAKE_CONFIG_DIR)/ignore.git),)
+	-cp $(MAKE_CONFIG_DIR)/ignore.git .gitignore
+endif
+	@echo "#Alpine Ignored"   >> .gitignore
+	@echo "/lib"              >> .gitignore
+	@echo "/bin"              >> .gitignore
+	@echo "/.make/*.mk"       >> .gitignore
+	@echo "/.gitignore"       >> .gitignore
+

@@ -72,8 +72,3 @@
 /inc
 /thirds
 /.gitignore.saved
-#Alpine Ignored
-/lib
-/bin
-/.make/*.mk
-/.gitignore
