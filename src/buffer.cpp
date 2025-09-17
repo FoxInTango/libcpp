@@ -91,7 +91,7 @@ Buffer* Buffer::clone(){
     return new Buffer(*this);
 }
 
-Buffer::Status Buffer::append(const char* _data,size_t _size){
+Buffer::Status Buffer::append(const char* const _data,size_t _size){
     size_t t_size = size + _size;
     char*  t_data = new char[t_size];
     if(t_data) {

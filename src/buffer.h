@@ -30,8 +30,7 @@ public:
 public:
     Status resize(size_t size);
     Buffer* clone();
-    Status append(const char* data,size_t size = 0);
-
+    Status append(const char* const data,size_t size = 0);
 };
 namespaceEnd
 EXTERN_C_END
