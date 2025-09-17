@@ -1,13 +1,13 @@
 #ifndef _LIBCPP_THREAD_H_
 #define _LIBCPP_THREAD_H_
 #include "define.h"
-namespaceBegin(foxintango)
 EXTERN_C_BEGIN
+namespaceBegin(foxintango)
 class foxintangoAPI Thread{
 public:
     Thread();
     virtual ~Thread();
 };
-EXTERN_C_END
 namespaceEnd
+EXTERN_C_END
 #endif
