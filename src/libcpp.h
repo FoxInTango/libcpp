@@ -23,6 +23,8 @@
  */
 #ifndef _LIB_CPP_H_
 #define _LIB_CPP_H_
+#include "thread.h"
+#include "event.h"
 #include "string.h"
 #include "struct.h"
 #include "member.h"
