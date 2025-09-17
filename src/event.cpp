@@ -9,3 +9,9 @@ Event::Event(){
 Event::~Event() {
 }
 
+EventHandler::EventHandler(){}
+EventHandler::~EventHandler(){}
+
+int EventHandler::handleEvent(Event* e){
+    return 0;
+}

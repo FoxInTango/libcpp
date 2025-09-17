@@ -8,6 +8,13 @@ public:
     Event();
     virtual ~Event();
 };
+class foxintangoAPI EventHandler {
+public:
+    EventHandler();
+    virtual ~EventHandler();
+public:
+    virtual int handleEvent(Event* e);
+};
 EXTERN_C_END
 namespaceEnd
 #endif
