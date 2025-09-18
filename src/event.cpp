@@ -11,7 +11,11 @@ Event::~Event() {
 
 EventHandler::EventHandler(){}
 EventHandler::~EventHandler(){}
+int EventHandler::handleEvent(Event* event){ return 0; }
 
-int EventHandler::handleEvent(Event* e){
+EventSessionInterface::EventSessionInterface(){}
+EventSessionInterface::~EventSessionInterface(){}
+
+const char* EventSessionInterface::getAttribute(const char* const name){
     return 0;
 }

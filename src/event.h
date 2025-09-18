@@ -12,13 +12,19 @@ public:
     virtual ~Event();
  
 };
-
-class foxintangoAPI EventHandler {
+class foxintangoAPI EventHandler{
 public:
     EventHandler();
     virtual ~EventHandler();
 public:
-    virtual int handleEvent(Event* e);
+    virtual int handleEvent(Event* event);
+};
+class foxintangoAPI EventSessionInterface {
+public:
+    EventSessionInterface();
+    virtual ~EventSessionInterface();
+public:
+    virtual const char* getAttribute(const char* const name);
 };
 
 EXTERN_C_END
